@@ -7,5 +7,9 @@ namespace WebApplication1.Modules
 {
     public class Reise
     {
+        public int id { get; set; }
+        public string destinasjon { get; set; }
+        public string start { get; set; }
+        public DateTime tidspunkt { get; set; }
     }
 }
