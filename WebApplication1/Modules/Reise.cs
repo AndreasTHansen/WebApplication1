@@ -8,8 +8,9 @@ namespace WebApplication1.Modules
     public class Reise
     {
         public int id { get; set; }
-        public string destinasjon { get; set; }
-        public string start { get; set; }
-        public DateTime tidspunkt { get; set; }
+        public string reiseTil { get; set; }
+        public string reiseFra{ get; set; }
+        public DateTime tidspunktFra { get; set; }
+        public DateTime tidspunktTil { get; set; }
     }
 }
