@@ -7,8 +7,9 @@ using WebApplication1.Modules;
 namespace WebApplication1.Controllers
 {
     public class BillettController
+
     {
-        public int id { get; set; }
+        
 
     }
 }
