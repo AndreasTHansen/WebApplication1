@@ -1,4 +1,28 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿$(function () {
+    hentAlleReiser();
+});
 
-// Write your Javascript code.
+function hentAlleReiser() {
+    $.get("reise/hentAlle", function (reiser) {
+        formaterReiser(reiser);
+    });
+}
+
+function formaterReiser(reiser) {
+    let ut = "<table class='table table-striped'>" +
+        "<tr>" +
+        "<th>Reises fra</th><th>Reises til</th></th>Avgang<th></th><th>Ankomst</th><th></th><th></th>" +
+        "</tr>";
+
+    for (let reise of reiser) {
+        ut += "<tr>" +
+            "<td>" + reise.reiseTil + "</td>" +
+            "<td>" + reise.reiseFra + "</td>" +
+            "<td>" + reise.tidspunktFra + "</td>" +
+            "<td>" + reise.tidspunktTil + "</td>" +
+            "<td>" + kunde.poststed + "</td>" +
+            "</tr>";
+    }
+    ut += "</table>";
+    $("#reisene").html(ut);
+}

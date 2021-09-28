@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,11 +17,11 @@ namespace WebApplication1.Controllers
         {
             _reiseDB = reiseDb;
         }
-        public List<Reise> HentAlle()
+        public async Task<List<Reise>> HentAlle()
         {
             try
             {
-                List<Reise> alleReiser = _reiseDB.Reiser.ToList();
+                List<Reise> alleReiser = await _reiseDB.Reiser.ToListAsync();
                 return alleReiser;
             }
             catch
