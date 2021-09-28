@@ -12,8 +12,7 @@ namespace WebApplication1.Modules
         {
             Database.EnsureCreated();
         }
-
-        public DbSet<Reise> Reiser { get; set; }
+        public DbSet<Reise> Reiser { get; set; } 
     }
 }
 
