@@ -16,11 +16,11 @@ function formaterReiser(reiser) {
 
     for (let reise of reiser) {
         ut += "<tr>" +
+            "<td>" + reise.id + "</td>" +
             "<td>" + reise.reiseTil + "</td>" +
             "<td>" + reise.reiseFra + "</td>" +
             "<td>" + reise.tidspunktFra + "</td>" +
             "<td>" + reise.tidspunktTil + "</td>" +
-            "<td>" + kunde.poststed + "</td>" +
             "</tr>";
     }
     ut += "</table>";
