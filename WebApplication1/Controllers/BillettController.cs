@@ -11,17 +11,17 @@ namespace WebApplication1.Controllers
 {
     public class BillettController : ControllerBase
     {
-        private readonly BillettDB _bilettDb;
+        private readonly BillettDB _billettDb;
 
-        public BillettController(BillettDB bilettDb)
+        public BillettController(BillettDB billettDb)
         {
-            _bilettDb = bilettDb;
+            _billettDb = billettDb;
         }
         public async Task<List<Billett>> HentAlle()
         {
             try
             {
-                List<Billett> alleBiletter = await _bilettDb.Biletter.ToListAsync();
+                List<Billett> alleBiletter = await _billettDb.Biletter.ToListAsync();
                 return alleBiletter;
             }
             catch

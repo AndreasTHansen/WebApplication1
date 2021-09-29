@@ -9,7 +9,7 @@ namespace WebApplication1.Models
 
 {
 
-    public class Biletter
+    public class Billetter
     {
 
         public int id { get; set; }
@@ -35,7 +35,7 @@ namespace WebApplication1.Models
             Database.EnsureCreated();        
         }
 
-        public DbSet<Biletter> Biletter { get; set; }
+        public DbSet<Billetter> Billetter { get; set; }
         public DbSet<Reiser> Reiser { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
