@@ -31,5 +31,19 @@ namespace WebApplication1.Controllers
 
         }
 
+        public async Task<bool> Lagre(Billett innBillett)
+        {
+            try
+            {
+                _billettDb.Add(innBillett);
+                await _billettDb.SaveChangesAsync();
+                return true;
+            }
+
+            catch {
+                return false;
+            }
+        }
+
     }
 }
