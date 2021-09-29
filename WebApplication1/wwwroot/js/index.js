@@ -11,7 +11,7 @@ function hentAlleReiser() {
 function formaterReiser(reiser) {
     let ut = "<table class='table table-striped'>" +
         "<tr>" +
-        "<th>Reise-id</th><th>Reises fra</th><th>Reises til</th><th>Avgang</th><th>Ankomst</th><th></th><th></th>" +
+        "<th>Reise-id</th><th>Reises fra</th><th>Reises til</th><th>Avgang</th><th>Ankomst</th>" +
         "</tr>";
 
     for (let reise of reiser) {
