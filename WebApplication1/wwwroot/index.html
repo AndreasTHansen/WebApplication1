@@ -14,16 +14,12 @@
 
         <h2>Hvor ønsker du å reise?</h2>
 
-        <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                Destinasjoner
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-                <li><a href="#">Kiel</a></li>
-                <li><a href="#">København</a></li>
-            </ul>
-        </div>
+        <select name="destination" class="form-control input-lg">
+            <option value=""> Velg destinasjon </option>
+            <option value="Kiel"> Kiel </option>
+            <option value="Kobenhavn"> København</option>
+        </select>
+
         <div id="reisene"></div>
 
     </div>
