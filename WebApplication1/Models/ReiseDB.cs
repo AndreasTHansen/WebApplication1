@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace WebApplication1.Models
 {
-    public class BilettDB : DbContext
+    public class ReiseDB : DbContext
     {
-        public BilettDB(DbContextOptions<BilettDB> options) : base(options)
+        public ReiseDB(DbContextOptions<ReiseDB> options) : base(options)
         {
 
         }
