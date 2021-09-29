@@ -1,4 +1,5 @@
-﻿$(function () {
+﻿
+$(function () {
     hentAlleReiser();
 });
 
@@ -26,3 +27,4 @@ function formaterReiser(reiser) {
     ut += "</table>";
     $("#reisene").html(ut);
 }
+
