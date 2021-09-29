@@ -24,7 +24,7 @@
         if (value == "Kobenhavn") {
             hentAlleReiser("København");
         };
-        if (value == "" || value == "visAlle") {
+        if (value == "visAlle") {
             hentAlleReiser("");
         }
     })
