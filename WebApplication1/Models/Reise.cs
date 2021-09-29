@@ -10,7 +10,7 @@ namespace WebApplication1.Modules
         public int id { get; set; }
         public string reiseTil { get; set; }
         public string reiseFra{ get; set; }
-        public DateTime tidspunktFra { get; set; }
-        public DateTime tidspunktTil { get; set; }
+        public string tidspunktFra { get; set; }
+        public string tidspunktTil { get; set; }
     }
 }
