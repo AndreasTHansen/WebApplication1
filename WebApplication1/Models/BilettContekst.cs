@@ -9,7 +9,7 @@ namespace WebApplication1.Models
 
 {
 
-    public class Billetter
+    public class Biletter
     {
 
         public int id { get; set; }
@@ -27,15 +27,15 @@ namespace WebApplication1.Models
         public string tidspunktTil { get; set; }
     }
 
-    public class BillettContekst : DbContext
+    public class BilettContekst : DbContext
     {
-        public BillettContekst(DbContextOptions<BillettContekst> options)
+        public BilettContekst(DbContextOptions<BilettContekst> options)
             : base(options)
         {
             Database.EnsureCreated();        
         }
 
-        public DbSet<Billetter> Billetter { get; set; }
+        public DbSet<Biletter> Biletter { get; set; }
         public DbSet<Reiser> Reiser { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
