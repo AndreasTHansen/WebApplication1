@@ -9,19 +9,19 @@ using WebApplication1.Modules;
 
 namespace WebApplication1.Controllers
 {
-    public class BilettController : ControllerBase
+    public class BillettController : ControllerBase
     {
-        private readonly BilettDB _bilettDb;
+        private readonly BillettDB _bilettDb;
 
-        public BilettController(BilettDB bilettDb)
+        public BillettController(BillettDB bilettDb)
         {
             _bilettDb = bilettDb;
         }
-        public async Task<List<Bilett>> HentAlle()
+        public async Task<List<Billett>> HentAlle()
         {
             try
             {
-                List<Bilett> alleBiletter = await _bilettDb.Biletter.ToListAsync();
+                List<Billett> alleBiletter = await _bilettDb.Biletter.ToListAsync();
                 return alleBiletter;
             }
             catch

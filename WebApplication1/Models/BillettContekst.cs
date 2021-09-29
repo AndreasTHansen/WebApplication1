@@ -27,9 +27,9 @@ namespace WebApplication1.Models
         public string tidspunktTil { get; set; }
     }
 
-    public class BilettContekst : DbContext
+    public class BillettContekst : DbContext
     {
-        public BilettContekst(DbContextOptions<BilettContekst> options)
+        public BillettContekst(DbContextOptions<BillettContekst> options)
             : base(options)
         {
             Database.EnsureCreated();        

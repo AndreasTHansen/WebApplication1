@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace WebApplication1.Models
 {
-    public class BilettDB : DbContext
+    public class BillettDB : DbContext
     {
 
-        public BilettDB(DbContextOptions<BilettDB> options) : base(options)
+        public BillettDB(DbContextOptions<BillettDB> options) : base(options)
         {
             Database.EnsureCreated();
         }
 
-        public DbSet<Bilett> Biletter { get; set; }
+        public DbSet<Billett> Biletter { get; set; }
     }
 }

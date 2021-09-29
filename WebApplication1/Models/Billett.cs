@@ -6,7 +6,7 @@ using WebApplication1.Modules;
 
 namespace WebApplication1.Models
 {
-    public class Bilett
+    public class Billett
     {
         public int id { get; set; }
         public string fornavn { get; set; }
