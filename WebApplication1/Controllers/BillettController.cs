@@ -76,7 +76,22 @@ namespace WebApplication1.Controllers
             catch {
                 return false;
             }
-        }
 
+        }
+        public async Task<bool> Slett(int id)
+        {
+
+            try
+            {
+                Billetter enBillet = await _billettDb.Billetter.FindAsync(id);
+                _billettDb.Remove(enBillet);
+                await _billettDb.SaveChangesAsync();
+                return true;
+            }
+            catch
+            {
+                return false; 
+            }
+        }
     }
 }
