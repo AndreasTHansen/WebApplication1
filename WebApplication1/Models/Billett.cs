@@ -12,7 +12,12 @@ namespace WebApplication1.Models
         public string fornavn { get; set; }
         public string etternavn { get; set; }
         public string epost { get; set; }
-        public virtual Reise reiseId { get; set; }
+
+        public int reiseId { get; set; }
+        public string reiseTil { get; set; }
+        public string reiseFra { get; set; }
+        public string tidspunktFra { get; set; }
+        public string tidspunktTil { get; set; }
 
     }
 }

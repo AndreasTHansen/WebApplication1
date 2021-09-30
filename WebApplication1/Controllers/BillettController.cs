@@ -11,9 +11,9 @@ namespace WebApplication1.Controllers
 {
     public class BillettController : ControllerBase
     {
-        private readonly BillettDB _billettDb;
+        private readonly BillettContekst _billettDb;
 
-        public BillettController(BillettDB billettDb)
+        public BillettController(BillettContekst billettDb)
         {
             _billettDb = billettDb;
         }
@@ -21,8 +21,20 @@ namespace WebApplication1.Controllers
         {
             try
             {
-                List<Billett> alleBiletter = await _billettDb.Biletter.ToListAsync();
-                return alleBiletter;
+                List<Billett> alleBilletter = await _billettDb.Billetter.Select(k => new Billett
+                {
+                    id = k.id,
+                    fornavn = k.fornavn,
+                    etternavn = k.etternavn,
+                    epost = k.epost,
+                    reiseId = k.reise.id,
+                    reiseFra = k.reise.reiseFra,
+                    reiseTil = k.reise.reiseTil,
+                    tidspunktFra = k.reise.tidspunktFra,
+                    tidspunktTil = k.reise.tidspunktTil
+                }).ToListAsync();
+
+                return alleBilletter;
             }
             catch
             {
@@ -35,7 +47,28 @@ namespace WebApplication1.Controllers
         {
             try
             {
-                _billettDb.Add(innBillett);
+                var nyBillett = new Billetter(); 
+                nyBillett.fornavn = innBillett.fornavn;
+                nyBillett.etternavn = innBillett.etternavn;
+                nyBillett.epost = innBillett.epost;
+
+                var sjekkReise = _billettDb.Reiser.Find(innBillett.reiseId);
+                if (sjekkReise == null)
+                {
+
+                    var nyReise = new Reiser();
+                    nyReise.id = innBillett.reiseId;
+                    nyReise.reiseFra = innBillett.reiseFra;
+                    nyReise.reiseTil = innBillett.reiseTil;
+                    nyReise.tidspunktFra = innBillett.reiseTil;
+                    nyReise.tidspunktTil = innBillett.reiseTil;
+                }
+                else
+                {
+                    nyBillett.reise = sjekkReise;
+                }
+
+                _billettDb.Add(nyBillett);
                 await _billettDb.SaveChangesAsync();
                 return true;
             }
