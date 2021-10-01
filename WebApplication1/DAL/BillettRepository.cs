@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApplication1.Models;
+using WebApplication1.Modules;
 
 namespace WebApplication1.DAL
 {
@@ -98,6 +99,29 @@ namespace WebApplication1.DAL
             catch
             {
                 return false;
+            }
+        } 
+
+        public async Task<List<Reise>> HentAlleReiser() 
+        {
+            try
+            {
+                List<Reise> alleReiser = await _billettDb.Reiser.Select(k => new Reise
+                {
+                    id = k.id,
+                    reiseFra = k.reiseFra,
+                    reiseTil = k.reiseTil,
+                    tidspunktFra = k.tidspunktFra,
+                    tidspunktTil = k.tidspunktTil,
+                    datoAnkomst = k.datoAnkomst,
+                    datoAvreise = k.datoAvreise
+                }).ToListAsync();
+
+                return alleReiser;
+            }
+            catch
+            {
+                return null;
             }
         }
         //Vet ikke om vi trenger en endre eller hent en, men kan legge det til hvis det er nødvendig

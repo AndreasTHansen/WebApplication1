@@ -12,5 +12,7 @@ namespace WebApplication1.Modules
         public string reiseFra{ get; set; }
         public string tidspunktFra { get; set; }
         public string tidspunktTil { get; set; }
+        public string datoAvreise { get; set; }
+        public string datoAnkomst { get; set; }
     }
 }

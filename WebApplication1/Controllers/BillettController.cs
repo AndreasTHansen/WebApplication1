@@ -32,5 +32,9 @@ namespace WebApplication1.Controllers
             return await _billettDb.Slett(id);
         }
 
+        public async Task<List<Reise>> HentAlleReiser()
+        {
+            return await _billettDb.HentAlleReiser();
+        }
      }
 }
