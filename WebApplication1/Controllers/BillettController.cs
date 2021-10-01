@@ -27,9 +27,12 @@ namespace WebApplication1.Controllers
                     fornavn = k.fornavn,
                     etternavn = k.etternavn,
                     epost = k.epost,
+                    billettType = k.billettType,
                     reiseId = k.reise.id,
                     reiseFra = k.reise.reiseFra,
                     reiseTil = k.reise.reiseTil,
+                    datoAnkomst = k.reise.datoAnkomst,
+                    datoAvreise = k.reise.datoAvreise,
                     tidspunktFra = k.reise.tidspunktFra,
                     tidspunktTil = k.reise.tidspunktTil
                 }).ToListAsync();
@@ -51,6 +54,7 @@ namespace WebApplication1.Controllers
                 nyBillett.fornavn = innBillett.fornavn;
                 nyBillett.etternavn = innBillett.etternavn;
                 nyBillett.epost = innBillett.epost;
+                nyBillett.billettType = innBillett.billettType;
 
                 var sjekkReise = _billettDb.Reiser.Find(innBillett.reiseId);
                 if (sjekkReise == null)
@@ -60,6 +64,8 @@ namespace WebApplication1.Controllers
                     nyReise.id = innBillett.reiseId;
                     nyReise.reiseFra = innBillett.reiseFra;
                     nyReise.reiseTil = innBillett.reiseTil;
+                    nyReise.datoAvreise = innBillett.datoAvreise;
+                    nyReise.datoAnkomst = innBillett.datoAnkomst;
                     nyReise.tidspunktFra = innBillett.reiseTil;
                     nyReise.tidspunktTil = innBillett.reiseTil;
                 }
