@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApplication1.DAL;
 using WebApplication1.Models;
 using WebApplication1.Modules;
 
@@ -29,6 +30,8 @@ namespace WebApplication1
             services.AddControllers();
             services.AddDbContext<ReiseDB>(options => options.UseSqlite("Data source=Reise.db"));
             services.AddDbContext<BillettContekst>(options => options.UseSqlite("Data source=Billett.db"));
+
+            services.AddScoped<IBillettRepository, BillettRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
