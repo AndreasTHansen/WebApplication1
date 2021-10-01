@@ -31,7 +31,7 @@
 });
 
 function hentAlleReiser(dest) {
-    $.get("reise/hentAlle", function (reiser) {
+    $.get("billett/hentAlle", function (reiser) {
         formaterReiser(reiser, dest);
     });
 }
