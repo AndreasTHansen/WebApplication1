@@ -28,6 +28,7 @@ namespace WebApplication1
         {
             services.AddControllers();
             services.AddDbContext<ReiseDB>(options => options.UseSqlite("Data source=Reise.db"));
+            services.AddDbContext<BillettContekst>(options => options.UseSqlite("Data source=Billett.db"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

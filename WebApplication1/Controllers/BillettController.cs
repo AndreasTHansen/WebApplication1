@@ -76,11 +76,9 @@ namespace WebApplication1.Controllers
             catch {
                 return false;
             }
-
         }
         public async Task<bool> Slett(int id)
         {
-
             try
             {
                 Billetter enBillet = await _billettDb.Billetter.FindAsync(id);
@@ -93,5 +91,6 @@ namespace WebApplication1.Controllers
                 return false; 
             }
         }
+        //Vet ikke om vi trenger en endre eller hent en, men kan legge det til hvis det er nødvendig
     }
 }
