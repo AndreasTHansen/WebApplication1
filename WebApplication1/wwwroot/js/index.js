@@ -66,5 +66,5 @@ function formaterReiser(reiser, dest) {
         }
     }
     ut += "</table>";
-    $("#reisene").html(ut);
+    $("#reisene").html(ut); 
 }

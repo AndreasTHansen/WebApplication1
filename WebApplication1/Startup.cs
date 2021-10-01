@@ -45,7 +45,13 @@ namespace WebApplication1
                 app.UseHsts();
             }
 
-            app.UseStaticFiles();
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetRequiredService<BillettContekst>();
+                context.Database.EnsureCreated();
+             }
+
+        app.UseStaticFiles();
 
             app.UseRouting();
 
