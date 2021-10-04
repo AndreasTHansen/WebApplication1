@@ -4,46 +4,37 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApplication1.DAL;
 using WebApplication1.Models;
 using WebApplication1.Modules;
 
 namespace WebApplication1.Controllers
 {
+    [Route("[controller]/[action]")]
     public class BillettController : ControllerBase
     {
-        private readonly BillettDB _billettDb;
-
-        public BillettController(BillettDB billettDb)
+        private readonly IBillettRepository _billettDb;
+        public BillettController(IBillettRepository billettDb)
         {
             _billettDb = billettDb;
         }
-        public async Task<List<Billett>> HentAlle()
+
+        public async Task<List<Billett>> HentAlle() 
         {
-            try
-            {
-                List<Billett> alleBiletter = await _billettDb.Biletter.ToListAsync();
-                return alleBiletter;
-            }
-            catch
-            {
-                return null;
-            }
-
+            return await _billettDb.HentAlle();
         }
-
         public async Task<bool> Lagre(Billett innBillett)
         {
-            try
-            {
-                _billettDb.Add(innBillett);
-                await _billettDb.SaveChangesAsync();
-                return true;
-            }
-
-            catch {
-                return false;
-            }
+            return await _billettDb.Lagre(innBillett);
+        }
+        public async Task<bool> Slett(int id) 
+        {
+            return await _billettDb.Slett(id);
         }
 
-    }
+        public async Task<List<Reise>> HentAlleReiser()
+        {
+            return await _billettDb.HentAlleReiser();
+        }
+     }
 }

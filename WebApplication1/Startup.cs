@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApplication1.DAL;
 using WebApplication1.Models;
 using WebApplication1.Modules;
 
@@ -28,6 +29,9 @@ namespace WebApplication1
         {
             services.AddControllers();
             services.AddDbContext<ReiseDB>(options => options.UseSqlite("Data source=Reise.db"));
+            services.AddDbContext<BillettContekst>(options => options.UseSqlite("Data source=Billett.db"));
+
+            services.AddScoped<IBillettRepository, BillettRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,6 +40,7 @@ namespace WebApplication1
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                DbInit.Initialize(app);
             }
             else
             {
@@ -44,7 +49,13 @@ namespace WebApplication1
                 app.UseHsts();
             }
 
-            app.UseStaticFiles();
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetRequiredService<BillettContekst>();
+                context.Database.EnsureCreated();
+             }
+
+        app.UseStaticFiles();
 
             app.UseRouting();
 

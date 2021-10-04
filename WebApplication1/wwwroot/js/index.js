@@ -31,7 +31,7 @@
 });
 
 function hentAlleReiser(dest) {
-    $.get("reise/hentAlle", function (reiser) {
+    $.get("billett/hentAlleReiser", function (reiser) {
         formaterReiser(reiser, dest);
     });
 }
@@ -66,5 +66,5 @@ function formaterReiser(reiser, dest) {
         }
     }
     ut += "</table>";
-    $("#reisene").html(ut);
+    $("#reisene").html(ut); 
 }
