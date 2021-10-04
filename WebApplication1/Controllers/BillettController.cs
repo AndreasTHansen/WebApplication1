@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,27 +15,43 @@ namespace WebApplication1.Controllers
     public class BillettController : ControllerBase
     {
         private readonly IBillettRepository _billettDb;
-        public BillettController(IBillettRepository billettDb)
+
+        private ILogger<BillettController> _log;
+        public BillettController(IBillettRepository billettDb, ILogger<BillettController> log)
         {
             _billettDb = billettDb;
         }
 
-        public async Task<List<Billett>> HentAlle() 
+        public async Task<ActionResult> HentAlle()
         {
-            return await _billettDb.HentAlle();
+            List<Billett> billettListe = await _billettDb.HentAlle();
+            return Ok(billettListe);
         }
-        public async Task<bool> Lagre(Billett innBillett)
+        public async Task<ActionResult> Lagre(Billett innBillett)
         {
-            return await _billettDb.Lagre(innBillett);
+            bool returOK = await _billettDb.Lagre(innBillett);
+            if (!returOK)
+            {
+                _log.LogInformation("Billetten ble ikke lagret");
+                return BadRequest("Billetten ble ikke lagret");
+            }
+            return Ok("Billett lagret");
         }
-        public async Task<bool> Slett(int id) 
+        public async Task<ActionResult> Slett(int id)
         {
-            return await _billettDb.Slett(id);
+            bool slettOk = await _billettDb.Slett(id);
+            if (!slettOk)
+            {
+                _log.LogInformation("Billetten ble ikke slettet");
+                return NotFound("Billetten ble ikke slettet");
+            }
+            return Ok("Billett slettet");
         }
 
-        public async Task<List<Reise>> HentAlleReiser()
+        public async Task<ActionResult> HentAlleReiser()
         {
-            return await _billettDb.HentAlleReiser();
+            List<Reise> reiseListe = await _billettDb.HentAlleReiser();
+            return Ok(reiseListe);
         }
-     }
+    }
 }
