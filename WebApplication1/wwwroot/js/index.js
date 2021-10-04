@@ -68,10 +68,17 @@ function formaterReiser(reiser, dest) {
     }
     ut += "</table>";
     $("#reisene").html(ut);
-
+     
+    function HentEnReise(id) {
+        $.get("billett/HentEnReise")
+    }
 
     $("button").click(function () {
-        const fired_button = $(this).val();
-        alert(fired_button);
+        alert(this.id);
+        const valgtReise = HentEnReise(this.id);
+        alert(valgtReise.reiseTil)
+
+        $("utDestinasjon").html(valgtReise.reiseTil);
+        
     });
 }

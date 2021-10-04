@@ -104,12 +104,28 @@ namespace WebApplication1.DAL
             }
         } 
 
-        public async Task<Billett> HentEn(int id)
+        public async Task<Billett> HentEnBillett(int id)
         {
             try
             {
                 Billetter enBillett = await _billettDb.Billetter.FindAsync(id);
-                return enBillett;
+                var hentetBillett = new Billett()
+                {
+                    id = enBillett.id,
+                    fornavn = enBillett.fornavn,
+                    etternavn = enBillett.etternavn,
+                    epost = enBillett.epost,
+                    mobilnummer = enBillett.mobilnummer,
+                    billettType = enBillett.billettType,
+                    reiseId = enBillett.reise.id,
+                    reiseTil = enBillett.reise.reiseTil,
+                    reiseFra = enBillett.reise.reiseFra,
+                    datoAnkomst = enBillett.reise.datoAnkomst,
+                    datoAvreise = enBillett.reise.datoAvreise,
+                    tidspunktFra = enBillett.reise.tidspunktFra,
+                    tidspunktTil = enBillett.reise.tidspunktTil
+                };
+                return hentetBillett;
             }
             catch
             {
@@ -138,11 +154,6 @@ namespace WebApplication1.DAL
             {
                 return null;
             }
-        }
-
-        public Task<Billett> HentEn()
-        {
-            throw new NotImplementedException();
         }
 
         public async Task<Reise> HentEnReise(int id)
