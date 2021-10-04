@@ -104,6 +104,19 @@ namespace WebApplication1.DAL
             }
         } 
 
+        public async Task<Billett> HentEn(int id)
+        {
+            try
+            {
+                Billetter enBillett = await _billettDb.Billetter.FindAsync(id);
+                return enBillett;
+            }
+            catch
+            {
+                return null;
+            }
+
+        }
         public async Task<List<Reise>> HentAlleReiser() 
         {
             try
@@ -125,6 +138,11 @@ namespace WebApplication1.DAL
             {
                 return null;
             }
+        }
+
+        public Task<Billett> HentEn()
+        {
+            throw new NotImplementedException();
         }
         //Vet ikke om vi trenger en endre eller hent en, men kan legge det til hvis det er nødvendig
     }

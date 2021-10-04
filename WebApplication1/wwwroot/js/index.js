@@ -27,7 +27,8 @@
         if (value == "visAlle") {
             hentAlleReiser("");
         }
-    })
+    }
+    )
 });
 
 function hentAlleReiser(dest) {
@@ -66,5 +67,11 @@ function formaterReiser(reiser, dest) {
         }
     }
     ut += "</table>";
-    $("#reisene").html(ut); 
+    $("#reisene").html(ut);
+
+
+    $("button").click(function () {
+        const fired_button = $(this).val();
+        alert(fired_button);
+    });
 }

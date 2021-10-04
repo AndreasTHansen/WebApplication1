@@ -10,6 +10,7 @@ namespace WebApplication1.DAL
     public interface IBillettRepository
     {
         Task<List<Billett>> HentAlle();
+        Task<Billett> HentEn();
         Task<bool> Lagre(Billett innBillett);
         Task<bool> Slett(int id);
         Task<List<Reise>> HentAlleReiser();
