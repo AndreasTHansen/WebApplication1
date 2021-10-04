@@ -13,5 +13,6 @@ namespace WebApplication1.DAL
         Task<bool> Lagre(Billett innBillett);
         Task<bool> Slett(int id);
         Task<List<Reise>> HentAlleReiser();
+        Task<Reise> HentEnReise(int id);
     }
 }
