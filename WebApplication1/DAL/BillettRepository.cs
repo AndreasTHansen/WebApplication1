@@ -180,6 +180,11 @@ namespace WebApplication1.DAL
             }
 
         }
+
+        public Task<Billett> HentEn()
+        {
+            throw new NotImplementedException();
+        }
         //Vet ikke om vi trenger en endre eller hent en, men kan legge det til hvis det er nødvendig
     }
 }
