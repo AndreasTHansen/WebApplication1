@@ -30,13 +30,18 @@ namespace WebApplication1.Controllers
         }
         public async Task<ActionResult> Lagre(Billett innBillett)
         {
-            bool returOK = await _billettDb.Lagre(innBillett);
-            if (!returOK)
+            if (ModelState.IsValid)
             {
-                _log.LogInformation("Billetten ble ikke lagret");
-                return BadRequest("Billetten ble ikke lagret");
+                bool returOK = await _billettDb.Lagre(innBillett);
+                if (!returOK)
+                {
+                    _log.LogInformation("Billetten ble ikke lagret");
+                    return BadRequest("Billetten ble ikke lagret");
+                }
+                return Ok("Billett lagret");
             }
-            return Ok("Billett lagret");
+            _log.LogInformation("Feil i inputvalidering");
+            return BadRequest("Feil i inputvalidering");
         }
         public async Task<ActionResult> Slett(int id)
         {
