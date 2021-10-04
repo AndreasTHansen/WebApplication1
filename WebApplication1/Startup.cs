@@ -28,7 +28,6 @@ namespace WebApplication1
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddDbContext<ReiseDB>(options => options.UseSqlite("Data source=Reise.db"));
             services.AddDbContext<BillettContekst>(options => options.UseSqlite("Data source=Billett.db"));
 
             services.AddScoped<IBillettRepository, BillettRepository>();
