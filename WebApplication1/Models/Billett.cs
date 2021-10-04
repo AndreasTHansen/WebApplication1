@@ -12,6 +12,8 @@ namespace WebApplication1.Models
         public string fornavn { get; set; }
         public string etternavn { get; set; }
         public string epost { get; set; }
+
+        public string mobilnummer { get; set; }
         public string billettType { get; set; }
         public int reiseId { get; set; }
         public string reiseTil { get; set; }

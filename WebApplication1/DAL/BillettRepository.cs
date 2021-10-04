@@ -30,6 +30,7 @@ namespace WebApplication1.DAL
                     fornavn = k.fornavn,
                     etternavn = k.etternavn,
                     epost = k.epost,
+                    mobilnummer = k.mobilnummer,
                     billettType = k.billettType,
                     reiseId = k.reise.id,
                     reiseFra = k.reise.reiseFra,
@@ -57,6 +58,7 @@ namespace WebApplication1.DAL
                 nyBillett.fornavn = innBillett.fornavn;
                 nyBillett.etternavn = innBillett.etternavn;
                 nyBillett.epost = innBillett.epost;
+                nyBillett.mobilnummer = innBillett.mobilnummer;
                 nyBillett.billettType = innBillett.billettType;
 
                 var sjekkReise = _billettDb.Reiser.Find(innBillett.reiseId);
