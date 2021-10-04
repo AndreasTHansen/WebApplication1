@@ -20,6 +20,7 @@ namespace WebApplication1.Controllers
         public BillettController(IBillettRepository billettDb, ILogger<BillettController> log)
         {
             _billettDb = billettDb;
+            _log = log;
         }
 
         public async Task<ActionResult> HentAlle()
@@ -51,6 +52,7 @@ namespace WebApplication1.Controllers
         public async Task<ActionResult> HentAlleReiser()
         {
             List<Reise> reiseListe = await _billettDb.HentAlleReiser();
+            _log.LogInformation("Test");
             return Ok(reiseListe);
         }
     }
