@@ -144,6 +144,31 @@ namespace WebApplication1.DAL
         {
             throw new NotImplementedException();
         }
+
+        public async Task<Reise> HentEnReise(int id)
+        {
+            try
+            {
+                Reiser enReise = await _billettDb.Reiser.FindAsync(id);
+                var hentetReise = new Reise()
+                {
+                    id = enReise.id,
+                    reiseFra = enReise.reiseFra,
+                    reiseTil = enReise.reiseTil,
+                    tidspunktFra = enReise.tidspunktFra,
+                    tidspunktTil = enReise.tidspunktTil,
+                    datoAnkomst = enReise.datoAnkomst,
+                    datoAvreise = enReise.datoAvreise
+                };
+
+                return hentetReise;
+            }
+            catch
+            {
+                return null;
+            }
+
+        }
         //Vet ikke om vi trenger en endre eller hent en, men kan legge det til hvis det er nødvendig
     }
 }

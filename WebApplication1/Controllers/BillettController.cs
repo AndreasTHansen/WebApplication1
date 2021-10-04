@@ -60,5 +60,17 @@ namespace WebApplication1.Controllers
             _log.LogInformation("Test");
             return Ok(reiseListe);
         }
+
+        public async Task<ActionResult> HentEnReise(int id)
+        {
+            Reise hentetReise = await _billettDb.HentEnReise(id);
+            
+            if(hentetReise == null)
+            {
+                _log.LogInformation("Fant ikke reisen i databasen");
+                return NotFound("Fant ikke reisen i databasen");
+            }
+            return Ok("Reise funnet");
+        }
     }
 }
