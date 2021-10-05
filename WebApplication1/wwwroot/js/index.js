@@ -47,8 +47,8 @@ function formaterReiser(reiser, dest) {
         for (let reise of reiser) {
             ut += "<tr>" +
                 "<td><button id=" + reise.id + ">Kjøp her</button></td>" +
-                "<td>" + reise.reiseTil + "</td>" +
                 "<td>" + reise.reiseFra + "</td>" +
+                "<td>" + reise.reiseTil + "</td>" +
                 "<td>" + reise.tidspunktFra + "</td>" +
                 "<td>" + reise.tidspunktTil + "</td>" +
                 "</tr>";
