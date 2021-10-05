@@ -71,9 +71,9 @@ function formaterReiser(reiser, dest) {
      
     function HentEnReise(id) {
         $.get("billett/HentEnReise")
-    }
+    };
 
-    $("#kjopBtn").click(function () {
+    $("button").click(function () {
         alert(this.id);
         const valgtReise = HentEnReise(this.id);
         alert(valgtReise.reiseTil)
