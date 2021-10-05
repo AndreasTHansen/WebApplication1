@@ -75,7 +75,7 @@ function formaterReiser(reiser, dest) {
     }
 
     function HentEnReise(reiseId) {
-        $.get("billett/HentEnReise", { id: reiseId }, function (reise) {
+        $.get("billett/HentEnReise", {id: reiseId}, function (reise) {
             velgReise(reise);
         });
     };  
