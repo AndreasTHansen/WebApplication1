@@ -40,7 +40,7 @@ function hentAlleReiser(dest) {
 function formaterReiser(reiser, dest) {
     let ut = "<table class='table table-striped'>" +
         "<tr>" +
-        "<th>Reise-id</th><th>Kjøp billett</th><th>Reises til</th><th>Avgang</th><th>Ankomst</th>" +
+        "<th>Kjøp billett</th><th>Reises fra</th><th>Reises til</th><th>Avgang</th><th>Ankomst</th>" +
         "</tr>";
 
     if (dest == "") {
@@ -73,7 +73,7 @@ function formaterReiser(reiser, dest) {
         $.get("billett/HentEnReise")
     };
 
-    $("button").click(function () {
+    $("#kjopBtn").click(function () {
         alert(this.id);
         const valgtReise = HentEnReise(this.id);
         alert(valgtReise.reiseTil)
