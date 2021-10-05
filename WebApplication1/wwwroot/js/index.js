@@ -50,8 +50,8 @@ function formaterReiser(reiser, dest) {
         for (let reise of reiser) {
             ut += "<tr>" +
                 "<td><button id=" + reise.id + ">Kjøp her</button></td>" +
-                "<td>" + reise.reiseTil + "</td>" +
                 "<td>" + reise.reiseFra + "</td>" +
+                "<td>" + reise.reiseTil + "</td>" +
                 "<td>" + reise.tidspunktFra + "</td>" +
                 "<td>" + reise.tidspunktTil + "</td>" +
                 "</tr>";
@@ -72,20 +72,20 @@ function formaterReiser(reiser, dest) {
     ut += "</table>";
     $("#reisene").html(ut);
 
+    function velgReise(reise) {
+        alert(reise.reiseTil)
+        $("utDestinasjon").html(reise.reiseTil);
+    }
+
+    function HentEnReise(reiseId) {
+        $.get("billett/HentEnReise", { id: reiseId }, function (reise) {
+            velgReise(reise);
+        });
+    };  
+
     $("button").click(function () {
-        
         id = this.id
-        HentEnReise(id)
+        HentEnReise(id);
     });
 }
 
-function velgReise(reise) {
-    $("#utDestinasjon").html(reise.reiseTil);
-}
-
-function HentEnReise(tall) {
-    $.get("billett/HentEnReise", { id: tall }, function (reise) {
-        velgReise(reise);
-    });
-    
-}
