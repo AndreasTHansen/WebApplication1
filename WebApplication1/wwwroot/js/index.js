@@ -71,7 +71,7 @@ function formaterReiser(reiser, dest) {
      
     function HentEnReise(id) {
         $.get("billett/HentEnReise")
-    }
+    };
 
     $("button").click(function () {
         alert(this.id);
