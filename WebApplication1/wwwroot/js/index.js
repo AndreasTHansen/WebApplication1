@@ -68,17 +68,21 @@ function formaterReiser(reiser, dest) {
     }
     ut += "</table>";
     $("#reisene").html(ut);
-     
-    function HentEnReise(id) {
-        $.get("billett/HentEnReise")
-    };
+
+    function velgReise(reise) {
+        alert(reise.reiseTil)
+        $("utDestinasjon").html(reise.reiseTil);
+    }
+
+    function HentEnReise(reiseId) {
+        $.get("billett/HentEnReise", { id: reiseId }, function (reise) {
+            velgReise(reise);
+        });
+    };  
 
     $("button").click(function () {
-        alert(this.id);
-        const valgtReise = HentEnReise(this.id);
-        alert(valgtReise.reiseTil)
-
-        $("utDestinasjon").html(valgtReise.reiseTil);
-        
+        id = this.id
+        HentEnReise(id);
     });
 }
+

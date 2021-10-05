@@ -70,7 +70,7 @@ namespace WebApplication1.Controllers
                 _log.LogInformation("Fant ikke reisen i databasen");
                 return NotFound("Fant ikke reisen i databasen");
             }
-            return Ok("Reise funnet");
+            return Ok(hentetReise);
         }
     }
 }
