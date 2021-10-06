@@ -34,6 +34,16 @@ $(document).ready(function () {
     });
 });
 
+function compareDatoAvreise(a, b) {
+    if (a.datoAvreise < b.datoAvreise) {
+        return -1;
+    }
+    if (a.datoAvreise > b.datoAvreise) {
+        return 1;
+    }
+    return 0;
+}
+
 function hentAlleReiser() {
     $.get("billett/hentAlleReiser", function (reiser) {
         init(reiser);
@@ -83,12 +93,12 @@ function velgReise(reise) {
     $("#kjopForm").css("display", "block");
     $("#utDestinasjon").html(reise.reiseTil);
     $("#utTid").html(reise.tidspunktFra + ", " + reise.datoAvreise)
+    valgtReise = reise;
 }
 
 function HentEnReise(reiseId) {
     $.get("billett/HentEnReise", { id: reiseId }, function (reise) {
         velgReise(reise);
-        valgtReise = reise;
     });
 };
 
@@ -104,14 +114,13 @@ function lagreBillett() {
 
     const url = "billett/Lagre";
 
-    console.log(billett);
+    $.post(url, billett, function () {
 
-   /* $.post(url, billett, function (OK) {
 
-        alert("billet ble lagret");
-        window.location.href = 'kvittering.html';
+        alert(billett.epost + "billetten ble lagret");
+        window.location.href = 'kvittering.html';       
     })
         .fail(function () {
-            console.log("du er feil mann");
-        })*/
+            console.log("Noe feil skjedde med lagringen")
+        });
 };
