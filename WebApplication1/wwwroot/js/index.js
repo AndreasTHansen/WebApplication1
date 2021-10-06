@@ -81,7 +81,6 @@ function visReiser(reiseArr) {
         // Funksjonen skal kjøre på alle knapper utenom kjøp-knappen.
         if (this.id == "knapp") {
             lagreBillett();
-            return;
         }
         else {
             id = this.id
@@ -116,11 +115,8 @@ function lagreBillett() {
     };
 
     const url = "billett/Lagre";
-    console.log(valgtReise.id)
 
     $.post(url, billett, function () {
-
-
         alert(billett.epost + "billetten ble lagret");
         window.location.href = 'kvittering.html';       
     })
