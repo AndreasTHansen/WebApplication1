@@ -36,7 +36,6 @@ function hentAlleReiser() {
     $.get("billett/hentAlleReiser", function (reiser) {
         init(reiser);
     });
-
 }
 
 function init(reiser) {
@@ -54,18 +53,6 @@ function init(reiser) {
     });
 
     visReiser(alleArr);
-
-    $("button").click(function () {
-        // Funksjonen skal kjøre på alle knapper utenom kjøp-knappen.
-        if (this.id == "knapp") {
-            lagreBillett();
-            return;
-        }
-        else {
-            id = this.id
-            HentEnReise(id);
-        }
-    });
 }
 
 function visReiser(reiseArr) {
