@@ -22,6 +22,7 @@ $(document).ready(function () {
     });
 });
 
+//Sortering av avreisedatoer
 function compareDatoAvreise(a, b) {
     if (a.datoAvreise < b.datoAvreise) {
         return -1;
