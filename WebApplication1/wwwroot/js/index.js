@@ -93,6 +93,7 @@ function visReiser(reiseArr) {
 
 function velgReise(reise) {
     $("#kjopForm").css("display", "block");
+    $("#knapp").css("display", "block");
     $("#utDestinasjon").html(reise.reiseTil);
     $("#utTid").html(reise.tidspunktFra + ", " + reise.datoAvreise)
     valgtReise = reise;
