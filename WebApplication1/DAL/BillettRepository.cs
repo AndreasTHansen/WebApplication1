@@ -32,6 +32,7 @@ namespace WebApplication1.DAL
                     epost = k.epost,
                     mobilnummer = k.mobilnummer,
                     billettType = k.billettType,
+                    pris = k.pris,
                     reiseId = k.reise.id,
                     reiseFra = k.reise.reiseFra,
                     reiseTil = k.reise.reiseTil,
@@ -51,7 +52,7 @@ namespace WebApplication1.DAL
         }
 
         public async Task<bool> Lagre(Billett innBillett)
-        {
+        {                    
             try
             {
                 var nyBillett = new Billetter();
@@ -60,6 +61,7 @@ namespace WebApplication1.DAL
                 nyBillett.epost = innBillett.epost;
                 nyBillett.mobilnummer = innBillett.mobilnummer;
                 nyBillett.billettType = innBillett.billettType;
+                nyBillett.pris = innBillett.pris;
 
                 var sjekkReise = _billettDb.Reiser.Find(innBillett.reiseId);
                 if (sjekkReise == null)

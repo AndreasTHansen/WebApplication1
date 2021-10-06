@@ -1,9 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using WebApplication1.Modules;
 
 namespace WebApplication1.Models
 
@@ -18,6 +13,7 @@ namespace WebApplication1.Models
         public string epost { get; set; }  
         public string mobilnummer { get; set; }
         public string billettType { get; set; }
+        public double pris { get; set; }
         public virtual Reiser reise { get; set; }
     }
     public class Reiser

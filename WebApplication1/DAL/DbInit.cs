@@ -24,9 +24,9 @@ namespace WebApplication1.Models
                 var reise4 = new Reiser { reiseFra = "Oslo", reiseTil = "København", tidspunktFra = "12:00", tidspunktTil = "09:00", datoAvreise = "14/12/2022", datoAnkomst = "15/12/2022" };
                 var reise5 = new Reiser { reiseFra = "Oslo", reiseTil = "København", tidspunktFra = "12:00", tidspunktTil = "09:00", datoAvreise = "16/12/2022", datoAnkomst = "17/12/2022" };
 
-                var billett1 = new Billetter { fornavn = "Anders", etternavn = "Hagen", mobilnummer = "12345678", billettType = "voksen", epost = "anders@gmail.com", reise = reise1 };
-                var billett2 = new Billetter { fornavn = "Andreas", etternavn = "Hansen", mobilnummer = "987654321", billettType = "voksen", epost = "andreas@gmail.com", reise = reise5 };
-                var billett3 = new Billetter { fornavn = "Andreas", etternavn = "Hansen", billettType = "voksen", mobilnummer = "12345678", epost = "andreas@gmail.com", reise = reise3 };
+                var billett1 = new Billetter { fornavn = "Anders", etternavn = "Hagen", mobilnummer = "12345678", billettType = "voksen", epost = "anders@gmail.com", pris = 1499.99, reise = reise1 };
+                var billett2 = new Billetter { fornavn = "Andreas", etternavn = "Hansen", mobilnummer = "987654321", billettType = "voksen", epost = "andreas@gmail.com", pris = 1499.99, reise = reise5 };
+                var billett3 = new Billetter { fornavn = "Andreas", etternavn = "Hansen", billettType = "voksen", mobilnummer = "12345678", epost = "andreas@gmail.com", pris = 1499.99, reise = reise3 };
 
 
                 context.Reiser.Add(reise2);

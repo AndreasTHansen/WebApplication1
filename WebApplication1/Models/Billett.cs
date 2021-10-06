@@ -33,6 +33,7 @@ namespace WebApplication1.Models
         public string tidspunktFra { get; set; }
         [RegularExpression(@"^[0-9./\:]{2,20})$")]
         public string tidspunktTil { get; set; }
+        public double pris { get; set;  }
 
     }
 }
