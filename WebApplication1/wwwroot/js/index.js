@@ -54,8 +54,6 @@ function init(reiser) {
     kobenhavnArr = alleArr.filter(function (reise) {
         return reise.reiseTil == "København";
     });
-
-    visReiser(alleArr);
 }
 
 function visReiser(reiseArr) {
