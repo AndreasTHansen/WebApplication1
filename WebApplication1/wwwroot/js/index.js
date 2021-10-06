@@ -5,6 +5,18 @@ var alleArr = [];
 
 $(document).ready(function () {
 
+    $("button").click(function () {
+        // Funksjonen skal kjøre på alle knapper utenom kjøp-knappen.
+        if (this.id == "knapp") {
+            lagreBillett();
+            return;
+        }
+        else {
+            id = this.id
+            HentEnReise(id);
+        }
+    });
+
     hentAlleReiser();
 
     $("#reiseValg").change(function () {
@@ -20,24 +32,13 @@ $(document).ready(function () {
             visReiser(alleArr);
         }
     });
-
-    $("button").click(function () {
-        // Funksjonen skal kjøre på alle knapper utenom kjøp-knappen.
-        if (this.id == "knapp") {
-            lagreBillett();
-            return;
-        }
-        else {
-            id = this.id
-            HentEnReise(id);
-        }
-    });
 });
 
 function hentAlleReiser() {
     $.get("billett/hentAlleReiser", function (reiser) {
         init(reiser);
     });
+
 }
 
 function init(reiser) {
@@ -90,6 +91,7 @@ function HentEnReise(reiseId) {
         valgtReise = reise;
     });
 };
+
 
 function lagreBillett() {
     const billett = {
