@@ -13,6 +13,16 @@ function hentSisteBillett() {
 }
 
 function visBillett(billetter) {
-    let billett = billetter.slice(-1);
-    console.log("hei " + billett);
+    let billettArr = billetter.slice(-1);
+    const billett = billettArr[0];
+
+    $("#ordrenummer").html("#" + billett.id);
+    $("#fornavn").html(billett.fornavn);
+    $("#etternavn").html(billett.etternavn);
+    $("#epost").html(billett.fornavn);
+    $("#mobilnummer").html(billett.mobilnummer);
+    $("#reiseTil").html(billett.reiseTil);
+    $("#reiseFra").html(billett.reiseFra);
+    $("#ankomstTid").html(billett.datoAnkomst);
+    $("#avreiseTid").html(billett.datoAvreise);
 }
