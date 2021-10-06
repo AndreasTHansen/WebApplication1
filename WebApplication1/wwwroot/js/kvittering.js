@@ -8,12 +8,21 @@ function hentSisteBillett() {
         visBillett(billetter);
     })
         .fail(function () {
-            console.log("Noe gikk galt ved henting av data");
+            console.log("her gikk noe galt");
         })
 }
 
 function visBillett(billetter) {
     let billettArr = billetter.slice(-1);
-    var billett = billettArr[0];
-    console.log(billett.fornavn);
+    const billett = billettArr[0];
+
+    $("#ordrenummer").html("#" + billett.id);
+    $("#fornavn").html(billett.fornavn);
+    $("#etternavn").html(billett.etternavn);
+    $("#epost").html(billett.fornavn);
+    $("#mobilnummer").html(billett.mobilnummer);
+    $("#reiseTil").html(billett.reiseTil);
+    $("#reiseFra").html(billett.reiseFra);
+    $("#ankomstTid").html(billett.datoAnkomst);
+    $("#avreiseTid").html(billett.datoAvreise);
 }
