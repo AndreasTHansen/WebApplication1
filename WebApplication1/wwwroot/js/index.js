@@ -34,6 +34,16 @@ $(document).ready(function () {
     });
 });
 
+function compareDatoAvreise(a, b) {
+    if (a.datoAvreise < b.datoAvreise) {
+        return -1;
+    }
+    if (a.datoAvreise > b.datoAvreise) {
+        return 1;
+    }
+    return 0;
+}
+
 function hentAlleReiser() {
     $.get("billett/hentAlleReiser", function (reiser) {
         init(reiser);
