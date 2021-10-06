@@ -8,10 +8,12 @@ function hentSisteBillett() {
         visBillett(billetter);
     })
         .fail(function () {
-            console.log("her gikk noe galt");
+            console.log("Noe gikk galt ved henting av data");
         })
 }
 
 function visBillett(billetter) {
-    let billett = billetter.slice(-1);
+    let billettArr = billetter.slice(-1);
+    var billett = billettArr[0];
+    console.log(billett.fornavn);
 }
