@@ -47,6 +47,8 @@ function init(reiser) {
         i++;
     }
 
+    alleArr.sort(compareDatoAvreise);
+
     kielArr = alleArr.filter(function (reise) {
         return reise.reiseTil == "Kiel";
     });
