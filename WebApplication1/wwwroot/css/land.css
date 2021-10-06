@@ -1,0 +1,12 @@
+﻿body {
+}
+
+div.dest {
+    display: inline-block;
+    text-align: center;
+}
+
+.dest a, a:hover, a:visited, a:active {
+    color: inherit;
+    text-decoration: none;
+}

@@ -1,64 +1,36 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">     
+    <meta charset="utf-8" />
+    <title>Vel ditt destinasjonsland</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <meta charset="utf-8" />
     <title>Reiser</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="js/index.js"></script>
+    <link rel="stylesheet" href="css/land.css" type="text/css" />
 </head>
 <body>
     <div class="container">
-        <div class="form-group">
+        <div class="form-group" style="text-align: center">
             <h1 class="display-1">Vi ønsker deg velkommen til Color Line!</h1>
 
             <h2>Hvor ønsker du å reise?</h2>
 
-            <select name="destination" class="form-control input-lg" id="reiseValg">
-                <option value="" disabled selected> Velg destinasjon </option>
-                <option value="Kiel"> Kiel </option>
-                <option value="Kobenhavn"> København</option>
-                <option disabled>───────</option>
-                <option value="visAlle">Vis alle reiser</option>
-            </select>
+            <a href="København.html">
+                <div class="dest" style="padding-right: 5%">
+                    <img class="img-thumbnail img-responsive float" src="images/Flag_of_Denmark.svg.png" style="object-fit: cover" />
+                    <h4>Til Danmark</h4>
+                </div>
+            </a>
 
-            <div id="reisene"></div>
+            <a href="Kiel.html">
+                <div class="dest">
+                    <img class="img-thumbnail img-responsive float" src="images/Flag_of_Germany.svg.png" style="object-fit: cover" />
+                    <h4>Til Tyskland</h4>
+                </div>
+            </a>
+
         </div>
-
-        <form id="kjopForm" style="display:none">
-            Destinasjon : <span id="utDestinasjon"></span><br />
-            Utreise : <span id="utTid"></span>
-
-            <br /><br />
-
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label>Fornavn</label>
-                    <input type="text" class="form-control" id="fornavn" placeholder="Fornavn">
-                </div>
-                <div class="form-group col-md-6">
-                    <label>Etternavn</label>
-                    <input type="text" class="form-control" id="etternavn" placeholder="Etternavn">
-                </div>
-            </div>
-            <div class="form-group">
-                <label>E-post</label>
-                <input type="text" class="form-control" id="epost" placeholder="Epost">
-            </div>
-            <div class="form-group">
-                <label>Mobilnummer</label>
-                <input type="tel" class="form-control" id="mobilnummer" placeholder="Tlf.">
-            </div>
-        </form>
-        <button id="knapp" class="btn btn-primary" style="display:none">Kjøp</button>
-
-        <span id="feil"></span>
-
     </div>
-
-    <!--Script for å kjøre bootstrap-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>

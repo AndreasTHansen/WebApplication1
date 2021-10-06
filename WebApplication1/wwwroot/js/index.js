@@ -1,4 +1,5 @@
 ﻿let valgtReise = null;
+var lastet = false;
 var kielArr = [];
 var kobenhavnArr = [];
 var alleArr = [];
@@ -7,6 +8,7 @@ $(document).ready(function () {
 
     hentAlleReiser();
 
+    /*
     $("#reiseValg").change(function () {
         var value = $(this).val();
 
@@ -20,6 +22,20 @@ $(document).ready(function () {
             visReiser(alleArr);
         }
     });
+    */
+
+    //Trenger litt tid på å laste inn arrayene
+    //NB: Hvis vi legger til flere elementer i databasen og de slutter å vises, må vi huske å øke timeouten her
+
+    setTimeout(function () {
+        if ($("#land").text() == "Tyskland") {
+            visReiser(kielArr);
+        }
+        if ($("#land").text() == "Danmark") {
+            visReiser(kobenhavnArr);
+        }
+    }, 200);
+    
 });
 
 //Sortering av avreisedatoer
@@ -54,8 +70,6 @@ function init(reiser) {
     kobenhavnArr = alleArr.filter(function (reise) {
         return reise.reiseTil == "København";
     });
-
-    visReiser(alleArr);
 }
 
 function visReiser(reiseArr) {
