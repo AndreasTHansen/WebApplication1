@@ -107,7 +107,7 @@ function lagreBillett() {
         etternavn: $("#etternavn").val(),
         epost: $("#epost").val(),
         mobilnummer: $("#mobilnummer").val(),
-        reiseId: valgtReise.reiseId
+        reiseId: valgtReise.id
     };
 
     const url = "billett/Lagre";
