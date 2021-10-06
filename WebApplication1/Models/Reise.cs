@@ -9,17 +9,17 @@ namespace WebApplication1.Modules
     public class Reise
     {
         public int id { get; set; }
-        [RegularExpression(@"^[a-zA-ZæøåÆØÅ. \-]{2,20})$")]
+        [RegularExpression(@"^[a-zA-ZæøåÆØÅ. \-]{2,20}$")]
         public string reiseTil { get; set; }
-        [RegularExpression(@"^[a-zA-ZæøåÆØÅ. \-]{2,20})$")]
+        [RegularExpression(@"^[a-zA-ZæøåÆØÅ. \-]{2,20}$")]
         public string reiseFra{ get; set; }
-        [RegularExpression(@"^[0-9./\:]{2,20})$")]
+        [RegularExpression(@"^[0-9./\:]{2,20}$")]
         public string tidspunktFra { get; set; }
-        [RegularExpression(@"^[0-9./\:]{2,20})$")]
+        [RegularExpression(@"^[0-9./\:]{2,20}$")]
         public string tidspunktTil { get; set; }
-        [RegularExpression(@"^[0-9./\:]{2,20})$")]
+        [RegularExpression(@"^[0-9./\:]{2,20}$")]
         public string datoAvreise { get; set; }
-        [RegularExpression(@"^[0-9./\:]{2,20})$")]
+        [RegularExpression(@"^[0-9./\:]{2,20}$")]
         public string datoAnkomst { get; set; }
     }
 }
