@@ -34,6 +34,19 @@ $(document).ready(function () {
     )
 });
 
+
+function velgReise(reise) {
+    $("#kjopForm").css("display", "block");
+    $("#utDestinasjon").html(reise.reiseTil);
+    $("#utTid").html(reise.tidspunktFra + ", " + reise.datoAvreise)
+}
+
+function HentEnReise(reiseId) {
+    $.get("billett/HentEnReise", { id: reiseId }, function (reise) {
+        velgReise(reise);
+    });
+};
+
 function hentAlleReiser(dest) {
     $.get("billett/hentAlleReiser", function (reiser) {
         formaterReiser(reiser, dest);
@@ -72,18 +85,12 @@ function formaterReiser(reiser, dest) {
     ut += "</table>";
     $("#reisene").html(ut);
 
-    function velgReise(reise) {
-        alert(reise.reiseTil)
-        $("utDestinasjon").html(reise.reiseTil);
-    }
-
-    function HentEnReise(reiseId) {
-        $.get("billett/HentEnReise", {id: reiseId}, function (reise) {
-            velgReise(reise);
-        });
-    };  
-
     $("button").click(function () {
+        // Funksjonen skal kjøre på alle knapper utenom kjøp-knappen.
+        if (this.id == "kjopBtn") {
+            return;
+        }
+        
         id = this.id
         HentEnReise(id);
     });
