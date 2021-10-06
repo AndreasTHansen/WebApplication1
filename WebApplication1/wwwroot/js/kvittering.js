@@ -1,11 +1,18 @@
 ﻿$(document).ready(function () {
-    hentSisteBillett()
+    hentSisteBillett();
 })
 
 function hentSisteBillett() {
-
     $.get("billett/HentAlle", function (billetter) {
-        return;
+        console.log(billetter);
+        visBillett(billetter);
     })
-    
+        .fail(function () {
+            console.log("her gikk now galt");
+        })
+}
+
+function visBillett(billetter) {
+    let billett = billetter.slice(-1);
+    console.log("hei " + billett);
 }
