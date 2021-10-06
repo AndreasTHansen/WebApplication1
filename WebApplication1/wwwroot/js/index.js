@@ -1,4 +1,4 @@
-﻿
+﻿let valgtReise = null;
 var kielArr = [];
 var kobenhavnArr = [];
 var alleArr = [];
@@ -116,6 +116,7 @@ function lagreBillett() {
     };
 
     const url = "billett/Lagre";
+    console.log(valgtReise.id)
 
     $.post(url, billett, function () {
 
