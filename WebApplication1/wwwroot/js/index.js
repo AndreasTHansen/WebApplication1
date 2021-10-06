@@ -1,78 +1,25 @@
 ﻿
+var kielArr = [];
+var kobenhavnArr = [];
+var alleArr = [];
+
 $(document).ready(function () {
 
-    hentAlleReiser("");
-
-    /*
-    $("#valgKiel").click(function () {
-        hentAlleReiser("Kiel");
-    })
-
-    $("#valgKobenhavn").click(function () {
-        hentAlleReiser("København");
-    })
-
-    $("#visAlle").click(function () {
-        hentAlleReiser("");
-    })
-    */
+    hentAlleReiser();
 
     $("#reiseValg").change(function () {
         var value = $(this).val();
 
         if (value == "Kiel") {
-            hentAlleReiser("Kiel");
+            visReiser(kielArr);
         };
         if (value == "Kobenhavn") {
-            hentAlleReiser("København");
+            visReiser(kobenhavnArr);
         };
         if (value == "visAlle") {
-            hentAlleReiser("");
+            visReiser(alleArr);
         }
-    }
-    )
-});
-
-let valgtReise = null;
-
-
-function hentAlleReiser(dest) {
-    $.get("billett/hentAlleReiser", function (reiser) {
-        formaterReiser(reiser, dest);
     });
-}
-
-function formaterReiser(reiser, dest) {
-    let ut = "<table class='table table-striped'>" +
-        "<tr>" +
-        "<th>Kjøp billett</th><th>Reiser fra</th><th>Destinasjon</th><th>Avgang</th><th>Ankomst</th>"
-        "</tr>";
-
-    if (dest == "") {
-        for (let reise of reiser) {
-            ut += "<tr>" +
-                "<td><button id=" + reise.id + ">Kjøp her</button></td>" +
-                "<td>" + reise.reiseFra + "</td>" +
-                "<td>" + reise.reiseTil + "</td>" +
-                "<td>" + reise.datoAvreise + ", "+ reise.tidspunktFra +"</td>" +
-                "<td>" + reise.datoAnkomst + ", " + reise.tidspunktTil + "</td>" +
-                "</tr>";
-        }
-    } else {
-        for (let reise of reiser) {
-            if (reise.reiseTil == dest) {
-                ut += "<tr>" +
-                    "<td><button id=" + reise.id + ">Kjøp her</button></td>" +
-                    "<td>" + reise.reiseTil + "</td>" +
-                    "<td>" + reise.reiseFra + "</td>" +
-                    "<td>" + reise.tidspunktFra + "</td>" +
-                    "<td>" + reise.tidspunktTil + "</td>" +
-                    "</tr>";
-            }
-        }
-    }
-    ut += "</table>";
-    $("#reisene").html(ut);
 
     $("button").click(function () {
         // Funksjonen skal kjøre på alle knapper utenom kjøp-knappen.
@@ -85,6 +32,49 @@ function formaterReiser(reiser, dest) {
             HentEnReise(id);
         }
     });
+});
+
+function hentAlleReiser() {
+    $.get("billett/hentAlleReiser", function (reiser) {
+        init(reiser);
+    });
+}
+
+function init(reiser) {
+    let i = 0;
+    for (let reise of reiser) {
+        alleArr[i] = reise;
+        i++;
+    }
+
+    kielArr = alleArr.filter(function (reise) {
+        return reise.reiseTil == "Kiel";
+    });
+    kobenhavnArr = alleArr.filter(function (reise) {
+        return reise.reiseTil == "København";
+    });
+
+    visReiser(alleArr);
+}
+
+function visReiser(reiseArr) {
+    let ut = "<table class='table table-striped'>" +
+        "<tr>" +
+        "<th>Kjøp billett</th><th>Reiser fra</th><th>Destinasjon</th><th>Avgang</th><th>Ankomst</th>"
+    "</tr>";
+
+    for (let i = 0; i < reiseArr.length; i++) {
+        ut += "<tr>" +
+            "<td><button id=" + reiseArr[i].id + ">Kjøp her</button></td>" +
+            "<td>" + reiseArr[i].reiseFra + "</td>" +
+            "<td>" + reiseArr[i].reiseTil + "</td>" +
+            "<td>" + reiseArr[i].datoAvreise + ", " + reiseArr[i].tidspunktFra + "</td>" +
+            "<td>" + reiseArr[i].datoAnkomst + ", " + reiseArr[i].tidspunktTil + "</td>"
+        "</tr>";
+    }
+
+    ut += "</table>";
+    $("#reisene").html(ut);
 }
 
 
