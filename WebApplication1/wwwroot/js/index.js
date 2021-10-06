@@ -75,12 +75,13 @@ function formaterReiser(reiser, dest) {
 
     $("button").click(function () {
         // Funksjonen skal kjøre på alle knapper utenom kjøp-knappen.
-        if (this.id == "kjopBtn") {
+        if (this.id != "kjopBtn") {
+            id = this.id
+            HentEnReise(id);
+        }
+        else {
             return;
         }
-        
-        id = this.id
-        HentEnReise(id);
     });
 }
 
