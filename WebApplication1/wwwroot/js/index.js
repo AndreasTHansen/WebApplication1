@@ -37,7 +37,6 @@ function hentAlleReiser() {
     $.get("billett/hentAlleReiser", function (reiser) {
         init(reiser);
     });
-
 }
 
 function init(reiser) {
