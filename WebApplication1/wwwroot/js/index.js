@@ -1,5 +1,4 @@
 ﻿
-
 $(document).ready(function () {
 
     hentAlleReiser("");
@@ -33,6 +32,8 @@ $(document).ready(function () {
     }
     )
 });
+
+let valgtReise = null;
 
 
 function hentAlleReiser(dest) {
@@ -75,20 +76,51 @@ function formaterReiser(reiser, dest) {
 
     $("button").click(function () {
         // Funksjonen skal kjøre på alle knapper utenom kjøp-knappen.
-        if (this.id != "kjopBtn") {
-            id = this.id
-            HentEnReise(id);
+        if (this.id == "knapp") {
+            lagreBillett();
+            return;
         }
         else {
-            return;
+            id = this.id
+            HentEnReise(id);
         }
     });
 }
 
+
+function velgReise(reise) {
+    $("#kjopForm").css("display", "block");
+    $("#utDestinasjon").html(reise.reiseTil);
+    $("#utTid").html(reise.tidspunktFra + ", " + reise.datoAvreise)
+    valgtReise = reise;
+}
+
 function HentEnReise(reiseId) {
     $.get("billett/HentEnReise", { id: reiseId }, function (reise) {
-        $("#kjopForm").css("display", "block");
-        $("#utDestinasjon").html(reise.reiseTil);
-        $("#utTid").html(reise.tidspunktFra + ", " + reise.datoAvreise)
+        velgReise(reise);
+    });
+};
+
+function lagreBillett() {
+    const billett = {
+        fornavn: $("#fornavn").val(),
+        etternavn: $("#etternavn").val(),
+        epost: $("#epost").val(),
+        mobilnummer: $("#mobilnummer").val(),
+        reiseId: valgtReise.reiseId
+    };
+
+    const url = "billett/Lagre";
+
+    $.post(url, billett, function (OK) {
+
+        if (OK) {
+            alert("billet ble lagret");
+            window.location.href = 'kvittering.html';
+        }
+        else {
+            alert("1");
+            $("#feil").html("Feil i databasen, prøv igjen");
+        }
     });
 };

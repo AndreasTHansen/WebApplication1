@@ -9,24 +9,24 @@
     <script src="js/index.js"></script>
 </head>
 <body>
-    <div class="container">  
+    <div class="container">
         <div class="form-group">
-        <h1 class="display-1">Vi ønsker deg velkommen til Color Line!</h1>
+            <h1 class="display-1">Vi ønsker deg velkommen til Color Line!</h1>
 
-        <h2>Hvor ønsker du å reise?</h2>
+            <h2>Hvor ønsker du å reise?</h2>
 
-        <select name="destination" class="form-control input-lg" id="reiseValg">
-            <option value="" disabled selected> Velg destinasjon </option>
-            <option value="Kiel"> Kiel </option>
-            <option value="Kobenhavn"> København</option>
-            <option disabled>───────</option>
-            <option value="visAlle">Vis alle reiser</option>
-        </select>
+            <select name="destination" class="form-control input-lg" id="reiseValg">
+                <option value="" disabled selected> Velg destinasjon </option>
+                <option value="Kiel"> Kiel </option>
+                <option value="Kobenhavn"> København</option>
+                <option disabled>───────</option>
+                <option value="visAlle">Vis alle reiser</option>
+            </select>
 
-        <div id="reisene"></div>
+            <div id="reisene"></div>
         </div>
-        
-        <form id ="kjopForm" style="display:none">
+
+        <form id="kjopForm" style="display:none">
             Destinasjon : <span id="utDestinasjon"></span><br />
             Utreise : <span id="utTid"></span>
 
@@ -34,28 +34,26 @@
 
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="fname">Fornavn</label>
-                    <input type="text" class="form-control" id="fname" placeholder="Fornavn">
+                    <label>Fornavn</label>
+                    <input type="text" class="form-control" id="fornavn" placeholder="Fornavn">
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="lname">Etternavn</label>
-                    <input type="text" class="form-control" id="lname" placeholder="Etternavn">
+                    <label>Etternavn</label>
+                    <input type="text" class="form-control" id="etternavn" placeholder="Etternavn">
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputEmail4">E-post</label>
-                <input type="email" class="form-control" id="inputEmail4 " placeholder="Adresse">
+                <label>E-post</label>
+                <input type="email" class="form-control" id="epost " placeholder="Adresse">
             </div>
             <div class="form-group">
-                <label for="inputAddress">Addresse</label>
-                <input type="text" class="form-control" id="inputAddress" placeholder="Adresse">
+                <label>Mobilnummer</label>
+                <input type="tel" class="form-control" id="mobilnummer" placeholder="Tlf.">
             </div>
-            <div class="form-group">
-                <label for="phone">Mobilnummer</label>
-                <input type="tel" class="form-control" id="phone" placeholder="Tlf.">
-            </div>
-            <button id="kjopBtn" class="btn btn-primary">Kjøp</button>
         </form>
+        <button id="knapp" class="btn btn-primary">Kjøp</button>
+
+        <span id="feil"></span>
 
     </div>
 
