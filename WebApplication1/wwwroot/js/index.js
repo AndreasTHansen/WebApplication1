@@ -56,7 +56,7 @@ function hentAlleReiser(dest) {
 function formaterReiser(reiser, dest) {
     let ut = "<table class='table table-striped'>" +
         "<tr>" +
-        "<th>Kjøp billett</th><th>Reises fra</th><th>Reises til</th><th>Avgang</th><th>Ankomst</th>" +
+        "<th>Kjøp billett</th><th>Reiser fra</th><th>Destinasjon</th><th>Avgang</th><th>Ankomst</th>"
         "</tr>";
 
     if (dest == "") {
@@ -65,8 +65,8 @@ function formaterReiser(reiser, dest) {
                 "<td><button id=" + reise.id + ">Kjøp her</button></td>" +
                 "<td>" + reise.reiseFra + "</td>" +
                 "<td>" + reise.reiseTil + "</td>" +
-                "<td>" + reise.tidspunktFra + "</td>" +
-                "<td>" + reise.tidspunktTil + "</td>" +
+                "<td>" + reise.datoAvreise + ", "+ reise.tidspunktFra +"</td>" +
+                "<td>" + reise.datoAnkomst + ", " + reise.tidspunktTil + "</td>" +
                 "</tr>";
         }
     } else {
