@@ -107,18 +107,20 @@ function lagreBillett() {
         etternavn: $("#etternavn").val(),
         epost: $("#epost").val(),
         mobilnummer: $("#mobilnummer").val(),
-        reiseId: valgtReise.id
+        reiseId: valgtReise.reiseId
     };
 
     const url = "billett/Lagre";
 
-    $.post(url, billett, function (OK) {
+    $.post(url, billett, function () {
 
-        alert("billet ble lagret");
-        window.location.href = 'kvittering.html';
-    })
-
-        .fail(function () {
-            console.log("du er feil mann");
-        })
+        if (OK) {
+            alert("billet ble lagret");
+            window.location.href = 'kvittering.html';
+        }
+        else {
+            alert("1");
+            $("#feil").html("Feil i databasen, prøv igjen");
+        }
+    });
 };
