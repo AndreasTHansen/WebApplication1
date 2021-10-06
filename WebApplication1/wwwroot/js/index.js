@@ -84,14 +84,10 @@ function formaterReiser(reiser, dest) {
     });
 }
 
-function velgReise(reise) {
-    $("#kjopForm").css("display", "block");
-    $("#utDestinasjon").html(reise.reiseTil);
-    $("#utTid").html(reise.tidspunktFra + ", " + reise.datoAvreise)
-}
-
 function HentEnReise(reiseId) {
     $.get("billett/HentEnReise", { id: reiseId }, function (reise) {
-        velgReise(reise);
+        $("#kjopForm").css("display", "block");
+        $("#utDestinasjon").html(reise.reiseTil);
+        $("#utTid").html(reise.tidspunktFra + ", " + reise.datoAvreise)
     });
 };
