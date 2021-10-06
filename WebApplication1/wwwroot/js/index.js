@@ -1,4 +1,4 @@
-﻿
+﻿let valgtReise = null;
 var kielArr = [];
 var kobenhavnArr = [];
 var alleArr = [];
@@ -22,6 +22,7 @@ $(document).ready(function () {
     });
 });
 
+//Sortering av avreisedatoer
 function compareDatoAvreise(a, b) {
     if (a.datoAvreise < b.datoAvreise) {
         return -1;
@@ -44,6 +45,8 @@ function init(reiser) {
         alleArr[i] = reise;
         i++;
     }
+
+    alleArr.sort(compareDatoAvreise);
 
     kielArr = alleArr.filter(function (reise) {
         return reise.reiseTil == "Kiel";
@@ -73,6 +76,18 @@ function visReiser(reiseArr) {
 
     ut += "</table>";
     $("#reisene").html(ut);
+
+    $("button").click(function () {
+        // Funksjonen skal kjøre på alle knapper utenom kjøp-knappen.
+        if (this.id == "knapp") {
+            lagreBillett();
+            return;
+        }
+        else {
+            id = this.id
+            HentEnReise(id);
+        }
+    });
 }
 
 
@@ -100,6 +115,7 @@ function lagreBillett() {
     };
 
     const url = "billett/Lagre";
+    console.log(valgtReise.id)
 
     $.post(url, billett, function () {
 
