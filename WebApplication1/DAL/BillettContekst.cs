@@ -14,6 +14,7 @@ namespace WebApplication1.Models
         public string mobilnummer { get; set; }
         public string billettType { get; set; }
         public double pris { get; set; }
+        public int antallReisende { get; set; }
         public virtual Reiser reise { get; set; }
     }
     public class Reiser
