@@ -12,9 +12,9 @@ namespace WebApplication1.Models
         public int id { get; set; }
         //[RegularExpression(@"^[a-zA-ZæøåÆØÅ. \-]{2,20})$")]
         public string fornavn { get; set; }
-        //[RegularExpression(@"^[a-zA-ZæøåÆØÅ. \-]{2,20})$")]
+        //[RegularExpression(@"^[a-zA-ZæøåÆØÅ. \-]{2,50})$")]
         public string etternavn { get; set; }
-        //[RegularExpression(@"^[0-9a-zA-ZæøåÆØÅ. \-@]{2,50})$")]
+        //[RegularExpression(@"^[0-9a-zA-ZæøåÆØÅ. \-@]{2,20})$")]
         public string epost { get; set; }
         //[RegularExpression(@"^[0-9+]{2,20})$")]
         public string mobilnummer { get; set; } 
