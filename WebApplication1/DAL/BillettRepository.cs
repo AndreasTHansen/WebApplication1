@@ -31,8 +31,8 @@ namespace WebApplication1.DAL
                     etternavn = k.etternavn,
                     epost = k.epost,
                     mobilnummer = k.mobilnummer,
-                    billettType = k.billettType,
-                    antallReisende = k.antallReisende,
+                    antallBarn = k.antallBarn,
+                    antallVoksne = k.antallVoksne,
                     pris = k.pris,
                     reiseId = k.reise.id,
                     reiseFra = k.reise.reiseFra,
@@ -61,8 +61,8 @@ namespace WebApplication1.DAL
                 nyBillett.etternavn = innBillett.etternavn;
                 nyBillett.epost = innBillett.epost;
                 nyBillett.mobilnummer = innBillett.mobilnummer;
-                nyBillett.billettType = innBillett.billettType;
-                nyBillett.antallReisende = innBillett.antallReisende;
+                nyBillett.antallBarn = innBillett.antallBarn;
+                nyBillett.antallVoksne = innBillett.antallVoksne;
                 nyBillett.pris = innBillett.pris;
 
                 var sjekkReise = _billettDb.Reiser.Find(innBillett.reiseId);
@@ -121,8 +121,8 @@ namespace WebApplication1.DAL
                     epost = enBillett.epost,
                     mobilnummer = enBillett.mobilnummer,
                     pris = enBillett.pris,
-                    antallReisende = enBillett.antallReisende,
-                    billettType = enBillett.billettType,
+                    antallBarn = enBillett.antallBarn,
+                    antallVoksne = enBillett.antallVoksne,
                     reiseId = enBillett.reise.id,
                     reiseTil = enBillett.reise.reiseTil,
                     reiseFra = enBillett.reise.reiseFra,

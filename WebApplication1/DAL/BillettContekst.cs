@@ -12,9 +12,9 @@ namespace WebApplication1.Models
         public string etternavn { get; set; }
         public string epost { get; set; }  
         public string mobilnummer { get; set; }
-        public string billettType { get; set; }
+        public int antallVoksne { get; set; }
+        public int antallBarn { get; set; }
         public double pris { get; set; }
-        public int antallReisende { get; set; }
         public virtual Reiser reise { get; set; }
     }
     public class Reiser

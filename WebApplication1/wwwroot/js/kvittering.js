@@ -8,7 +8,7 @@ function hentSisteBillett() {
         visBillett(billetter);
     })
         .fail(function () {
-            console.log("her gikk now galt");
+            console.log("her gikk noe galt");
         })
 }
 
