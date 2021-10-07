@@ -84,13 +84,25 @@ function validerCvc(cvc) {
 
 function validerMåned(måned) {
     const regexp = /^(0?[1-9]|1[012])$/
-    const ok = regexp.test(cvc);
+    const ok = regexp.test(måned);
     if (ok) {
         $("#feilDato").html("");
         return true;
     }
     else {
-        $("#feilDato").html("Dag må være en gyldig dato");
+        $("#feilDato").html("Måned må være en gyldig dato");
         return false;
+    }
+}
+
+function validerÅr(år) {
+    const regexp = /^(19|20)\d{2}$/;
+    const ok = regexp.test(år)
+    if (ok) {
+        $("feilDato").html("");
+        return true;
+    }
+    else {
+        $("#feilDato").html("År må være en gyldig dato");
     }
 }

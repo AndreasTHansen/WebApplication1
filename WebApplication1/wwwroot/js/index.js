@@ -154,7 +154,10 @@ function validerBillett() {
     const mobilOK = validerMobilnummer($("#mobilnummer").val());
     const kortOK = validerKortnummer($("#kortnummer").val());
     const cvcOK = validerCvc($("#cvc").val());
-    if (fornavnOK && etternavnOK && epostOK && mobilOK && kortOK && cvcOK) {
+    const månedOK = validerMåned($("#måned").val());
+    const årOK = validerÅr($("#år").val());
+
+    if (fornavnOK && etternavnOK && epostOK && mobilOK && kortOK && cvcOK && månedOK && årOK) {
         lagreBillett()
     }
 }
