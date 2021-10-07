@@ -198,7 +198,7 @@ function lagreBillett() {
     const url = "billett/Lagre";
 
     $.post(url, billett, function () {
-        alert(billett.epost + "billetten ble lagret");
+        alert(billett.epost + " billetten ble lagret");
         window.location.href = 'kvittering.html';
     })
         .fail(function () {
