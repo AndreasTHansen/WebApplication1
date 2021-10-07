@@ -152,7 +152,9 @@ function validerBillett() {
     const etternavnOK = validerEtternavn($("#etternavn").val());
     const epostOK = validerEpost($("#epost").val());
     const mobilOK = validerMobilnummer($("#mobilnummer").val());
-    if (fornavnOK && etternavnOK && epostOK && mobilOK) {
+    const kortOK = validerKortnummer($("#kortnummer").val());
+    const cvcOK = validerCvc($("#cvc").val());
+    if (fornavnOK && etternavnOK && epostOK && mobilOK && kortOK && cvcOK) {
         lagreBillett()
     }
 }

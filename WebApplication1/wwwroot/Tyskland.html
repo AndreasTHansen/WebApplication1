@@ -46,12 +46,12 @@
             </div>
             <div class="form-group">
                 <label>Kortnummer</label>
-                <input type="text" class="form-control" id="kortnummer" placeholder="Kortnummer" />
+                <input type="text" class="form-control" id="kortnummer" placeholder="Kortnummer" onchange="validerKortnummer(this.value)"/>
                 <span id="feilKort" style="color: red"></span>
             </div>
             <div class="form-group">
                 <label>Cvc</label>
-                <input type="text" class="form-control" id="cvc" placeholder="Cvc" />
+                <input type="text" class="form-control" id="cvc" placeholder="cvc" onchange="validerCvc(this.value)"/>
                 <span id="feilCvc" style="color: red"></span>
             </div>
             <div class="form-row">

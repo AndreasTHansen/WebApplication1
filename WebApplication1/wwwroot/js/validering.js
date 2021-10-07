@@ -42,7 +42,7 @@ function validerEpost(epost) {
 }
 
 function validerMobilnummer(mobilnummer) {
-    const regexp = /^[0-9\.\ \-]{2,20}$/;
+    const regexp = /^[0-9\.\ \-]{8,12}$/;
     const ok = regexp.test(mobilnummer);
     if (ok) {
         $("#feilMobil").html("");
@@ -51,6 +51,32 @@ function validerMobilnummer(mobilnummer) {
 
     else {
         $("#feilMobil").html("Mobilnummeret må være mellom 8 og 10 siffer");
+        return false;
+    }
+}
+
+function validerKortnummer(kortnummer) {
+    const regexp = /^[0-9]{16}$/;
+    const ok = regexp.test(kortnummer);
+    if (ok) {
+        $("#feilKort").html("");
+        return true;
+    }
+    else {
+        $("#feilKort").html("Kortnummeret må være på 16 siffer");
+        return false;
+    }
+}
+
+function validerCvc(cvc) {
+    const regexp = /^[0-9]{3}$/;
+    const ok = regexp.test(cvc);
+    if (ok) {
+        $("#feilCvc").html("");
+        return true;
+    }
+    else {
+        $("#feilCvc").html("cvc-en må bestå av 3 siffer");
         return false;
     }
 }
