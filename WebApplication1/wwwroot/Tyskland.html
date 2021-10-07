@@ -13,7 +13,23 @@
         <div class="form-group">
             <h2 class="display-1">Dette er reisene vi tilbyr til <span id="land">Tyskland</span></h2>
 
-            <div id="reisene"></div>
+            <div class="d-inline">
+                <label for="inputDag">Dag: </label>
+                <input type="number" id="dagInn" name="inputDag" min="1" max="31" value="1" />
+
+                <span style="padding-right: 2.5%; padding-left: 2.5%">
+                    <label for="inputManed">Måned: </label>
+                    <input type="number" id="manedInn" name="inputManed" min="1" max="12" value="1" />
+                </span>
+
+                <label for="inputAr">År: </label>
+                <input type="number" id="arInn" name="inputAr" min="2021" max="2026" value="2021" />
+
+                <button id="sokDato" onclick="sokDato(kielArr)" style="margin-left: 2.5%; margin-right: 2.5%">Søk etter reiser</button>
+                <button id="resetTabell" onclick="visReiser(kielArr)">Reset tabellen</button>
+            </div>
+
+            <div id="reisene" style="min-height: 5px; max-height: 400px" class="overflow-auto"></div>
         </div>
 
         <form id="kjopForm" style="display:none">
