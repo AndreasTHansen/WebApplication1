@@ -1,6 +1,11 @@
 ﻿$(document).ready(function () {
     hentSisteBillett();
+    beregnPris();
 })
+
+function beregnPris() {
+    if $("#")
+}
 
 function hentSisteBillett() {
     $.get("billett/HentAlle", function (billetter) {
@@ -25,6 +30,14 @@ function visBillett(billetter) {
     $("#reiseFra").html(billett.reiseFra);
     $("#ankomstTid").html(billett.datoAnkomst);
     $("#avreiseTid").html(billett.datoAvreise);
-    $("#antallVoksne").html(billett.antallVoksne);
-    $("#antallBarn").html(billett.antallBarn);
+
+    if (billett.antallVoksne < 0) {
+        $("#antallVoksne").css("display","block");
+        $("#antallVoksne").html(billett.antallVoksne);
+    }
+
+    if (billett.antallBarn < 0) {
+        $("#antallBarn").css("display", "block");
+        $("#antallBarn").html(billett.antallBarn);
+    }
 }
