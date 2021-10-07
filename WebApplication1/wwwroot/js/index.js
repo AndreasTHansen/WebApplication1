@@ -163,6 +163,7 @@ function lagreBillett() {
         mobilnummer: $("#mobilnummer").val(),
         antallVoksne: $("#antallVoksne").val(),
         antallBarn: $("#antallBarn").val(),
+        kortnummer: $("#kortnummer").val(),
         reiseId: valgtReise.id
     };
 

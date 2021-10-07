@@ -81,7 +81,9 @@ namespace WebApplication1.DAL
                     var nyttKort = new Kort();
                     nyttKort.kortnummer = innBillett.kortnummer;
                     nyttKort.utlopsdato = innBillett.utlopsdato;
-                    nyttKort.cvc = innBillett.cvc;      
+                    nyttKort.cvc = innBillett.cvc;
+
+                    nyKunde.kort = nyttKort; 
                 }
                 else
                 {
