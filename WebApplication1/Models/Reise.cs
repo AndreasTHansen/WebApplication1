@@ -21,5 +21,6 @@ namespace WebApplication1.Modules
         public string datoAvreise { get; set; }
         [RegularExpression(@"^[0-9./\:]{2,20}$")]
         public string datoAnkomst { get; set; }
+        public double reisePris { get; set; }
     }
 }

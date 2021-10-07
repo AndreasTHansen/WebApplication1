@@ -14,7 +14,7 @@ namespace WebApplication1.Models
         public string mobilnummer { get; set; }
         public int antallVoksne { get; set; }
         public int antallBarn { get; set; }
-        public double pris { get; set; }
+        public double totalPris { get; set; }
         public virtual Reiser reise { get; set; }
     }
     public class Reiser
@@ -27,6 +27,7 @@ namespace WebApplication1.Models
         public string datoAvreise { get; set; }
         public string datoAnkomst { get; set; }
         public string tidspunktTil { get; set; }
+        public double reisePris { get; set; }
     }
 
     public class BillettContekst : DbContext

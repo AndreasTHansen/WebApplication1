@@ -33,14 +33,15 @@ namespace WebApplication1.DAL
                     mobilnummer = k.mobilnummer,
                     antallBarn = k.antallBarn,
                     antallVoksne = k.antallVoksne,
-                    pris = k.pris,
+                    totalPris = k.totalPris,
                     reiseId = k.reise.id,
                     reiseFra = k.reise.reiseFra,
                     reiseTil = k.reise.reiseTil,
                     datoAnkomst = k.reise.datoAnkomst,
                     datoAvreise = k.reise.datoAvreise,
                     tidspunktFra = k.reise.tidspunktFra,
-                    tidspunktTil = k.reise.tidspunktTil
+                    tidspunktTil = k.reise.tidspunktTil,
+                    reisePris = k.reise.reisePris
                 }).ToListAsync();
 
                 return alleBilletter;
@@ -63,7 +64,7 @@ namespace WebApplication1.DAL
                 nyBillett.mobilnummer = innBillett.mobilnummer;
                 nyBillett.antallBarn = innBillett.antallBarn;
                 nyBillett.antallVoksne = innBillett.antallVoksne;
-                nyBillett.pris = innBillett.pris;
+                nyBillett.totalPris = innBillett.totalPris;
 
                 var sjekkReise = _billettDb.Reiser.Find(innBillett.reiseId);
                 if (sjekkReise == null)
@@ -77,6 +78,7 @@ namespace WebApplication1.DAL
                     nyReise.datoAnkomst = innBillett.datoAnkomst;
                     nyReise.tidspunktFra = innBillett.reiseTil;
                     nyReise.tidspunktTil = innBillett.reiseTil;
+                    nyReise.reisePris = innBillett.reisePris;
                 }
                 else
                 {
@@ -120,7 +122,7 @@ namespace WebApplication1.DAL
                     etternavn = enBillett.etternavn,
                     epost = enBillett.epost,
                     mobilnummer = enBillett.mobilnummer,
-                    pris = enBillett.pris,
+                    totalPris = enBillett.totalPris,
                     antallBarn = enBillett.antallBarn,
                     antallVoksne = enBillett.antallVoksne,
                     reiseId = enBillett.reise.id,
@@ -129,7 +131,8 @@ namespace WebApplication1.DAL
                     datoAnkomst = enBillett.reise.datoAnkomst,
                     datoAvreise = enBillett.reise.datoAvreise,
                     tidspunktFra = enBillett.reise.tidspunktFra,
-                    tidspunktTil = enBillett.reise.tidspunktTil
+                    tidspunktTil = enBillett.reise.tidspunktTil,
+                    reisePris = enBillett.reise.reisePris
                 };
                 return hentetBillett;
             }
@@ -151,7 +154,8 @@ namespace WebApplication1.DAL
                     tidspunktFra = k.tidspunktFra,
                     tidspunktTil = k.tidspunktTil,
                     datoAnkomst = k.datoAnkomst,
-                    datoAvreise = k.datoAvreise
+                    datoAvreise = k.datoAvreise,
+                    reisePris = k.reisePris
                 }).ToListAsync();
 
                 return alleReiser;
