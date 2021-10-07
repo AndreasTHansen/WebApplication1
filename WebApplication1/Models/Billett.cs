@@ -16,15 +16,13 @@ namespace WebApplication1.Models
         public string fornavn { get; set; }
         [RegularExpression(@"^[a-zA-ZæøåÆØÅ. \-]{2,50}$")]
         public string etternavn { get; set; }
-        [RegularExpression(@"^[0-9a-zA-ZæøåÆØÅ. \-@]{2,20}$")]
+        [RegularExpression(@"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$")]
         public string epost { get; set; }
         [RegularExpression(@"^[0-9+]{2,20}$")]
         public string mobilnummer { get; set; }
         [RegularExpression(@"^[0-9+]{2,30}$")]
         public string kortnummer { get; set; }
-        //[RegularExpression(@"^[0-9/\]{2,30}$")]
         public string utlopsdato { get; set; }
-        //[RegularExpression(@"^[0-9]{3}$")]
         public int cvc { get; set; }
         public int antallVoksne { get; set; }
         public int antallBarn { get; set; }

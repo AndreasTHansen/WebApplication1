@@ -106,3 +106,13 @@ function validerÅr(år) {
         $("#feilDato").html("År må være en gyldig dato");
     }
 }
+function validerAntall(antall) {
+    if (antall == 0) {
+        $("#feilAntall").html("Må være minst en voksen");
+        return false;
+    }
+    else {
+        $("#feilAntall").html("");
+        return true;
+    }
+}
