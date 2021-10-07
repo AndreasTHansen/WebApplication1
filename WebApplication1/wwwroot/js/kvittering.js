@@ -8,7 +8,7 @@ function hentSisteBillett() {
         visBillett(billetter);
     })
         .fail(function () {
-            console.log("her gikk noe galt");
+            console.log("Noe gikk galt ved henting av data");
         })
 }
 
