@@ -1,11 +1,4 @@
-﻿$(document).ready(function () {
-    hentSisteBillett();
-    beregnPris();
-})
-
-function beregnPris() {
-    if $("#")
-}
+﻿hentSisteBillett();
 
 function hentSisteBillett() {
     $.get("billett/HentAlle", function (billetter) {
@@ -24,20 +17,23 @@ function visBillett(billetter) {
     $("#ordrenummer").html("#" + billett.id);
     $("#fornavn").html(billett.fornavn);
     $("#etternavn").html(billett.etternavn);
-    $("#epost").html(billett.fornavn);
+    $("#epost").html(billett.epost);
     $("#mobilnummer").html(billett.mobilnummer);
     $("#reiseTil").html(billett.reiseTil);
     $("#reiseFra").html(billett.reiseFra);
     $("#ankomstTid").html(billett.datoAnkomst);
     $("#avreiseTid").html(billett.datoAvreise);
+    $("#totalPris").html(billett.totalPris);
 
-    if (billett.antallVoksne < 0) {
-        $("#antallVoksne").css("display","block");
+    if (billett.antallVoksne > 0) {
+        $("#voksenRad").css("display","table-row");
         $("#antallVoksne").html(billett.antallVoksne);
+        $("#prisVoksne").html(billett.reisePris);
     }
 
-    if (billett.antallBarn < 0) {
-        $("#antallBarn").css("display", "block");
+    if (billett.antallBarn > 0) {
+        $("#barnRad").css("display", "table-detail");
         $("#antallBarn").html(billett.antallBarn);
+        $("#prisBarn").html(billett.reisePris / 2);
     }
 }
