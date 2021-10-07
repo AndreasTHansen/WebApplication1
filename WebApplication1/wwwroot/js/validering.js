@@ -96,7 +96,7 @@ function validerMåned(måned) {
 }
 
 function validerÅr(år) {
-    const regexp = /^(19|20)\d{2}$/;
+    const regexp = /^(20)\d{2}$/;
     const ok = regexp.test(år)
     if (ok) {
         $("feilDato").html("");
