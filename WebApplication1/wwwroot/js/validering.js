@@ -28,7 +28,7 @@ function validerEtternavn(etternavn) {
 }
 
 function validerEpost(epost) {
-    const regexp = /^[0-9a-zA-ZæøåÆØÅ\.\ \-]{2,20}$/;
+    const regexp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     const ok = regexp.test(epost);
     if (ok) {
         $("#feilEpost").html("");
@@ -96,7 +96,7 @@ function validerMåned(måned) {
 }
 
 function validerÅr(år) {
-    const regexp = /^(19|20)\d{2}$/;
+    const regexp = /^(20)\d{2}$/;
     const ok = regexp.test(år)
     if (ok) {
         $("feilDato").html("");
