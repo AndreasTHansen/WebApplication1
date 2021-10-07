@@ -3,7 +3,7 @@
     console.log(fornavn);
     const ok = regexp.test(fornavn);
     if (!ok) {
-        $("#feilFornavn").html("Fornavnet må være mellom 2 og 20 bokstaver");
+        $("#feilFornavn").html("Fornavnet må være mellom 2 og 30 bokstaver");
         return false;
     }
     else {  
@@ -36,7 +36,7 @@ function validerEpost(epost) {
     }
 
     else {
-        $("#feilEpost").html("Eposten må være mellom 2 og 30 tegn");
+        $("#feilEpost").html("Må være en gyldig epost adresse");
         return false;
     }
 }
@@ -90,7 +90,7 @@ function validerMåned(måned) {
         return true;
     }
     else {
-        $("#feilDato").html("Måned må være en gyldig dato");
+        $("#feilDato").html("må være en gydlig måned");
         return false;
     }
 }
@@ -103,7 +103,7 @@ function validerÅr(år) {
         return true;
     }
     else {
-        $("#feilDato").html("År må være en gyldig dato");
+        $("#feilDato").html("Må være et gyldig år");
     }
 }
 function validerAntall(antall) {

@@ -116,21 +116,23 @@ function visReiser(reiseArr) {
     ut += "</table>";
     $("#reisene").html(ut);
 
-    $("button").click(function () {
-        // Funksjonen skal kjøre på alle knapper utenom kjøp-knappen.
-        if (this.id == "knapp") {
-            lagreBillett();
-            return;
-        }
-        else {
-            id = this.id
-            HentEnReise(id);
+    $("button").click(function (event) {
+        
+        if (!event.detail || event.detail == 1) { //Skal hjelpe mot double clicks
+            // Funksjonen skal kjøre på alle knapper utenom kjøp-knappen.
+            if (this.id == "knapp") {
+                validerBillett();
+            }
+            else {
+                id = this.id
+                HentEnReise(id);
 
-            //Animasjon som scroller til bunn av skjermen, kilde: 
-            $('html, body').animate({
-                scrollTop: $(document).height()
-            },
-                1000);
+                //Animasjon som scroller til bunn av skjermen, kilde: 
+                $('html, body').animate({
+                    scrollTop: $(document).height()
+                },
+                    1000);
+            }
         }
     });
 
@@ -172,9 +174,13 @@ function validerBillett() {
     const cvcOK = validerCvc($("#cvc").val());
     const månedOK = validerMåned($("#måned").val());
     const årOK = validerÅr($("#år").val());
+    const antallOK = validerAntall($("#antallVoksne").val());
 
-    if (fornavnOK && etternavnOK && epostOK && mobilOK && kortOK && cvcOK && månedOK && årOK) {
-        lagreBillett()
+    if (fornavnOK && etternavnOK && epostOK && mobilOK && kortOK && cvcOK && månedOK && årOK && antallOK) {
+        lagreBillett();
+    }
+    else {
+        alert("Nei");
     }
 }
 
@@ -198,7 +204,6 @@ function lagreBillett() {
     const url = "billett/Lagre";
 
     $.post(url, billett, function () {
-        alert(billett.epost + " billetten ble lagret");
         window.location.href = 'kvittering.html';
     })
         .fail(function () {
