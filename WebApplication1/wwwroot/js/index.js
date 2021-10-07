@@ -2,6 +2,7 @@
 var lastet = false;
 var kielArr = [];
 var kobenhavnArr = [];
+var osloArr = [];
 var alleArr = [];
 
 
@@ -38,10 +39,16 @@ $("#reiseValg").change(function () {
 
 //Sortering av avreisedatoer
 function compareDatoAvreise(a, b) {
-    if (a.datoAvreise < b.datoAvreise) {
+    const aDatoTemp = a.datoAvreise.split('/');
+    const bDatoTemp = b.datoAvreise.split('/');
+
+    const aDato = aDatoTemp[2] + aDatoTemp[1] + aDatoTemp[0];
+    const bDato = bDatoTemp[2] + bDatoTemp[1] + bDatoTemp[0];
+
+    if (aDato < bDato) {
         return -1;
     }
-    if (a.datoAvreise > b.datoAvreise) {
+    if (aDato > bDato) {
         return 1;
     }
     return 0;
@@ -78,6 +85,15 @@ function init(reiser) {
         });
 
         visReiser(kobenhavnArr);
+    }
+
+    if ($("#land").html() == "Norge") {
+
+        osloArr = alleArr.filter(function (reise) {
+            return reise.reiseTil == "Oslo";
+        });
+
+        visReiser(osloArr);
     }
 }
 
