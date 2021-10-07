@@ -208,7 +208,8 @@ namespace WebApplication1.DAL
                     tidspunktFra = enReise.tidspunktFra,
                     tidspunktTil = enReise.tidspunktTil,
                     datoAnkomst = enReise.datoAnkomst,
-                    datoAvreise = enReise.datoAvreise
+                    datoAvreise = enReise.datoAvreise,
+                    reisePris = enReise.reisePris
                 };
 
                 return hentetReise;

@@ -126,7 +126,8 @@ function visReiser(reiseArr) {
 }
 
 function oppdaterPris() {
-    let pris = antallVoksne.value * 100 + antallBarn.value * 50;
+    console.log(valgtReise.reisePris)
+    let pris = antallVoksne.value * valgtReise.reisePris.value + antallBarn.value * (valgtReise.reisePris.value / 2);
     $("#pris").html(pris + "kr");
 }
 
@@ -136,7 +137,7 @@ function velgReise(reise) {
     $("#knapp").css("display", "block");
     $("#utDestinasjon").html(reise.reiseTil);
     $("#utTid").html(reise.tidspunktFra + ", " + reise.datoAvreise)
-    valgtReise = reise;
+    window.valgtReise = reise;
 }
 
 function HentEnReise(reiseId) {
