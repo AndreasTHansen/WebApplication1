@@ -8,53 +8,68 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="js/kvittering.js"></script>
 </head>
-<body>
+<body style="background:rgba(67, 216, 228, 0.12);">
 
-    <div class="container">
-        <div class="form-group" style="text-align: center">
-            <table style="width:100%">
-                <tr style="width:100%; text-align:center;">
-                    <td>
-                        text
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        text
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        text
-                    </td>
-                </tr>
-            </table>
-            <!-- <h1 class="display-2">Ordrebekreftelse</h1>
+    <div class="container" style="align-items: center; background: white;">
+        <table style="width: 100%; text-align: center; align-items: center;">
+            <tr>
+                <td style="font-size: 6em;">
+                    <img src="img/colorline.png" alt="Color Line" style="height: 2em; width: 3.2em; margin-bottom: 0.2em;">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img src="img/check.png" alt="Bestilling gikk gjennom. Ikon" style="height: 10em;width: 10em;">
+                </td>
+            </tr>
+            <tr style="height: 5em; font-size: 2em;">
+                <td>
+                    <p>Takk for din bestilling, <span id="fornavn"></span> <span id="etternavn"></span>!</p>
+                </td>
+            </tr>
+            <tr style="text-align: center; font-size: 2em;">
+                <td>
+                    <p>Ordrenummer<span id="ordrenummer"></span></p>
+                </td>
+            </tr>
+        </table>
+        <table style="border-top: 1px solid black; width: 50%;margin-top: 1em;margin-left: 25%; font-size: 1.2em; ">
+            <tr id="voksenRad" style="display:none;">
+                <td style="width: 30%;">
+                    <p>Tur <span id="reiseFra"></span> Voksen X<span id="antallVoksne"></span></p>
+                </td>
+                <td style="width: 50%;">
+                </td>
+                <td>
+                    <span id="prisVoksne"></span>
+                </td>
+            </tr>
+            <tr id="barnRad" style="display:none;">
+                <td>
+                    <p>Tur <span id="reiseFra"> Kiel- </span> <span id="reiseTil"> København - </span> Barn X<span id="antallBarn"></span></p>
+                </td>
+                <td>
+                </td>
+                <td>
+                    <span id="prisBarn"></span>
+                </td>
+            </tr>
+            <tr style="border-top: 2px solid black;">
+                <td>
+                    <span id="total"></span> Total<span id="antallBarn"></span>
+                </td>
+                <td>
+                </td>
+                <td>
+                    <span id="prisTotal"></span>
+                </td>
+            </tr>
 
-    Ordrenummer: <span id="ordrenummer"></span>
-    <br />
-    Fornavn: <span id="fornavn"></span>
-    <br />
-    Etternavn: <span id="etternavn"></span>
-    <br />
-    Mobilnummer: <span id="mobilnummer"></span>
-    <br />
-    Epost: <span id="epost"></span>
-    <br />
-    Reiser fra: <span id="reiseFra"></span>
-    <br />
-    Reiser til: <span id="reiseTil"></span>
-    <br />
-    Tidspunkt avreise: <span id="avreiseTid"></span>
-    <br />
-    Tidspunkt ankomst: <span id="ankomstTid"></span>
-    <br />
-    Antall voksne: <span id="antallVoksne"></span>
-    <br />
-    Antall barn: <span id="antallBarn"></span>
-    <br />
-        -->
+        </table>
 
+
+        <div style="width: 100%; text-align: center; font-size: 1.5em; margin-top: 2em; padding-top: 2em; padding-bottom: 2em;">
+            Din bekreftelse blir sendt til <span id="epost"> epost</span>
         </div>
 
     </div>
