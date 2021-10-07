@@ -10,6 +10,8 @@ namespace WebApplication1.Models
     public class Billett
     {
         public int id { get; set; }
+       
+        public int kundeId { get; set; }
         [RegularExpression(@"^[a-zA-ZæøåÆØÅ. \-]{2,20}$")]
         public string fornavn { get; set; }
         [RegularExpression(@"^[a-zA-ZæøåÆØÅ. \-]{2,50}$")]

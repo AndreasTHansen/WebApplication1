@@ -56,15 +56,24 @@ namespace WebApplication1.DAL
         public async Task<bool> Lagre(Billett innBillett)
         {                    
             try
-            {
+            {             
                 var nyBillett = new Billetter();
-                nyBillett.kunde.fornavn = innBillett.fornavn;
-                nyBillett.kunde.etternavn = innBillett.etternavn;
-                nyBillett.kunde.epost = innBillett.epost;
-                nyBillett.kunde.mobilnummer = innBillett.mobilnummer;
                 nyBillett.antallBarn = innBillett.antallBarn;
                 nyBillett.antallVoksne = innBillett.antallVoksne;
                 nyBillett.totalPris = innBillett.totalPris;
+
+                var nyKunde = new Kunder(); //Vi har ikke lagring av kunde derfor lages det en ny for hver billett i denne versjonen
+                {
+                    nyKunde.fornavn = innBillett.fornavn;
+                    nyKunde.epost = innBillett.epost;
+                    nyKunde.etternavn = innBillett.etternavn;
+                    nyKunde.id = innBillett.kundeId;
+                    nyKunde.mobilnummer = innBillett.mobilnummer;
+                    nyKunde.kortnummer = innBillett.kortnummer;
+                    nyKunde.utlopsdato = innBillett.utlopsdato;
+                }
+
+                nyBillett.kunde = nyKunde;
 
                 var sjekkReise = _billettDb.Reiser.Find(innBillett.reiseId);
                 if (sjekkReise == null)
@@ -79,7 +88,10 @@ namespace WebApplication1.DAL
                     nyReise.tidspunktFra = innBillett.reiseTil;
                     nyReise.tidspunktTil = innBillett.reiseTil;
                     nyReise.reisePris = innBillett.reisePris;
+
+                    nyBillett.reise = nyReise;
                 }
+                
                 else
                 {
                     nyBillett.reise = sjekkReise;
