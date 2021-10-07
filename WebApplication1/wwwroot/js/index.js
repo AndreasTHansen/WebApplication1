@@ -128,7 +128,7 @@ function visReiser(reiseArr) {
 
 function oppdaterPris() {
     console.log(valgtReise.reisePris)
-    let pris = antallVoksne.value * valgtReise.reisePris.value + antallBarn.value * (valgtReise.reisePris.value / 2);
+    let pris = antallVoksne.value * valgtReise.reisePris + antallBarn.value * (valgtReise.reisePris*0.5);
     $("#pris").html(pris + "kr");
 }
 
@@ -138,7 +138,7 @@ function velgReise(reise) {
     $("#knapp").css("display", "block");
     $("#utDestinasjon").html(reise.reiseTil);
     $("#utTid").html(reise.tidspunktFra + ", " + reise.datoAvreise)
-    window.valgtReise = reise;
+    valgtReise = reise;
 }
 
 function HentEnReise(reiseId) {
@@ -158,6 +158,7 @@ function validerBillett() {
 }
 
 function lagreBillett() {
+    var pris = antallVoksne.value * valgtReise.reisePris + antallBarn.value * (valgtReise.reisePris * 0.5);
     const billett = {
         fornavn: $("#fornavn").val(),
         etternavn: $("#etternavn").val(),
@@ -166,6 +167,7 @@ function lagreBillett() {
         antallVoksne: $("#antallVoksne").val(),
         antallBarn: $("#antallBarn").val(),
         kortnummer: $("#kortnummer").val(),
+        totalPris: pris,
         reiseId: valgtReise.id
     };
 
