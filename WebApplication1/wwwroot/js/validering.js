@@ -1,18 +1,18 @@
 ﻿function validerFornavn(fornavn) {
     const regexp = /^[a-zæøåÆØÅ\.\ \-]{2, 20}$/;
     const ok = regexp.test(fornavn);
-    if (ok) {
-        $("#feilFornavn").hmtl("");
-        return true;
+    if (!ok) {
+        $("#feilFornavn").hmtl("Fornavnet må være mellom 2 og 20 bokstaver");
+        return false;
+    }
+    else {
+    $("#feilFornavn").hmtl("");
+    return true;
     }
 
-    else {
-        $("#feilFornavn").hmtl("Fornavnet må være mellom 2 og 20 bokstaver");
-            return false;
-        }
 }
 
-function validerEtteravn(etternavn) {
+function validerEtternavn(etternavn) {
     const regexp = /^[a-zæøåÆØÅ\.\ \-]{2, 50}$/;
     const ok = regexp.test(etternavn);
     if (ok) {

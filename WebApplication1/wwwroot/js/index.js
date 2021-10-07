@@ -94,7 +94,7 @@ function visReiser(reiseArr) {
     $("button").click(function () {
         // Funksjonen skal kjøre på alle knapper utenom kjøp-knappen.
         if (this.id == "knapp") {
-            lagreBillett();
+            validerBillett();
         }
         else {
             id = this.id
