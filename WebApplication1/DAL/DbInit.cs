@@ -26,8 +26,10 @@ namespace WebApplication1.Models
                 var reise6 = new Reiser { reiseFra = "Kiel", reiseTil = "Oslo", tidspunktFra = "19:00", tidspunktTil = "14:00", datoAnkomst = "10/01/2021", datoAvreise = "09/01/2021", reisePris = 1000.0};
                 var reise7 = new Reiser { reiseFra = "Kiel", reiseTil = "Oslo", tidspunktFra = "20:00", tidspunktTil = "13:00", datoAvreise = "21/01/2021", datoAnkomst = "22/01/2021", reisePris = 1000.0};
 
-                var kunde1 = new Kunder { fornavn = "Andreas", etternavn = "Hansen", mobilnummer = "12345678", epost = "andreas@gmail.com", utlopsdato = "24/4"};
-                var billett3 = new Billetter { antallBarn = 0, antallVoksne = 1, totalPris = 1499.99, reise = reise3, kunde = kunde1};
+                var kort1 = new Kort { kortnummer = "4567890", cvc = 123, utlopsdato = "03/04/2022" };
+                var kunde1 = new Kunder { fornavn = "Anders", etternavn = "Ottersland", mobilnummer = "41251290", epost = "anderh@gmail.com", kort=kort1};
+                var billett1 = new Billetter { antallBarn = 0, antallVoksne = 1, reise = reise5, totalPris = 1000, kunde = kunde1 };
+
 
                 context.Reiser.Add(reise1);
                 context.Reiser.Add(reise2);
@@ -36,7 +38,6 @@ namespace WebApplication1.Models
                 context.Reiser.Add(reise5);
                 context.Reiser.Add(reise6);
                 context.Reiser.Add(reise7);
-                context.Billetter.Add(billett3);
                 
 
                 context.SaveChanges();
