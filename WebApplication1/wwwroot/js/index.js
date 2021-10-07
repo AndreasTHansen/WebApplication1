@@ -93,7 +93,7 @@ function visReiser(reiseArr) {
     $("button").click(function () {
         // Funksjonen skal kjøre på alle knapper utenom kjøp-knappen.
         if (this.id == "knapp") {
-            lagreBillett();
+            return;
         }
         else {
             id = this.id
@@ -135,6 +135,15 @@ function HentEnReise(reiseId) {
     });
 };
 
+function validerBillett() {
+    const fornavnOK = validerFornavn($("#fornavn").val());
+    const etternavnOK = validerEtteravn($("#etternavn").val());
+    const epostOK = validerEpost($("#epost").val());
+    const mobilOK = validerMobilnummer($("#mobilnummer").val());
+    if (fornavnOK && etternavnOK && epostOK && mobilOK) {
+        lagreBillett()
+    }
+}
 
 function lagreBillett() {
     const billett = {
