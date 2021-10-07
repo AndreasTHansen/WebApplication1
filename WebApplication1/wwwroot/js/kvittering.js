@@ -25,4 +25,6 @@ function visBillett(billetter) {
     $("#reiseFra").html(billett.reiseFra);
     $("#ankomstTid").html(billett.datoAnkomst);
     $("#avreiseTid").html(billett.datoAvreise);
+    $("#antallVoksne").html(billett.antallVoksne);
+    $("#antallBarn").html(billett.antallBarn);
 }
