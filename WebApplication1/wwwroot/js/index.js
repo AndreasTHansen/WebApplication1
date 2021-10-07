@@ -122,7 +122,7 @@ function sokDato(innArr) {
         visReiser(sokArr);
     }
     else {
-        alert("Ingen reiser på valgt dato!");
+        $("sokeMsg").html("Finnes ingen reiser for denne datoen");
     }
 }
 
