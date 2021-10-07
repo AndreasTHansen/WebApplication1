@@ -4,38 +4,37 @@ var kielArr = [];
 var kobenhavnArr = [];
 var alleArr = [];
 
-$(document).ready(function () {
 
-    hentAlleReiser();
+hentAlleReiser();
 
-    /*
-    $("#reiseValg").change(function () {
-        var value = $(this).val();
+/*
+$("#reiseValg").change(function () {
+    var value = $(this).val();
 
-        if (value == "Kiel") {
-            visReiser(kielArr);
-        };
-        if (value == "Kobenhavn") {
-            visReiser(kobenhavnArr);
-        };
-        if (value == "visAlle") {
-            visReiser(alleArr);
-        }
-    });
-    */
+    if (value == "Kiel") {
+        visReiser(kielArr);
+    };
 
-    //Trenger litt tid på å laste inn arrayene
-    //NB: Hvis vi legger til flere elementer i databasen og de slutter å vises, må vi huske å øke timeouten her
-
-    setTimeout(function () {
-        if ($("#land").text() == "Tyskland") {
-            visReiser(kielArr);
-        }
-        if ($("#land").text() == "Danmark") {
-            visReiser(kobenhavnArr);
-        }
-    }, 200);
+    if (value == "Kobenhavn") {
+        visReiser(kobenhavnArr);
+    };
+    if (value == "visAlle") {
+        visReiser(alleArr);
+    }
 });
+*/
+
+//Trenger litt tid på å laste inn arrayene
+//NB: Hvis vi legger til flere elementer i databasen og de slutter å vises, må vi huske å øke timeouten her
+
+/*  setTimeout(function () {
+      if ($("#land").text() == "Tyskland") {
+          visReiser(kielArr);
+      }
+      if ($("#land").text() == "Danmark") {
+          visReiser(kobenhavnArr);
+      }
+  }, 200);*/
 
 //Sortering av avreisedatoer
 function compareDatoAvreise(a, b) {
@@ -63,12 +62,23 @@ function init(reiser) {
 
     alleArr.sort(compareDatoAvreise);
 
-    kielArr = alleArr.filter(function (reise) {
-        return reise.reiseTil == "Kiel";
-    });
-    kobenhavnArr = alleArr.filter(function (reise) {
-        return reise.reiseTil == "København";
-    });
+    if ($("#land").html() == "Tyskland") {
+
+        kielArr = alleArr.filter(function (reise) {
+            return reise.reiseTil == "Kiel";
+        });
+
+        visReiser(kielArr);
+    }
+
+    if ($("#land").html() == "Danmark") {
+
+        kobenhavnArr = alleArr.filter(function (reise) {
+            return reise.reiseTil == "København";
+        });
+
+        visReiser(kobenhavnArr);
+    }
 }
 
 function visReiser(reiseArr) {
@@ -117,7 +127,7 @@ function visReiser(reiseArr) {
 
 function oppdaterPris() {
     let pris = antallVoksne.value * 100 + antallBarn.value * 50;
-    $("#pris").html(pris+"kr");
+    $("#pris").html(pris + "kr");
 }
 
 
@@ -160,7 +170,7 @@ function lagreBillett() {
 
     $.post(url, billett, function () {
         alert(billett.epost + "billetten ble lagret");
-        window.location.href = 'kvittering.html';       
+        window.location.href = 'kvittering.html';
     })
         .fail(function () {
             console.log("Noe feil skjedde med lagringen")
