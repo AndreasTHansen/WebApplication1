@@ -15,6 +15,7 @@ $(document).ready(function () {
         if (value == "Kiel") {
             visReiser(kielArr);
         };
+
         if (value == "Kobenhavn") {
             visReiser(kobenhavnArr);
         };
