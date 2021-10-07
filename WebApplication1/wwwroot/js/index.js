@@ -97,6 +97,35 @@ function init(reiser) {
     }
 }
 
+function sokDato(innArr) {
+    let dag = $("#dagInn").val();
+    let mon = $("#manedInn").val();
+    let ar = $("#arInn").val();
+
+    if (dag < 10) {
+        dag = "0" + dag;
+    }
+
+    if (mon < 10) {
+        mon = "0" + mon;
+    }
+
+    const dato = dag + "/" + mon + "/" + ar;
+
+    let sokArr = [];
+
+    sokArr = innArr.filter(function (datoer) {
+        return datoer.datoAvreise == dato;
+    })
+
+    if (sokArr.length > 0) {
+        visReiser(sokArr);
+    }
+    else {
+        alert("Ingen reiser på valgt dato!");
+    }
+}
+
 function visReiser(reiseArr) {
     let ut = "<table class='table table-striped'>" +
         "<tr>" +
