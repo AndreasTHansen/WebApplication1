@@ -27,13 +27,17 @@ namespace WebApplication1.DAL
                 List<Billett> alleBilletter = await _billettDb.Billetter.Select(k => new Billett
                 {
                     id = k.kunde.id,
+                    antallBarn = k.antallBarn,
+                    antallVoksne = k.antallVoksne,
+                    totalPris = k.totalPris,
+                    kundeId = k.kunde.id,
                     fornavn = k.kunde.fornavn,
                     etternavn = k.kunde.etternavn,
                     epost = k.kunde.epost,
                     mobilnummer = k.kunde.mobilnummer,
-                    antallBarn = k.antallBarn,
-                    antallVoksne = k.antallVoksne,
-                    totalPris = k.totalPris,
+                    kortnummer = k.kunde.kort.kortnummer,
+                    utlopsdato = k.kunde.kort.utlopsdato,
+                    cvc = k.kunde.kort.cvc,
                     reiseId = k.reise.id,
                     reiseFra = k.reise.reiseFra,
                     reiseTil = k.reise.reiseTil,
@@ -69,8 +73,19 @@ namespace WebApplication1.DAL
                     nyKunde.etternavn = innBillett.etternavn;
                     nyKunde.id = innBillett.kundeId;
                     nyKunde.mobilnummer = innBillett.mobilnummer;
-                    nyKunde.kortnummer = innBillett.kortnummer;
-                    nyKunde.utlopsdato = innBillett.utlopsdato;
+                }
+
+                var sjekkKort = _billettDb.Kort.Find(innBillett.kortnummer); //Sammme kortnummer kan skje og vi har ikke auto increment så her må det sjekkes
+                if (sjekkKort==null)
+                {
+                    var nyttKort = new Kort();
+                    nyttKort.kortnummer = innBillett.kortnummer;
+                    nyttKort.utlopsdato = innBillett.utlopsdato;
+                    nyttKort.cvc = innBillett.cvc;      
+                }
+                else
+                {
+                    nyKunde.kort = sjekkKort;
                 }
 
                 nyBillett.kunde = nyKunde;

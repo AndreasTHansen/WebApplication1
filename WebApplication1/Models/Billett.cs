@@ -24,6 +24,7 @@ namespace WebApplication1.Models
         public string kortnummer { get; set; }
         [RegularExpression(@"^[0-9/]{2,30}$")]
         public string utlopsdato { get; set; }
+        public int cvc { get; set; }
         public int antallVoksne { get; set; }
         public int antallBarn { get; set; }
         public double totalPris { get; set; }

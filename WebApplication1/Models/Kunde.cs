@@ -14,5 +14,6 @@ namespace WebApplication1.Models
         public string mobilnummer { get; set; }
         public string kortnummer { get; set; }
         public string utlopsdato { get; set; }
+        public int cvc { get; set; }
     }
 }
