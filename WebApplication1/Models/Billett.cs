@@ -20,9 +20,9 @@ namespace WebApplication1.Models
         public string epost { get; set; }
         [RegularExpression(@"^[0-9+]{2,20}$")]
         public string mobilnummer { get; set; }
-        //[RegularExpression(@"^[0-9+]{2,30}$")]
+        [RegularExpression(@"^[0-9+]{2,30}$")]
         public string kortnummer { get; set; }
-        //[RegularExpression(@"^[0-9/]{2,30}$")]
+        //[RegularExpression(@"^[0-9/\]{2,30}$")]
         public string utlopsdato { get; set; }
         //[RegularExpression(@"^[0-9]{3}$")]
         public int cvc { get; set; }

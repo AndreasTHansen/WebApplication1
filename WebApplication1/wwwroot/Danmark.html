@@ -1,24 +1,22 @@
-﻿<!DOCTYPE html>
+﻿<!DOCTYPE HTML>
 <html>
 <head>
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <meta charset="utf-8" />
-    <title>Reiser</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <meta http-equiv="content-type" content="text/hmtl" ; charset="utf-8" />
+    <title>Reiser</title>
     <script src="js/validering.js"></script>
 </head>
 <body>
+
     <div class="container">
         <div class="form-group">
-
             <h2 class="display-1">Dette er reisene vi tilbyr til <span id="land">Danmark</span></h2>
 
             <div id="reisene"></div>
         </div>
 
         <form id="kjopForm" style="display:none">
-
             Destinasjon : <span id="utDestinasjon"></span><br />
             Utreise : <span id="utTid"></span>
 
@@ -27,28 +25,56 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label>Fornavn</label>
-                    <input type="text" class="form-control" id="fornavn" placeholder="Fornavn">
+                    <input type="text" class="form-control" id="fornavn" placeholder="Fornavn" onchange="validerFornavn(this.value)" />
+                    <span id="feilFornavn" style="color: red"></span>
                 </div>
                 <div class="form-group col-md-6">
                     <label>Etternavn</label>
-                    <input type="text" class="form-control" id="etternavn" placeholder="Etternavn">
+                    <input type="text" class="form-control" id="etternavn" placeholder="Etternavn" onchange="validerEtternavn(this.value)" />
+                    <span id="feilEtternavn" style="color: red"></span>
                 </div>
             </div>
             <div class="form-group">
                 <label>E-post</label>
-                <input type="text" class="form-control" id="epost" placeholder="Epost">
+                <input type="text" class="form-control" id="epost" placeholder="Epost" onchange="validerEpost(this.value)" />
+                <span id="feilEpost" style="color: red"></span>
             </div>
             <div class="form-group">
                 <label>Mobilnummer</label>
-                <input type="tel" class="form-control" id="mobilnummer" placeholder="Tlf.">
+                <input type="text" class="form-control" id="mobilnummer" placeholder="Tlf." onchange="validerMobilnummer(this.value)" />
+                <span id="feilMobil" style="color: red"></span>
+            </div>
+
+            <div class="form-group">
+                <label>Kortnummer</label>
+                <input type="text" class="form-control" id="kortnummer" placeholder="Kortnummer" onchange="validerKortnummer(this.value)" />
+                <span id="feilKort" style="color: red"></span>
+            </div>
+            <div class="form-group">
+                <label>Utløpsdato</label>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-1">
+                    <label>Måned</label>
+                    <input type="text" class="form-control" id="måned" placeholder="Måned" onchange="validerMåned(this.value)" />
+                    <span id="feilDato" style="color: red"></span>
+                </div>
+                <div class="form-group col-md-1">
+                    <label>År</label>
+                    <input type="text" class="form-control" id="år" placeholder="År" onchange="validerÅr(this.value)" />
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Cvc</label>
+                    <input type="text" class="form-control" id="cvc" placeholder="cvc" onchange="validerCvc(this.value)" />
+                    <span id="feilCvc" style="color: red"></span>
+                </div>
             </div>
             <div class="form-row">
                 <div class="col-md-6">
                     <label>Antall voksne</label>
 
                     <select id="antallVoksne" class="form-control">
-                        <option selected="selected">0</option>
-                        <option>1</option>
+                        <option selected="selected">1</option>
                         <option>2</option>
                         <option>3</option>
                         <option>4</option>
@@ -84,10 +110,9 @@
             <br /><br />
 
         </form>
-        <button id="knapp" class="btn btn-primary">Kjøp</button>
+        <button id="knapp" class="btn btn-primary" onclick="validerBillett()">Kjøp</button>
 
         <br />
-
         <span id="feil"></span>
 
     </div>

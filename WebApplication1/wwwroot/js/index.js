@@ -180,6 +180,7 @@ function validerBillett() {
 
 function lagreBillett() {
     var pris = antallVoksne.value * valgtReise.reisePris + antallBarn.value * (valgtReise.reisePris * 0.5);
+    var dato = $("#måned").val() + "/" + $("#år").val();
     const billett = {
         fornavn: $("#fornavn").val(),
         etternavn: $("#etternavn").val(),
@@ -188,6 +189,8 @@ function lagreBillett() {
         antallVoksne: $("#antallVoksne").val(),
         antallBarn: $("#antallBarn").val(),
         kortnummer: $("#kortnummer").val(),
+        cvc: $("#cvc").val(),
+        utlopsdato: dato,
         totalPris: pris,
         reiseId: valgtReise.id
     };
