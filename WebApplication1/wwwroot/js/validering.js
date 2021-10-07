@@ -80,3 +80,17 @@ function validerCvc(cvc) {
         return false;
     }
 }
+
+
+function validerMåned(måned) {
+    const regexp = /^(0?[1-9]|1[012])$/
+    const ok = regexp.test(cvc);
+    if (ok) {
+        $("#feilDato").html("");
+        return true;
+    }
+    else {
+        $("#feilDato").html("Dag må være en gyldig dato");
+        return false;
+    }
+}
