@@ -6,11 +6,11 @@ namespace WebApplication1.Models
 
     public class Billetter
     {
-
-        public virtual Kunder kunde { get; set; }
+        public int id { get; set; }
         public int antallVoksne { get; set; }
         public int antallBarn { get; set; }
         public double totalPris { get; set; }
+        public virtual Kunder kunde { get; set; }
         public virtual Reiser reise { get; set; }
     }
     public class Reiser
