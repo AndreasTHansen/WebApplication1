@@ -35,7 +35,6 @@ $(document).ready(function () {
             visReiser(kobenhavnArr);
         }
     }, 200);
-    
 });
 
 //Sortering av avreisedatoer
@@ -99,8 +98,26 @@ function visReiser(reiseArr) {
         else {
             id = this.id
             HentEnReise(id);
+
+            //Animasjon som scroller til bunn av skjermen, kilde: 
+            $('html, body').animate({
+                scrollTop: $(document).height()
+            },
+                1000);
         }
     });
+
+    $("#antallBarn").change(function () {
+        oppdaterPris();
+    });
+    $("#antallVoksne").change(function () {
+        oppdaterPris();
+    });
+}
+
+function oppdaterPris() {
+    let pris = antallVoksne.value * 100 + antallBarn.value * 50;
+    $("#pris").html(pris+"kr");
 }
 
 
@@ -125,6 +142,8 @@ function lagreBillett() {
         etternavn: $("#etternavn").val(),
         epost: $("#epost").val(),
         mobilnummer: $("#mobilnummer").val(),
+        antallVoksne: $("#antallVoksne").val(),
+        antallBarn: $("#antallBarn").val(),
         reiseId: valgtReise.id
     };
 
