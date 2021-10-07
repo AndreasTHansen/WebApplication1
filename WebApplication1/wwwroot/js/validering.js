@@ -1,18 +1,20 @@
 ﻿function validerFornavn(fornavn) {
-    const regexp = /^[a-zæøåÆØÅ\.\ \-]{2, 20}$/;
+    const regexp = /^[a-zA-ZæøåÆØÅ -]{2,30}$/;
+    console.log(fornavn);
     const ok = regexp.test(fornavn);
     if (!ok) {
-        $("feilFornavn").html("Fornavnet må være mellom 2 og 20 bokstaver");
+        $("#feilFornavn").html("Fornavnet må være mellom 2 og 20 bokstaver");
         return false;
     }
-    else {
-    $('#feilFornavn').html("");
-    return true;
+    else {  
+        $("#feilFornavn").html("");
+        return true;
     }
 }
 
 function validerEtternavn(etternavn) {
-    const regexp = /^[a-zæøåÆØÅ\.\ \-]{2, 50}$/;
+    const regexp = /^[a-zA-ZæøåÆØÅ\.\ \-]{2,50}$/;
+    console.log(etternavn);
     const ok = regexp.test(etternavn);
     if (ok) {
         $("#feilEtternavn").html("");
@@ -26,7 +28,7 @@ function validerEtternavn(etternavn) {
 }
 
 function validerEpost(epost) {
-    const regexp = /^[0-9a-zæøåÆØÅ\.\ \-@/]{2, 20}$/;
+    const regexp = /^[0-9a-zA-ZæøåÆØÅ\.\ \-]{2,20}$/;
     const ok = regexp.test(epost);
     if (ok) {
         $("#feilEpost").html("");
@@ -34,13 +36,13 @@ function validerEpost(epost) {
     }
 
     else {
-        $("#feilEpost").html("Fornavnet må være mellom 2 og 20 tegn");
+        $("#feilEpost").html("Eposten må være mellom 2 og 30 tegn");
         return false;
     }
 }
 
 function validerMobilnummer(mobilnummer) {
-    const regexp = /^[0-9+]{2, 20}$/;
+    const regexp = /^[0-9\.\ \-]{2,20}$/;
     const ok = regexp.test(mobilnummer);
     if (ok) {
         $("#feilMobil").html("");
