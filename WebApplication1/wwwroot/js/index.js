@@ -179,9 +179,6 @@ function validerBillett() {
     if (fornavnOK && etternavnOK && epostOK && mobilOK && kortOK && cvcOK && månedOK && årOK && antallOK) {
         lagreBillett();
     }
-    else {
-        alert("Nei");
-    }
 }
 
 function lagreBillett() {
