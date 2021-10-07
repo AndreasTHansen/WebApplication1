@@ -26,14 +26,18 @@ namespace WebApplication1.DAL
             {
                 List<Billett> alleBilletter = await _billettDb.Billetter.Select(k => new Billett
                 {
-                    id = k.id,
-                    fornavn = k.fornavn,
-                    etternavn = k.etternavn,
-                    epost = k.epost,
-                    mobilnummer = k.mobilnummer,
+                    id = k.kunde.id,
                     antallBarn = k.antallBarn,
                     antallVoksne = k.antallVoksne,
                     totalPris = k.totalPris,
+                    kundeId = k.kunde.id,
+                    fornavn = k.kunde.fornavn,
+                    etternavn = k.kunde.etternavn,
+                    epost = k.kunde.epost,
+                    mobilnummer = k.kunde.mobilnummer,
+                    kortnummer = k.kunde.kort.kortnummer,
+                    utlopsdato = k.kunde.kort.utlopsdato,
+                    cvc = k.kunde.kort.cvc,
                     reiseId = k.reise.id,
                     reiseFra = k.reise.reiseFra,
                     reiseTil = k.reise.reiseTil,
@@ -56,15 +60,37 @@ namespace WebApplication1.DAL
         public async Task<bool> Lagre(Billett innBillett)
         {                    
             try
-            {
+            {             
                 var nyBillett = new Billetter();
-                nyBillett.fornavn = innBillett.fornavn;
-                nyBillett.etternavn = innBillett.etternavn;
-                nyBillett.epost = innBillett.epost;
-                nyBillett.mobilnummer = innBillett.mobilnummer;
                 nyBillett.antallBarn = innBillett.antallBarn;
                 nyBillett.antallVoksne = innBillett.antallVoksne;
                 nyBillett.totalPris = innBillett.totalPris;
+
+                var nyKunde = new Kunder(); //Vi har ikke lagring av kunde derfor lages det en ny for hver billett i denne versjonen
+                {
+                    nyKunde.fornavn = innBillett.fornavn;
+                    nyKunde.epost = innBillett.epost;
+                    nyKunde.etternavn = innBillett.etternavn;
+                    nyKunde.id = innBillett.kundeId;
+                    nyKunde.mobilnummer = innBillett.mobilnummer;
+                }
+
+                var sjekkKort = _billettDb.Kort.Find(innBillett.kortnummer); //Sammme kortnummer kan skje og vi har ikke auto increment så her må det sjekkes
+                if (sjekkKort==null)
+                {
+                    var nyttKort = new Kort();
+                    nyttKort.kortnummer = innBillett.kortnummer;
+                    nyttKort.utlopsdato = innBillett.utlopsdato;
+                    nyttKort.cvc = innBillett.cvc;
+
+                    nyKunde.kort = nyttKort; 
+                }
+                else
+                {
+                    nyKunde.kort = sjekkKort;
+                }
+
+                nyBillett.kunde = nyKunde;
 
                 var sjekkReise = _billettDb.Reiser.Find(innBillett.reiseId);
                 if (sjekkReise == null)
@@ -79,7 +105,10 @@ namespace WebApplication1.DAL
                     nyReise.tidspunktFra = innBillett.reiseTil;
                     nyReise.tidspunktTil = innBillett.reiseTil;
                     nyReise.reisePris = innBillett.reisePris;
+
+                    nyBillett.reise = nyReise;
                 }
+                
                 else
                 {
                     nyBillett.reise = sjekkReise;
@@ -117,11 +146,11 @@ namespace WebApplication1.DAL
                 Billetter enBillett = await _billettDb.Billetter.FindAsync(id);
                 var hentetBillett = new Billett()
                 {
-                    id = enBillett.id,
-                    fornavn = enBillett.fornavn,
-                    etternavn = enBillett.etternavn,
-                    epost = enBillett.epost,
-                    mobilnummer = enBillett.mobilnummer,
+                    id = enBillett.kunde.id,
+                    fornavn = enBillett.kunde.fornavn,
+                    etternavn = enBillett.kunde.etternavn,
+                    epost = enBillett.kunde.epost,
+                    mobilnummer = enBillett.kunde.mobilnummer,
                     totalPris = enBillett.totalPris,
                     antallBarn = enBillett.antallBarn,
                     antallVoksne = enBillett.antallVoksne,
@@ -179,7 +208,8 @@ namespace WebApplication1.DAL
                     tidspunktFra = enReise.tidspunktFra,
                     tidspunktTil = enReise.tidspunktTil,
                     datoAnkomst = enReise.datoAnkomst,
-                    datoAvreise = enReise.datoAvreise
+                    datoAvreise = enReise.datoAvreise,
+                    reisePris = enReise.reisePris
                 };
 
                 return hentetReise;

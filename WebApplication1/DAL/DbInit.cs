@@ -26,7 +26,35 @@ namespace WebApplication1.Models
                 var reise6 = new Reiser { reiseFra = "Kiel", reiseTil = "Oslo", tidspunktFra = "19:00", tidspunktTil = "14:00", datoAnkomst = "10/01/2021", datoAvreise = "09/01/2021", reisePris = 1000.0};
                 var reise7 = new Reiser { reiseFra = "Kiel", reiseTil = "Oslo", tidspunktFra = "20:00", tidspunktTil = "13:00", datoAvreise = "21/01/2021", datoAnkomst = "22/01/2021", reisePris = 1000.0};
 
-                var billett3 = new Billetter { fornavn = "Andreas", etternavn = "Hansen", antallBarn = 0, antallVoksne = 1, mobilnummer = "12345678", epost = "andreas@gmail.com", totalPris = 1499.99, reise = reise3 };
+                var reise8 = new Reiser { reiseFra = "Oslo", reiseTil = "Kiel", tidspunktFra = "17:00", tidspunktTil = "13:00", datoAvreise = "12/12/2021", datoAnkomst = "13/12/2021", reisePris =  3000.0 };
+                var reise9 = new Reiser { reiseFra = "Oslo", reiseTil = "København", tidspunktFra = "18:00", tidspunktTil = "12:00", datoAvreise = "02/02/2022", datoAnkomst = "03/02/2022", reisePris =  1000.0 };
+                var reise10 = new Reiser { reiseFra = "Kiel", reiseTil = "Oslo", tidspunktFra = "18:00", tidspunktTil = "13:00", datoAvreise = "28/12/2021", datoAnkomst = "29/12/2021", reisePris =  3000.0};
+                var reise11 = new Reiser { reiseFra = "Kiel", reiseTil = "København", tidspunktFra = "16:00", tidspunktTil = "20:00", datoAvreise = "05/01/2022", datoAnkomst = "05/01/2022", reisePris = 700.0 };
+                var reise12 = new Reiser { reiseFra = "København", reiseTil = "Oslo", tidspunktFra = "17:00", tidspunktTil = "10:00", datoAvreise = "14/12/2021", datoAnkomst = "15/12/2021", reisePris = 1000.0 };
+                var reise13 = new Reiser { reiseFra = "København", reiseTil = "Oslo", tidspunktFra = "15:00", tidspunktTil = "19:00", datoAvreise = "07/01/2022", datoAnkomst = "07/01/2022", reisePris = 700.0 };
+
+                var reise14 = new Reiser { reiseFra = "Oslo", reiseTil = "Kiel", tidspunktFra = "18:00", tidspunktTil = "13:00", datoAvreise = "18/11/2021", datoAnkomst = "19/11/2021", reisePris = 3000.0 };
+                var reise15 = new Reiser { reiseFra = "Oslo", reiseTil = "København", tidspunktFra = "13:00", tidspunktTil = "21:00", datoAvreise = "23/11/2021", datoAnkomst = "24/11/2021", reisePris = 1000.0 };
+                var reise16 = new Reiser { reiseFra = "Kiel", reiseTil = "Oslo", tidspunktFra = "16:00", tidspunktTil = "13:00", datoAvreise = "20/11/2021", datoAnkomst = "21/11/2021", reisePris = 3000.0 };
+                var reise17 = new Reiser { reiseFra = "Kiel", reiseTil = "København", tidspunktFra = "21:00", tidspunktTil = "09:00", datoAvreise = "25/11/2021", datoAnkomst = "26/11/2021", reisePris = 700.0 };
+                var reise18 = new Reiser { reiseFra = "København", reiseTil = "Oslo", tidspunktFra = "20:00", tidspunktTil = "10:00", datoAvreise = "26/11/2021", datoAnkomst = "27/11/2021", reisePris = 1000.0 };
+                var reise19 = new Reiser { reiseFra = "København", reiseTil = "Kiel", tidspunktFra = "22:00", tidspunktTil = "10:00", datoAvreise = "28/11/2021", datoAnkomst = "29/11/2021", reisePris = 700.0 };
+
+
+                /* Template for alle reisene
+                var reise = new Reiser { reiseFra = "Oslo", reiseTil = "Kiel", tidspunktFra = "", tidspunktTil = "", datoAvreise = "", datoAnkomst = "", reisePris = 3000.0 };
+                var reise = new Reiser { reiseFra = "Oslo", reiseTil = "København", tidspunktFra = "", tidspunktTil = "", datoAvreise = "", datoAnkomst = "", reisePris = 1000.0 };
+                var reise = new Reiser { reiseFra = "Kiel", reiseTil = "Oslo", tidspunktFra = "", tidspunktTil = "", datoAvreise = "", datoAnkomst = "", reisePris = 3000.0 };
+                var reise = new Reiser { reiseFra = "Kiel", reiseTil = "København", tidspunktFra = "", tidspunktTil = "", datoAvreise = "", datoAnkomst = "", reisePris = 700.0 };
+                var reise = new Reiser { reiseFra = "København", reiseTil = "Oslo", tidspunktFra = "", tidspunktTil = "", datoAvreise = "", datoAnkomst = "", reisePris = 1000.0 };
+                var reise = new Reiser { reiseFra = "København", reiseTil = "Kiel", tidspunktFra = "", tidspunktTil = "", datoAvreise = "", datoAnkomst = "", reisePris = 700.0 };
+                */
+
+
+                var kort1 = new Kort { kortnummer = "4567890", cvc = 123, utlopsdato = "03/04/2022" };
+                var kunde1 = new Kunder { fornavn = "Anders", etternavn = "Ottersland", mobilnummer = "41251290", epost = "anderh@gmail.com", kort=kort1};
+                var billett1 = new Billetter { antallBarn = 0, antallVoksne = 1, reise = reise5, totalPris = 1000, kunde = kunde1 };
+
 
                 context.Reiser.Add(reise1);
                 context.Reiser.Add(reise2);
@@ -35,8 +63,18 @@ namespace WebApplication1.Models
                 context.Reiser.Add(reise5);
                 context.Reiser.Add(reise6);
                 context.Reiser.Add(reise7);
-                context.Billetter.Add(billett3);
-                
+                context.Reiser.Add(reise8);
+                context.Reiser.Add(reise9);
+                context.Reiser.Add(reise10);
+                context.Reiser.Add(reise11);
+                context.Reiser.Add(reise12);
+                context.Reiser.Add(reise13);
+                context.Reiser.Add(reise14);
+                context.Reiser.Add(reise15);
+                context.Reiser.Add(reise16);
+                context.Reiser.Add(reise17);
+                context.Reiser.Add(reise18);
+                context.Reiser.Add(reise19);
 
                 context.SaveChanges();
             }

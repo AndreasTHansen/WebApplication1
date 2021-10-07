@@ -42,7 +42,7 @@ function validerEpost(epost) {
 }
 
 function validerMobilnummer(mobilnummer) {
-    const regexp = /^[0-9\.\ \-]{2,20}$/;
+    const regexp = /^[0-9\.\ \-]{8,12}$/;
     const ok = regexp.test(mobilnummer);
     if (ok) {
         $("#feilMobil").html("");
@@ -52,5 +52,57 @@ function validerMobilnummer(mobilnummer) {
     else {
         $("#feilMobil").html("Mobilnummeret må være mellom 8 og 10 siffer");
         return false;
+    }
+}
+
+function validerKortnummer(kortnummer) {
+    const regexp = /^[0-9]{16}$/;
+    const ok = regexp.test(kortnummer);
+    if (ok) {
+        $("#feilKort").html("");
+        return true;
+    }
+    else {
+        $("#feilKort").html("Kortnummeret må være på 16 siffer");
+        return false;
+    }
+}
+
+function validerCvc(cvc) {
+    const regexp = /^[0-9]{3}$/;
+    const ok = regexp.test(cvc);
+    if (ok) {
+        $("#feilCvc").html("");
+        return true;
+    }
+    else {
+        $("#feilCvc").html("cvc-en må bestå av 3 siffer");
+        return false;
+    }
+}
+
+
+function validerMåned(måned) {
+    const regexp = /^(0?[1-9]|1[012])$/
+    const ok = regexp.test(måned);
+    if (ok) {
+        $("#feilDato").html("");
+        return true;
+    }
+    else {
+        $("#feilDato").html("Måned må være en gyldig dato");
+        return false;
+    }
+}
+
+function validerÅr(år) {
+    const regexp = /^(19|20)\d{2}$/;
+    const ok = regexp.test(år)
+    if (ok) {
+        $("feilDato").html("");
+        return true;
+    }
+    else {
+        $("#feilDato").html("År må være en gyldig dato");
     }
 }

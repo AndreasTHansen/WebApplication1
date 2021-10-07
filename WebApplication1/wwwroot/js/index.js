@@ -2,46 +2,53 @@
 var lastet = false;
 var kielArr = [];
 var kobenhavnArr = [];
+var osloArr = [];
 var alleArr = [];
 
 
 hentAlleReiser();
 
-    /*
-    $("#reiseValg").change(function () {
-        var value = $(this).val();
+/*
+$("#reiseValg").change(function () {
+    var value = $(this).val();
 
-        if (value == "Kiel") {
-            visReiser(kielArr);
-        };
+    if (value == "Kiel") {
+        visReiser(kielArr);
+    };
 
-        if (value == "Kobenhavn") {
-            visReiser(kobenhavnArr);
-        };
-        if (value == "visAlle") {
-            visReiser(alleArr);
-        }
-    });
-    */
+    if (value == "Kobenhavn") {
+        visReiser(kobenhavnArr);
+    };
+    if (value == "visAlle") {
+        visReiser(alleArr);
+    }
+});
+*/
 
-    //Trenger litt tid på å laste inn arrayene
-    //NB: Hvis vi legger til flere elementer i databasen og de slutter å vises, må vi huske å øke timeouten her
+//Trenger litt tid på å laste inn arrayene
+//NB: Hvis vi legger til flere elementer i databasen og de slutter å vises, må vi huske å øke timeouten her
 
-  /*  setTimeout(function () {
-        if ($("#land").text() == "Tyskland") {
-            visReiser(kielArr);
-        }
-        if ($("#land").text() == "Danmark") {
-            visReiser(kobenhavnArr);
-        }
-    }, 200);*/
+/*  setTimeout(function () {
+      if ($("#land").text() == "Tyskland") {
+          visReiser(kielArr);
+      }
+      if ($("#land").text() == "Danmark") {
+          visReiser(kobenhavnArr);
+      }
+  }, 200);*/
 
 //Sortering av avreisedatoer
 function compareDatoAvreise(a, b) {
-    if (a.datoAvreise < b.datoAvreise) {
+    const aDatoTemp = a.datoAvreise.split('/');
+    const bDatoTemp = b.datoAvreise.split('/');
+
+    const aDato = aDatoTemp[2] + aDatoTemp[1] + aDatoTemp[0];
+    const bDato = bDatoTemp[2] + bDatoTemp[1] + bDatoTemp[0];
+
+    if (aDato < bDato) {
         return -1;
     }
-    if (a.datoAvreise > b.datoAvreise) {
+    if (aDato > bDato) {
         return 1;
     }
     return 0;
@@ -72,12 +79,21 @@ function init(reiser) {
     }
 
     if ($("#land").html() == "Danmark") {
-       
+
         kobenhavnArr = alleArr.filter(function (reise) {
             return reise.reiseTil == "København";
         });
 
         visReiser(kobenhavnArr);
+    }
+
+    if ($("#land").html() == "Norge") {
+
+        osloArr = alleArr.filter(function (reise) {
+            return reise.reiseTil == "Oslo";
+        });
+
+        visReiser(osloArr);
     }
 }
 
@@ -103,6 +119,7 @@ function visReiser(reiseArr) {
     $("button").click(function () {
         // Funksjonen skal kjøre på alle knapper utenom kjøp-knappen.
         if (this.id == "knapp") {
+            lagreBillett();
             return;
         }
         else {
@@ -126,8 +143,9 @@ function visReiser(reiseArr) {
 }
 
 function oppdaterPris() {
-    let pris = antallVoksne.value * 100 + antallBarn.value * 50;
-    $("#pris").html(pris+"kr");
+    console.log(valgtReise.reisePris)
+    let pris = antallVoksne.value * valgtReise.reisePris + antallBarn.value * (valgtReise.reisePris*0.5);
+    $("#pris").html(pris + "kr");
 }
 
 
@@ -150,12 +168,18 @@ function validerBillett() {
     const etternavnOK = validerEtternavn($("#etternavn").val());
     const epostOK = validerEpost($("#epost").val());
     const mobilOK = validerMobilnummer($("#mobilnummer").val());
-    if (fornavnOK && etternavnOK && epostOK && mobilOK) {
+    const kortOK = validerKortnummer($("#kortnummer").val());
+    const cvcOK = validerCvc($("#cvc").val());
+    const månedOK = validerMåned($("#måned").val());
+    const årOK = validerÅr($("#år").val());
+
+    if (fornavnOK && etternavnOK && epostOK && mobilOK && kortOK && cvcOK && månedOK && årOK) {
         lagreBillett()
     }
 }
 
 function lagreBillett() {
+    var pris = antallVoksne.value * valgtReise.reisePris + antallBarn.value * (valgtReise.reisePris * 0.5);
     const billett = {
         fornavn: $("#fornavn").val(),
         etternavn: $("#etternavn").val(),
@@ -163,6 +187,8 @@ function lagreBillett() {
         mobilnummer: $("#mobilnummer").val(),
         antallVoksne: $("#antallVoksne").val(),
         antallBarn: $("#antallBarn").val(),
+        kortnummer: $("#kortnummer").val(),
+        totalPris: pris,
         reiseId: valgtReise.id
     };
 
@@ -170,7 +196,7 @@ function lagreBillett() {
 
     $.post(url, billett, function () {
         alert(billett.epost + "billetten ble lagret");
-        window.location.href = 'kvittering.html';       
+        window.location.href = 'kvittering.html';
     })
         .fail(function () {
             console.log("Noe feil skjedde med lagringen")
