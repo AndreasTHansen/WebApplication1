@@ -17,7 +17,11 @@ namespace WebApplication1.Models
         [RegularExpression(@"^[0-9a-zA-ZæøåÆØÅ. \-@]{2,20}$")]
         public string epost { get; set; }
         [RegularExpression(@"^[0-9+]{2,20}$")]
-        public string mobilnummer { get; set; } 
+        public string mobilnummer { get; set; }
+        [RegularExpression(@"^[0-9+]{2,30}$")]
+        public string kortnummer { get; set; }
+        [RegularExpression(@"^[0-9/]{2,30}$")]
+        public string utlopsdato { get; set; }
         public int antallVoksne { get; set; }
         public int antallBarn { get; set; }
         public double totalPris { get; set; }

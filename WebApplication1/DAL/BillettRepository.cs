@@ -26,11 +26,11 @@ namespace WebApplication1.DAL
             {
                 List<Billett> alleBilletter = await _billettDb.Billetter.Select(k => new Billett
                 {
-                    id = k.id,
-                    fornavn = k.fornavn,
-                    etternavn = k.etternavn,
-                    epost = k.epost,
-                    mobilnummer = k.mobilnummer,
+                    id = k.kunde.id,
+                    fornavn = k.kunde.fornavn,
+                    etternavn = k.kunde.etternavn,
+                    epost = k.kunde.epost,
+                    mobilnummer = k.kunde.mobilnummer,
                     antallBarn = k.antallBarn,
                     antallVoksne = k.antallVoksne,
                     totalPris = k.totalPris,
@@ -58,10 +58,10 @@ namespace WebApplication1.DAL
             try
             {
                 var nyBillett = new Billetter();
-                nyBillett.fornavn = innBillett.fornavn;
-                nyBillett.etternavn = innBillett.etternavn;
-                nyBillett.epost = innBillett.epost;
-                nyBillett.mobilnummer = innBillett.mobilnummer;
+                nyBillett.kunde.fornavn = innBillett.fornavn;
+                nyBillett.kunde.etternavn = innBillett.etternavn;
+                nyBillett.kunde.epost = innBillett.epost;
+                nyBillett.kunde.mobilnummer = innBillett.mobilnummer;
                 nyBillett.antallBarn = innBillett.antallBarn;
                 nyBillett.antallVoksne = innBillett.antallVoksne;
                 nyBillett.totalPris = innBillett.totalPris;
@@ -117,11 +117,11 @@ namespace WebApplication1.DAL
                 Billetter enBillett = await _billettDb.Billetter.FindAsync(id);
                 var hentetBillett = new Billett()
                 {
-                    id = enBillett.id,
-                    fornavn = enBillett.fornavn,
-                    etternavn = enBillett.etternavn,
-                    epost = enBillett.epost,
-                    mobilnummer = enBillett.mobilnummer,
+                    id = enBillett.kunde.id,
+                    fornavn = enBillett.kunde.fornavn,
+                    etternavn = enBillett.kunde.etternavn,
+                    epost = enBillett.kunde.epost,
+                    mobilnummer = enBillett.kunde.mobilnummer,
                     totalPris = enBillett.totalPris,
                     antallBarn = enBillett.antallBarn,
                     antallVoksne = enBillett.antallVoksne,
