@@ -129,7 +129,7 @@ function sokDato(innArr) {
 function visReiser(reiseArr) {
     let ut = "<table class='table table-striped'>" +
         "<tr>" +
-        "<th>Kjøp billett</th><th>Reiser fra</th><th>Destinasjon</th><th>Avgang</th><th>Ankomst</th>"
+        "<th>Kjøp billett</th><th>Reiser fra</th><th>Destinasjon</th><th>Avgang</th><th>Ankomst</th><th>Pris</th>" +
     "</tr>";
 
     for (let i = 0; i < reiseArr.length; i++) {
@@ -138,7 +138,8 @@ function visReiser(reiseArr) {
             "<td>" + reiseArr[i].reiseFra + "</td>" +
             "<td>" + reiseArr[i].reiseTil + "</td>" +
             "<td>" + reiseArr[i].datoAvreise + ", " + reiseArr[i].tidspunktFra + "</td>" +
-            "<td>" + reiseArr[i].datoAnkomst + ", " + reiseArr[i].tidspunktTil + "</td>"
+            "<td>" + reiseArr[i].datoAnkomst + ", " + reiseArr[i].tidspunktTil + "</td>" +
+            "<td>" + reiseArr[i].reisePris + " kr,-" + "</td>" +
         "</tr>";
     }
 
