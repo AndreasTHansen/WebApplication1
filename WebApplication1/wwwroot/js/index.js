@@ -2,6 +2,7 @@
 var lastet = false;
 var kielArr = [];
 var kobenhavnArr = [];
+var osloArr = [];
 var alleArr = [];
 
 
@@ -78,6 +79,15 @@ function init(reiser) {
         });
 
         visReiser(kobenhavnArr);
+    }
+
+    if ($("#land").html() == "Norge") {
+
+        osloArr = alleArr.filter(function (reise) {
+            return reise.reiseTil == "Oslo";
+        });
+
+        visReiser(osloArr);
     }
 }
 
