@@ -28,7 +28,7 @@ function validerEtternavn(etternavn) {
 }
 
 function validerEpost(epost) {
-    const regexp = /^[0-9a-zA-ZæøåÆØÅ\.\ \-]{2,20}$/;
+    const regexp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     const ok = regexp.test(epost);
     if (ok) {
         $("#feilEpost").html("");
