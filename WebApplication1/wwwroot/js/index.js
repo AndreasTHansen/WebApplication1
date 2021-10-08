@@ -8,35 +8,6 @@ var alleArr = [];
 
 hentAlleReiser();
 
-/*
-$("#reiseValg").change(function () {
-    var value = $(this).val();
-
-    if (value == "Kiel") {
-        visReiser(kielArr);
-    };
-
-    if (value == "Kobenhavn") {
-        visReiser(kobenhavnArr);
-    };
-    if (value == "visAlle") {
-        visReiser(alleArr);
-    }
-});
-*/
-
-//Trenger litt tid på å laste inn arrayene
-//NB: Hvis vi legger til flere elementer i databasen og de slutter å vises, må vi huske å øke timeouten her
-
-/*  setTimeout(function () {
-      if ($("#land").text() == "Tyskland") {
-          visReiser(kielArr);
-      }
-      if ($("#land").text() == "Danmark") {
-          visReiser(kobenhavnArr);
-      }
-  }, 200);*/
-
 //Sortering av avreisedatoer
 function compareDatoAvreise(a, b) {
     const aDatoTemp = a.datoAvreise.split('/');
@@ -97,10 +68,39 @@ function init(reiser) {
     }
 }
 
+function sokDato(innArr) {
+    let dag = $("#dagInn").val();
+    let mon = $("#manedInn").val();
+    let ar = $("#arInn").val();
+
+    if (dag < 10) {
+        dag = "0" + dag;
+    }
+
+    if (mon < 10) {
+        mon = "0" + mon;
+    }
+
+    const dato = dag + "/" + mon + "/" + ar;
+
+    let sokArr = [];
+
+    sokArr = innArr.filter(function (datoer) {
+        return datoer.datoAvreise == dato;
+    })
+
+    if (sokArr.length > 0) {
+        visReiser(sokArr);
+    }
+    else {
+        $("#sokeMsg").html("Det finnes ingen reiser for denne datoen");
+    }
+}
+
 function visReiser(reiseArr) {
     let ut = "<table class='table table-striped'>" +
         "<tr>" +
-        "<th>Kjøp billett</th><th>Reiser fra</th><th>Destinasjon</th><th>Avgang</th><th>Ankomst</th>"
+        "<th>Kjøp billett</th><th>Reiser fra</th><th>Destinasjon</th><th>Avgang</th><th>Ankomst</th><th>Pris</th>" +
     "</tr>";
 
     for (let i = 0; i < reiseArr.length; i++) {
@@ -109,7 +109,8 @@ function visReiser(reiseArr) {
             "<td>" + reiseArr[i].reiseFra + "</td>" +
             "<td>" + reiseArr[i].reiseTil + "</td>" +
             "<td>" + reiseArr[i].datoAvreise + ", " + reiseArr[i].tidspunktFra + "</td>" +
-            "<td>" + reiseArr[i].datoAnkomst + ", " + reiseArr[i].tidspunktTil + "</td>"
+            "<td>" + reiseArr[i].datoAnkomst + ", " + reiseArr[i].tidspunktTil + "</td>" +
+            "<td>" + reiseArr[i].reisePris + " kr,-" + "</td>" +
         "</tr>";
     }
 
@@ -120,8 +121,12 @@ function visReiser(reiseArr) {
         
         if (!event.detail || event.detail == 1) { //Skal hjelpe mot double clicks
             // Funksjonen skal kjøre på alle knapper utenom kjøp-knappen.
-            if (this.id == "knapp") {
+            if (this.id == "knapp")
+            {
                 validerBillett();
+            }
+            else if (this.id == "sokDato" || this.id == "resetTabell") {
+                return;
             }
             else {
                 id = this.id
@@ -178,9 +183,6 @@ function validerBillett() {
 
     if (fornavnOK && etternavnOK && epostOK && mobilOK && kortOK && cvcOK && månedOK && årOK && antallOK) {
         lagreBillett();
-    }
-    else {
-        alert("Nei");
     }
 }
 
