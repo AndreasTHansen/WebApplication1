@@ -91,6 +91,7 @@ function sokDato(innArr) {
 
     if (sokArr.length > 0) {
         visReiser(sokArr);
+        $("#sokeMsg").html("");
     }
     else {
         $("#sokeMsg").html("Det finnes ingen reiser for denne datoen");
@@ -125,9 +126,14 @@ function visReiser(reiseArr) {
             {
                 validerBillett();
             }
-            else if (this.id == "sokDato" || this.id == "resetTabell") {
+            else if (this.id == "resetTabell") {
+                $("#sokeMsg").html("")
                 return;
             }
+            else if (this.id == "sokDato") {
+                return;
+            }
+
             else {
                 id = this.id
                 HentEnReise(id);
