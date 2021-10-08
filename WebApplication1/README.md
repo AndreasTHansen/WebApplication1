@@ -11,3 +11,7 @@ Bootstrap-eksempler tatt fra nett:
 
 - Bootstrap for navbar
 	https://www.w3schools.com/bootstrap/bootstrap_navbar.asp
+
+
+Bilder:
+Stock-bilde av havet: https://www.pexels.com/photo/landscape-photograph-of-body-of-water-1001682/
