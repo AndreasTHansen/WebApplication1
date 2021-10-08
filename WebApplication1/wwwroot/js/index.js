@@ -118,10 +118,10 @@ function visReiser(reiseArr) {
     ut += "</table>";
     $("#reisene").html(ut);
 
+    // Utifra hvilken knapp som trykkes skjer ulike ting.
     $("button").click(function (event) {
         
         if (!event.detail || event.detail == 1) { //Skal hjelpe mot double clicks
-            // Funksjonen skal kjøre på alle knapper utenom kjøp-knappen.
             if (this.id == "knapp")
             {
                 validerBillett();
@@ -138,7 +138,7 @@ function visReiser(reiseArr) {
                 id = this.id
                 HentEnReise(id);
 
-                //Animasjon som scroller til bunn av skjermen, kilde: 
+                //Animasjon som scroller til bunn av skjermen
                 $('html, body').animate({
                     scrollTop: $(document).height()
                 },
@@ -162,11 +162,14 @@ function oppdaterPris() {
 }
 
 
-function velgReise(reise) { //Lagrer reisen valgt av bruker
+//Viser utfyllingsfeltet for kjøp av billett, og viser bruker hvilken reise som er valgt.
+function velgReise(reise) {
     $("#kjopForm").css("display", "block");
     $("#knapp").css("display", "block");
     $("#utDestinasjon").html(reise.reiseTil);
-    $("#utTid").html(reise.tidspunktFra + ", " + reise.datoAvreise)
+    $("#fraDestinasjon").html(reise.reiseFra);
+    $("#fraTid").html(reise.tidspunktFra + ", " + reise.datoAvreise);
+    $("#tilTid").html(reise.tidspunktTil + ", " + reise.datoAnkomst)
     valgtReise = reise;
 }
 
