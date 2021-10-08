@@ -162,7 +162,7 @@ function oppdaterPris() {
 }
 
 
-function velgReise(reise) {
+function velgReise(reise) { //Lagrer reisen valgt av bruker
     $("#kjopForm").css("display", "block");
     $("#knapp").css("display", "block");
     $("#utDestinasjon").html(reise.reiseTil);
@@ -215,6 +215,6 @@ function lagreBillett() {
         window.location.href = 'kvittering.html';
     })
         .fail(function () {
-            console.log("Noe feil skjedde med lagringen")
+            console.log("Noe feil skjedde under lagringen")
         });
 };
