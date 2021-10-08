@@ -9,6 +9,26 @@
 </head>
 <body>
 
+    <nav class="navbar navbar-expand-sm bg-light">
+        <a href="index.html" class="navbar-brand">
+            <img src="img/Color_Line_logo.svg" class="d-inline-block align-middle mr-3" width="180" alt="Logo" />
+        </a>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Hjem</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Danmark</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Tyskland</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Norge</a>
+            </li>
+        </ul>
+    </nav>
+
     <div class="container">
         <div class="form-group">
             <h2 class="display-1">Dette er reisene vi tilbyr til <span id="land">Danmark</span></h2>
@@ -34,10 +54,15 @@
         </div>
 
         <form id="kjopForm" style="display:none">
-            Destinasjon : <span id="utDestinasjon"></span><br />
-            Utreise : <span id="utTid"></span>
 
-            <br /><br />
+            <div style="font-size:1.5em;">
+                <p>Reise valgt:</p>
+                <span id="fraDestinasjon"></span>-<span id="utDestinasjon"></span><br />
+                Utreise : <span id="fraTid"></span>
+                Ankomst: <span id="tilTid"></span>
+            </div>
+
+            <br />
 
             <div class="form-row">
                 <div class="form-group col-md-6">
