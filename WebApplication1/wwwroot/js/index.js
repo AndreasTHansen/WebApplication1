@@ -106,7 +106,7 @@ function visReiser(reiseArr) {
 
     for (let i = 0; i < reiseArr.length; i++) {
         ut += "<tr>" +
-            "<td><button id=" + reiseArr[i].id + ">Kjøp her</button></td>" +
+            "<td><button id=" + reiseArr[i].id + " class='btn btn-primary'>Kjøp her</button></td>" +
             "<td>" + reiseArr[i].reiseFra + "</td>" +
             "<td>" + reiseArr[i].reiseTil + "</td>" +
             "<td>" + reiseArr[i].datoAvreise + ", " + reiseArr[i].tidspunktFra + "</td>" +
