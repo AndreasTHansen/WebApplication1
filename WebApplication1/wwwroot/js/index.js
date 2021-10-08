@@ -218,6 +218,6 @@ function lagreBillett() {
         window.location.href = 'kvittering.html';
     })
         .fail(function () {
-            console.log("Noe feil skjedde med lagringen")
+            console.log("Noe feil skjedde under lagringen")
         });
 };
