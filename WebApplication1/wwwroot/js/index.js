@@ -8,35 +8,6 @@ var alleArr = [];
 
 hentAlleReiser();
 
-/*
-$("#reiseValg").change(function () {
-    var value = $(this).val();
-
-    if (value == "Kiel") {
-        visReiser(kielArr);
-    };
-
-    if (value == "Kobenhavn") {
-        visReiser(kobenhavnArr);
-    };
-    if (value == "visAlle") {
-        visReiser(alleArr);
-    }
-});
-*/
-
-//Trenger litt tid på å laste inn arrayene
-//NB: Hvis vi legger til flere elementer i databasen og de slutter å vises, må vi huske å øke timeouten her
-
-/*  setTimeout(function () {
-      if ($("#land").text() == "Tyskland") {
-          visReiser(kielArr);
-      }
-      if ($("#land").text() == "Danmark") {
-          visReiser(kobenhavnArr);
-      }
-  }, 200);*/
-
 //Sortering av avreisedatoer
 function compareDatoAvreise(a, b) {
     const aDatoTemp = a.datoAvreise.split('/');
@@ -122,7 +93,7 @@ function sokDato(innArr) {
         visReiser(sokArr);
     }
     else {
-        $("sokeMsg").html("Finnes ingen reiser for denne datoen");
+        $("#sokeMsg").html("Det finnes ingen reiser for denne datoen");
     }
 }
 
@@ -150,8 +121,12 @@ function visReiser(reiseArr) {
         
         if (!event.detail || event.detail == 1) { //Skal hjelpe mot double clicks
             // Funksjonen skal kjøre på alle knapper utenom kjøp-knappen.
-            if (this.id == "knapp") {
+            if (this.id == "knapp")
+            {
                 validerBillett();
+            }
+            else if (this.id == "sokDato" || this.id == "resetTabell") {
+                return;
             }
             else {
                 id = this.id
