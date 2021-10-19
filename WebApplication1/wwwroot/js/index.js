@@ -31,6 +31,25 @@ function hentAlleReiser() {
     });
 }
 
+function adminLogin() {
+
+    //Brukernavn for admin er: admin
+    //Passord for admin er:    Admin123
+
+    const username = $("#usernameInput").val();
+    const password = $("#passwordInput").val();
+
+    console.log("Brukernavn: " + username + "\nPassord: " + password);
+
+    if (username == "admin" && password == "Admin123") {
+        location.href = "admin.html";
+    } else {
+        alert("Feil brukernavn eller passord");
+        $("#usernameInput").val("");
+        $("#passwordInput").val("");
+    }
+}
+
 function init(reiser) {
     let i = 0;
     for (let reise of reiser) {
