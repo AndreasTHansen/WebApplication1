@@ -37,6 +37,15 @@ namespace WebApplication1.Models
         public string mobilnummer { get; set; }     
         public virtual Kort kort { get; set; }
     }
+
+    public class Brukere
+    {
+        public int Id { get; set; }
+        public string Brukernavn { get; set; }
+        public byte[] Passord { get; set; }
+        public byte[] Salt { get; set; }
+    }
+
     public class Kort
     {   
         [Key]
@@ -57,6 +66,7 @@ namespace WebApplication1.Models
         public DbSet<Reiser> Reiser { get; set; }
         public DbSet<Kunder> Kunder { get; set; }
         public DbSet<Kort> Kort { get; set; }
+        public DbSet<Bruker> Brukere { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
