@@ -2,10 +2,9 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Vel ditt destinasjonsland</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <meta charset="utf-8" />
-    <title>Reiser</title>
+    <title>Logg innn som admin</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="css/land.css" type="text/css" />
 </head>
@@ -48,13 +47,14 @@
             <h1 class="display-5" style="margin-top: 30px;">Logg inn</h1>
             <br />
             <label for="username"><span style="opacity: 0%">Passord</span>Brukernavn: </label>
-            <input name="username" id="usernameInput" type="text"/>
+            <input name="username" id="usernameInput" type="text" />
             <br />
             <label for="password"><span style="opacity: 0%">Brukernavn</span>Passord: </label>
-            <input name="password" id="passwordInput" type="password"/>
+            <input name="password" id="passwordInput" type="password" />
             <br /><br />
-            <button id="adminLogin" onclick="#" style="margin-bottom: 10px;">Logg inn</button>
+            <button id="adminLogin" onclick="adminLogin()" style="margin-bottom: 10px;">Logg inn</button>
         </div>
     </div>
+    <script src="js/index.js"></script>
 </body>
 </html>
