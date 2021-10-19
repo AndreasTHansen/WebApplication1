@@ -26,10 +26,10 @@
         </a>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="login.html">Logg inn</a>
+                <a class="nav-link" href="#">Logg inn</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Hjem</a>
+                <a class="nav-link" href="index.html">Hjem</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="Danmark.html">Danmark</a>
@@ -43,32 +43,17 @@
         </ul>
     </nav>
 
-    <div class="container">
+    <div class="container" style="background-color: rgba(240, 238, 236, 0.9)">
         <div class="form-group" style="text-align: center">
-            <h1 class="display-1">Vi ønsker deg velkommen til Color Line!</h1>
-
-            <h2>Hvor ønsker du å reise?</h2>
-
-            <a href="Danmark.html">
-                <div class="dest">
-                    <img class="img-thumbnail img-responsive float" src="images/Flag_of_Denmark.svg.png" style="object-fit: cover" />
-                    <h4>Til Danmark</h4>
-                </div>
-            </a>
-
-            <a href="Tyskland.html">
-                <div class="dest" style="padding-right: 2.5%; padding-left: 2.5%">
-                    <img class="img-thumbnail img-responsive float" src="images/Flag_of_Germany.svg.png" style="object-fit: cover" />
-                    <h4>Til Tyskland</h4>
-                </div>
-            </a>
-
-            <a href="Norge.html">
-                <div class="dest">
-                    <img class="img-thumbnail img-responsive float" src="images/Flag_of_Norway.svg.png" style="object-fit: cover" />
-                    <h4>Til Norge</h4>
-                </div>
-            </a>
+            <h1 class="display-5" style="margin-top: 30px;">Logg inn</h1>
+            <br /><br />
+            <label for="username"><span style="opacity: 0%">Passord</span>Brukernavn: </label>
+            <input name="username" id="usernameInput" type="text"/>
+            <br />
+            <label for="password"><span style="opacity: 0%">Brukernavn</span>Passord: </label>
+            <input name="password" id="passwordInput" type="password"/>
+            <br /><br />
+            <button id="adminLogin" onclick="#">Logg inn</button>
         </div>
     </div>
 </body>
