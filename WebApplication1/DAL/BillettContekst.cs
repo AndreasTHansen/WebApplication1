@@ -66,7 +66,7 @@ namespace WebApplication1.Models
         public DbSet<Reiser> Reiser { get; set; }
         public DbSet<Kunder> Kunder { get; set; }
         public DbSet<Kort> Kort { get; set; }
-        public DbSet<Bruker> Brukere { get; set; }
+        public DbSet<Brukere> Brukere { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

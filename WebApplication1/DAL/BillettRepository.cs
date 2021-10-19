@@ -19,9 +19,13 @@ namespace WebApplication1.DAL
 
         private readonly BillettContekst _billettDb;
 
-        public BillettRepository(BillettContekst billettDb)
+        private ILogger<BillettRepository> _log;
+
+        public BillettRepository(BillettContekst billettDb, ILogger<BillettRepository> log)
         { 
-        _billettDb = billettDb;
+            _billettDb = billettDb;
+            _log = log;
+
         }
         public async Task<List<Billett>> HentAlle()
         {
@@ -224,6 +228,9 @@ namespace WebApplication1.DAL
 
         }
 
+
+
+        //LagHash, LagSalt og LoggInn er hentet fra fagstoff.
         public static byte[] LagHash(string passord, byte[] salt)
         {
             return KeyDerivation.Pbkdf2(
@@ -246,7 +253,7 @@ namespace WebApplication1.DAL
         {
             try
             {
-                Bruker funnetBruker = await _billettDb.Brukere.FirstOrDefaultAsync(b => b.Brukernavn == bruker.Brukernavn);
+                Brukere funnetBruker = await _billettDb.Brukere.FirstOrDefaultAsync(b => b.Brukernavn == bruker.Brukernavn);
 
                 //sjekk passordet
                 byte[] hash = LagHash(bruker.Passord, funnetBruker.Salt);
@@ -259,7 +266,7 @@ namespace WebApplication1.DAL
             }
             catch (Exception e)
             {
-                
+                _log.LogInformation(e.Message);
                 return false;
             }
         }
