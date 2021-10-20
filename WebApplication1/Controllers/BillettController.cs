@@ -72,5 +72,22 @@ namespace WebApplication1.Controllers
             }
             return Ok(hentetReise);
         }
+
+        //Hentet fra fagstoff
+        public async Task<ActionResult> LoggInn(Bruker bruker)
+        {
+            if (ModelState.IsValid)
+            {
+                bool returnOK = await _billettDb.LoggInn(bruker);
+                if (!returnOK)
+                {
+                    _log.LogInformation("Innloggingen feilet for bruker" + bruker.Brukernavn);
+                    return Ok(false);
+                }
+                return Ok(true);
+            }
+            _log.LogInformation("Feil i inputvalidering");
+            return BadRequest("Feil i inputvalidering på server");
+        }
     }
 }

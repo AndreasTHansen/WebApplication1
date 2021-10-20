@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApplication1.DAL;
 
 namespace WebApplication1.Models
 {
@@ -75,6 +76,18 @@ namespace WebApplication1.Models
                 context.Reiser.Add(reise17);
                 context.Reiser.Add(reise18);
                 context.Reiser.Add(reise19);
+
+
+                //Hentet fra fagstoff
+                // lag en påoggingsbruker
+                var bruker = new Brukere();
+                bruker.Brukernavn = "Admin";
+                var passord = "Test11";
+                byte[] salt = BillettRepository.LagSalt();
+                byte[] hash = BillettRepository.LagHash(passord, salt);
+                bruker.Passord = hash;
+                bruker.Salt = salt;
+                context.Brukere.Add(bruker);
 
                 context.SaveChanges();
             }

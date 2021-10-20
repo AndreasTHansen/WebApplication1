@@ -249,6 +249,7 @@ namespace WebApplication1.DAL
             return salt;
         }
 
+
         public async Task<bool> LoggInn(Bruker bruker)
         {
             try
