@@ -32,6 +32,17 @@ namespace WebApplication1
             services.AddDbContext<BillettContekst>(options => options.UseSqlite("Data source=Billett.db"));
 
             services.AddScoped<IBillettRepository, BillettRepository>();
+
+            services.AddSession(options =>
+            {
+                options.Cookie.Name = ".AdventureWorks.Session";
+                options.IdleTimeout = TimeSpan.FromSeconds(1800); //30 min
+                options.Cookie.IsEssential = true;
+
+            });
+
+            services.AddDistributedMemoryCache();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,7 +67,9 @@ namespace WebApplication1
                 context.Database.EnsureCreated();
              }
 
-        app.UseStaticFiles();
+            app.UseStaticFiles();
+
+            app.UseSession();
 
             app.UseRouting();
 
