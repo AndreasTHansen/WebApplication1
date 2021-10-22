@@ -1,11 +1,10 @@
+using System.Collections.Generic;
+using System.Net;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Threading.Tasks;
 using WebApplication1.Controllers;
 using WebApplication1.DAL;
 using WebApplication1.Models;
@@ -19,11 +18,20 @@ namespace WebAppTest
         private const string _loggetInn = "loggetInn";
         private const string _ikkeLoggetInn = "";
 
+
+        //for billett
         private readonly Mock<IBillettRepository> mockRep = new Mock<IBillettRepository>();
         private readonly Mock<ILogger<BillettController>> mockLog = new Mock<ILogger<BillettController>>();
 
+        //for kunde
+        private readonly Mock<IKundeRepository> mockRepK = new Mock<IKundeRepository>();
+        private readonly Mock<ILogger<KundeController>> mockLogK = new Mock<ILogger<KundeController>>();
+
         private readonly Mock<HttpContext> mockHttpContext = new Mock<HttpContext>();
         private readonly MockHttpSession mockSession = new MockHttpSession();
+
+
+        //Billett controller
 
         [Fact]
         public async Task LagreLoggetInnOK()
@@ -45,7 +53,7 @@ namespace WebAppTest
         }
 
         [Fact]
-        public async Task LagreLoggetInnOKFeil()
+        public async Task LagreLoggetInnFeilOK()
         {
             mockRep.Setup(k => k.Lagre(It.IsAny<Billett>())).ReturnsAsync(false);
 
@@ -56,11 +64,53 @@ namespace WebAppTest
             billettController.ControllerContext.HttpContext = mockHttpContext.Object;
 
             //Act
-            var resultat = await billettController.Lagre(It.IsAny<Billett>()) as OkObjectResult;
+            var resultat = await billettController.Lagre(It.IsAny<Billett>()) as BadRequestObjectResult;
 
             //Assert
-            Assert.Equal((int)HttpStatusCode.OK, resultat.StatusCode);
-            Assert.Null(resultat.Value);
+            Assert.Equal((int)HttpStatusCode.BadRequest, resultat.StatusCode);
+            Assert.Equal("Billetten kunne ikke lagres", resultat.Value);
+        }
+
+        [Fact]
+        public async Task LagreLoggetInnFeilModellOK()
+        {
+            // Arrange
+            mockRep.Setup(k => k.Lagre(It.IsAny<Billett>())).ReturnsAsync(true);
+
+            var billettController = new BillettController(mockRep.Object, mockLog.Object);
+
+            billettController.ModelState.AddModelError("ReiseID", "Feil i inputvalidering på server");
+
+            mockSession[_loggetInn] = _loggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            billettController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            // Act
+            var resultat = await billettController.Lagre(It.IsAny<Billett>()) as BadRequestObjectResult;
+
+            // Assert 
+            Assert.Equal((int)HttpStatusCode.BadRequest, resultat.StatusCode);
+            Assert.Equal("Feil i inputvalidering på server", resultat.Value);
+        }
+
+        [Fact]
+        public async Task LagreIkkeLoggetInnOK()
+        {
+            //Arrange
+            mockRep.Setup(k => k.Lagre(It.IsAny<Billett>())).ReturnsAsync(true);
+
+            var billettController = new BillettController(mockRep.Object, mockLog.Object);
+
+            mockSession[_loggetInn] = _ikkeLoggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            billettController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            //Act
+            var resultat = await billettController.Lagre(It.IsAny<Billett>()) as UnauthorizedObjectResult;
+
+            //Assert
+            Assert.Equal((int)HttpStatusCode.Unauthorized, resultat.StatusCode);
+            Assert.Equal("Ikke logget inn", resultat.Value);
         }
 
         [Fact]
@@ -135,7 +185,7 @@ namespace WebAppTest
         }
 
         [Fact]
-        public async Task HentAlleLoggetInnOKFeilDB()
+        public async Task HentAlleLoggetInnFeilOK()
         {
             //Arrange
             var billettListe = new List<Billett>();
@@ -160,7 +210,7 @@ namespace WebAppTest
         public async Task HentAlleIkkeLoggetInn()
         {
             //Arrange
-            mockRep.Setup(k => k.HentAlle()).ReturnsAsync(() => null);
+            mockRep.Setup(k => k.HentAlle()).ReturnsAsync(It.IsAny<List<Billett>>());
 
             var billettController = new BillettController(mockRep.Object, mockLog.Object);
 
@@ -196,6 +246,125 @@ namespace WebAppTest
         }
 
         [Fact]
+        public async Task SlettLoggetInnFeilOK()
+        {
+            mockRep.Setup(k => k.Slett(It.IsAny<int>())).ReturnsAsync(false);
+
+            var billettController = new BillettController(mockRep.Object, mockLog.Object);
+
+            mockSession[_loggetInn] = _loggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            billettController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            //Act
+            var resultat = await billettController.Slett(It.IsAny<int>()) as NotFoundObjectResult;
+
+            //Assert
+            Assert.Equal((int)HttpStatusCode.NotFound, resultat.StatusCode);
+            Assert.Equal("Billetten ble ikke slettet", resultat.Value);
+        }
+
+        [Fact]
+        public async Task SlettIkkeLoggetInnOK()
+        {
+            //Arrange
+            mockRep.Setup(k => k.Slett(It.IsAny<int>())).ReturnsAsync(true);
+
+            var billettController = new BillettController(mockRep.Object, mockLog.Object);
+
+            mockSession[_loggetInn] = _ikkeLoggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            billettController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            //Act
+            var resultat = await billettController.Slett(It.IsAny<int>()) as UnauthorizedObjectResult;
+
+            //Assert
+            Assert.Equal((int)HttpStatusCode.Unauthorized, resultat.StatusCode);
+            Assert.Equal("Ikke logget inn", resultat.Value);
+        }
+
+        [Fact]
+        public async Task EndreBillettLoggetInnOK()
+        {
+            mockRep.Setup(k => k.EndreBillett(It.IsAny<Billett>())).ReturnsAsync(true);
+
+            var billettController = new BillettController(mockRep.Object, mockLog.Object);
+
+            mockSession[_loggetInn] = _loggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            billettController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            //Act
+            var resultat = await billettController.EndreBillett(It.IsAny<Billett>()) as OkObjectResult;
+
+            //Assert
+            Assert.Equal((int)HttpStatusCode.OK, resultat.StatusCode);
+            Assert.Equal("Billetten ble endret", resultat.Value);
+        }
+
+        [Fact]
+        public async Task EndreBillettLoggetInnFeilOK()
+        {
+            mockRep.Setup(k => k.EndreBillett(It.IsAny<Billett>())).ReturnsAsync(false);
+
+            var billettController = new BillettController(mockRep.Object, mockLog.Object);
+
+            mockSession[_loggetInn] = _loggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            billettController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            //Act
+            var resultat = await billettController.EndreBillett(It.IsAny<Billett>()) as NotFoundObjectResult;
+
+            //Assert
+            Assert.Equal((int)HttpStatusCode.NotFound, resultat.StatusCode);
+            Assert.Equal("Billetten ble ikke endret", resultat.Value);
+        }
+
+        [Fact]
+        public async Task EndreBillettLoggetInnFeilModellOK()
+        {
+            // Arrange
+            mockRep.Setup(k => k.EndreBillett(It.IsAny<Billett>())).ReturnsAsync(true);
+
+            var billettController = new BillettController(mockRep.Object, mockLog.Object);
+
+            billettController.ModelState.AddModelError("ReiseID", "Feil i inputvalidering på server");
+
+            mockSession[_loggetInn] = _loggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            billettController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            // Act
+            var resultat = await billettController.EndreBillett(It.IsAny<Billett>()) as BadRequestObjectResult;
+
+            // Assert 
+            Assert.Equal((int)HttpStatusCode.BadRequest, resultat.StatusCode);
+            Assert.Equal("Feil i inputvalidering på server", resultat.Value);
+        }
+
+        [Fact]
+        public async Task EndreBillettIkkeLoggetInnOK()
+        {
+            //Arrange
+            mockRep.Setup(k => k.EndreBillett(It.IsAny<Billett>())).ReturnsAsync(true);
+
+            var billettController = new BillettController(mockRep.Object, mockLog.Object);
+
+            mockSession[_loggetInn] = _ikkeLoggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            billettController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            //Act
+            var resultat = await billettController.EndreBillett(It.IsAny<Billett>()) as UnauthorizedObjectResult;
+
+            //Assert
+            Assert.Equal((int)HttpStatusCode.Unauthorized, resultat.StatusCode);
+            Assert.Equal("Ikke logget inn", resultat.Value);
+        }
+
+        [Fact]
         public async Task HentEnReiseLoggetInnOK()
         {
             //Arrange
@@ -228,7 +397,47 @@ namespace WebAppTest
         }
 
         [Fact]
-        public async Task HentAlleReiser()
+        public async Task HentEnReiseLoggetInnFeilOK()
+        {
+            //Arrange
+            mockRep.Setup(k => k.HentEnReise(It.IsAny<int>())).ReturnsAsync(() => null);
+
+            var billettController = new BillettController(mockRep.Object, mockLog.Object);
+
+            mockSession[_loggetInn] = _loggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            billettController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            //Act
+            var resultat = await billettController.HentEnReise(It.IsAny<int>()) as NotFoundObjectResult;
+
+            //Assert
+            Assert.Equal((int)HttpStatusCode.NotFound, resultat.StatusCode);
+            Assert.Equal("Fant ikke reisen i databasen", resultat.Value);
+        }
+
+        [Fact]
+        public async Task HentEnReiseIkkeLoggetInnOK()
+        {
+            //Arrange
+            mockRep.Setup(k => k.HentEnReise(It.IsAny<int>())).ReturnsAsync(It.IsAny<Reise>);
+
+            var billettController = new BillettController(mockRep.Object, mockLog.Object);
+
+            mockSession[_loggetInn] = _ikkeLoggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            billettController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            //Act
+            var resultat = await billettController.HentEnReise(It.IsAny<int>()) as UnauthorizedObjectResult;
+
+            //Assert
+            Assert.Equal((int)HttpStatusCode.Unauthorized, resultat.StatusCode);
+            Assert.Equal("Ikke logget inn", resultat.Value);
+        }
+
+        [Fact]
+        public async Task HentAlleReiserLoggetInnOK()
         {
             //Arrange
             var reise1 = new Reise
@@ -276,7 +485,49 @@ namespace WebAppTest
         }
 
         [Fact]
-        public async Task LoggInnLoggetInnOK()
+        public async Task HentAlleReiserLoggetInnFeilOK()
+        {
+            //Arrange
+            var billettListe = new List<Billett>();
+
+            mockRep.Setup(k => k.HentAlleReiser()).ReturnsAsync(() => null);
+
+            var billettController = new BillettController(mockRep.Object, mockLog.Object);
+
+            mockSession[_loggetInn] = _loggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            billettController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            //Act
+            var resultat = await billettController.HentAlleReiser() as OkObjectResult;
+
+            //Assert
+            Assert.Equal((int)HttpStatusCode.OK, resultat.StatusCode);
+            Assert.Null(resultat.Value);
+        }
+
+        [Fact]
+        public async Task HentAlleReiserIkkeLoggetInnOK()
+        {
+            //Arrange
+            mockRep.Setup(k => k.HentAlleReiser()).ReturnsAsync(It.IsAny<List<Reise>>());
+
+            var billettController = new BillettController(mockRep.Object, mockLog.Object);
+
+            mockSession[_loggetInn] = _ikkeLoggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            billettController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            //Act
+            var resultat = await billettController.HentAlleReiser() as UnauthorizedObjectResult;
+
+            //Assert
+            Assert.Equal((int)HttpStatusCode.Unauthorized, resultat.StatusCode);
+            Assert.Equal("Ikke logget inn", resultat.Value);
+        }
+
+        [Fact]
+        public async Task LoggInnOK()
         {
             mockRep.Setup(k => k.LoggInn(It.IsAny<Bruker>())).ReturnsAsync(true);
 
@@ -295,9 +546,9 @@ namespace WebAppTest
         }
 
         [Fact]
-        public async Task LoggInnIkkeLoggetInnOK()
+        public async Task LoggInnFeilOK()
         {
-            mockRep.Setup(k => k.LoggInn(It.IsAny<Bruker>())).ReturnsAsync(true);
+            mockRep.Setup(k => k.LoggInn(It.IsAny<Bruker>())).ReturnsAsync(false);
 
             var billettController = new BillettController(mockRep.Object, mockLog.Object);
 
@@ -306,9 +557,113 @@ namespace WebAppTest
             billettController.ControllerContext.HttpContext = mockHttpContext.Object;
 
             // Act
-            var resultat = await billettController.LoggInn(It.IsAny<Bruker>()) as UnauthorizedObjectResult;
+            var resultat = await billettController.LoggInn(It.IsAny<Bruker>()) as OkObjectResult;
 
             // Assert 
+            Assert.Equal((int)HttpStatusCode.OK, resultat.StatusCode);
+            Assert.False((bool)resultat.Value);
+        }
+
+        [Fact]
+        public async Task LoggInnInputFeilOK()
+        {
+            mockRep.Setup(k => k.LoggInn(It.IsAny<Bruker>())).ReturnsAsync(true);
+
+            var billettController = new BillettController(mockRep.Object, mockLog.Object);
+
+            billettController.ModelState.AddModelError("Brukernavn", "Feil i inputvalidering på server");
+
+            mockSession[_loggetInn] = _loggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            billettController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            // Act
+            var resultat = await billettController.LoggInn(It.IsAny<Bruker>()) as BadRequestObjectResult;
+
+            // Assert 
+            Assert.Equal((int)HttpStatusCode.BadRequest, resultat.StatusCode);
+            Assert.Equal("Feil i inputvalidering på server", resultat.Value);
+        }
+
+
+        //Kunde controller
+
+        [Fact]
+        public async Task EndreKundeLoggetInnOK()
+        {
+            mockRepK.Setup(k => k.EndreKunde(It.IsAny<Kunde>())).ReturnsAsync(true);
+
+            var kundeController = new KundeController(mockRepK.Object, mockLogK.Object);
+
+            mockSession[_loggetInn] = _loggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            kundeController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            //Act
+            var resultat = await kundeController.EndreKunde(It.IsAny<Kunde>()) as OkObjectResult;
+
+            //Assert
+            Assert.Equal((int)HttpStatusCode.OK, resultat.StatusCode);
+            Assert.Equal("Kunden ble endret", resultat.Value);
+        }
+
+        [Fact]
+        public async Task EndreKundeLoggetInnFeilOK()
+        {
+            mockRepK.Setup(k => k.EndreKunde(It.IsAny<Kunde>())).ReturnsAsync(false);
+
+            var kundeController = new KundeController(mockRepK.Object, mockLogK.Object);
+
+            mockSession[_loggetInn] = _loggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            kundeController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            //Act
+            var resultat = await kundeController.EndreKunde(It.IsAny<Kunde>()) as NotFoundObjectResult;
+
+            //Assert
+            Assert.Equal((int)HttpStatusCode.NotFound, resultat.StatusCode);
+            Assert.Equal("Kunden kunne ikke endres", resultat.Value);
+        }
+
+        [Fact]
+        public async Task EndreKundeLoggetInnFeilModelOK()
+        {
+            // Arrange
+            mockRepK.Setup(k => k.EndreKunde(It.IsAny<Kunde>())).ReturnsAsync(true);
+
+            var kundeController = new KundeController(mockRepK.Object, mockLogK.Object);
+
+            kundeController.ModelState.AddModelError("Fornavn", "Feil i inputvalidering på server");
+
+            mockSession[_loggetInn] = _loggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            kundeController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            // Act
+            var resultat = await kundeController.EndreKunde(It.IsAny<Kunde>()) as BadRequestObjectResult;
+
+            // Assert 
+            Assert.Equal((int)HttpStatusCode.BadRequest, resultat.StatusCode);
+            Assert.Equal("Feil i inputvalidering på server", resultat.Value);
+        }
+
+        [Fact]
+        public async Task EndreKundeIkkeLoggetInnOK()
+        {
+            //Arrange
+            mockRepK.Setup(k => k.EndreKunde(It.IsAny<Kunde>())).ReturnsAsync(true);
+
+            var kundeController = new KundeController(mockRepK.Object, mockLogK.Object);
+
+            mockSession[_loggetInn] = _ikkeLoggetInn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            kundeController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            //Act
+            var resultat = await kundeController.EndreKunde(It.IsAny<Kunde>()) as UnauthorizedObjectResult;
+
+            //Assert
             Assert.Equal((int)HttpStatusCode.Unauthorized, resultat.StatusCode);
             Assert.Equal("Ikke logget inn", resultat.Value);
         }
