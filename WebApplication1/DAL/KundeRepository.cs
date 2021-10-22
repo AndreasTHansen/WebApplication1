@@ -68,9 +68,37 @@ namespace WebApplication1.DAL
             }
         }
 
-        //public async Task<bool> EndreKunde(Kunde innKunde)
-        //{
-        //    return
-        //}
+        public async Task<bool> LagreKunde(Kunde innKunde)
+        {
+            try 
+            {
+                var nyKunde = new Kunder();
+                nyKunde.fornavn = innKunde.fornavn;
+                nyKunde.etternavn = innKunde.etternavn;
+                nyKunde.epost = innKunde.epost;
+                nyKunde.mobilnummer = innKunde.mobilnummer;
+
+
+                  var sjekkKort = await _billettDb.Kort.FindAsync(innKunde.kortnummer);
+                  if (sjekkKort == null)
+                  {
+                      Kort kortRad = new Kort();
+                      kortRad.kortnummer = innKunde.kortnummer;
+                      kortRad.cvc = innKunde.cvc;
+                      kortRad.utlopsdato = innKunde.utlopsdato;
+                  }
+                else
+                {
+                    nyKunde.kort = sjekkKort;
+                }
+              
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+
+        }
     }
 }
