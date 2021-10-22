@@ -24,9 +24,7 @@ namespace WebApplication1.Models
         public string kortnummer { get; set; }
         public string utlopsdato { get; set; }
         public int cvc { get; set; }
-        public int antallVoksne { get; set; }
-        public int antallBarn { get; set; }
-        public double totalPris { get; set; }
+       
         public int reiseId { get; set; }
         [RegularExpression(@"^[a-zA-Z. \-]{2,20}$")]
         public string reiseTil { get; set; }
@@ -41,5 +39,8 @@ namespace WebApplication1.Models
         [RegularExpression(@"^[0-9./\:]{2,20}$")]
         public string tidspunktTil { get; set; }
         public double reisePris { get; set; }
+        public int antallVoksne { get; set; }
+        public int antallBarn { get; set; }
+        public double totalPris { get; set; }
     }
 }
