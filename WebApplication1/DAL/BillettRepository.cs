@@ -329,37 +329,6 @@ namespace WebApplication1.DAL
             }
         }
 
-        public async Task<bool> EndreKunde(Kunde endreKunde)
-        {
-            try
-            {
-                var endreObjekt = await _billettDb.Kunder.FindAsync(endreKunde.id);
-                //Sjekke om kortet finnes fra før
-                if (endreObjekt.kort.kortnummer != endreKunde.kortnummer)
-                {
-                    var kortRad = new Kort();
-                    kortRad.kortnummer = endreKunde.kortnummer;
-                    kortRad.cvc = endreKunde.cvc;
-                    kortRad.utlopsdato = endreKunde.utlopsdato;
-                    endreObjekt.kort = kortRad;
-                }
-                else
-                {
-                    endreObjekt.kort.kortnummer = endreKunde.kortnummer; 
-                }
-                endreObjekt.fornavn = endreKunde.fornavn;
-                endreObjekt.etternavn = endreKunde.etternavn;
-                endreObjekt.epost = endreKunde.epost;
-                endreObjekt.mobilnummer = endreKunde.mobilnummer;
-            }
-            catch (Exception e)
-            {
-                _log.LogInformation(e.Message);
-                return false;
-            }
-            return true;
-        }
-
 
 
         //LagHash, LagSalt og LoggInn er hentet fra fagstoff.

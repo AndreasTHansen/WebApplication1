@@ -54,6 +54,16 @@ namespace WebApplication1.Controllers
             return Ok("Billett slettet");
         }
 
+        public async Task<ActionResult> EndreBillett(Billett endreBillett)
+        {
+            bool endreOk = await _billettDb.EndreBillett(endreBillett);
+            if (!endreOk)
+            {
+                _log.LogInformation("Billetten kunne ikke bli endret");
+                return NotFound("Billetten ble ikke endret");
+            }
+            return Ok("Billetten ble endret");
+        }
         public async Task<ActionResult> HentAlleReiser()
         {
             List<Reise> reiseListe = await _billettDb.HentAlleReiser();

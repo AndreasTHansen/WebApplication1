@@ -32,6 +32,7 @@ namespace WebApplication1
             services.AddDbContext<BillettContekst>(options => options.UseSqlite("Data source=Billett.db"));
 
             services.AddScoped<IBillettRepository, BillettRepository>();
+            services.AddScoped<IKundeRepository, KundeRepository>();
 
             services.AddSession(options =>
             {
