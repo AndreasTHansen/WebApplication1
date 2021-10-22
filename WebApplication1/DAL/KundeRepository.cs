@@ -54,18 +54,23 @@ namespace WebApplication1.DAL
         public async Task<bool> SlettKunde(int id)
         {
 
-       
+
             try
             {
-                 Kunder enKunde = await _billettDb.Kunder.FindAsync(id);
-                 _billettDb.Remove(enKunde);
-                 await _billettDb.SaveChangesAsync();
-                 return true;
+                Kunder enKunde = await _billettDb.Kunder.FindAsync(id);
+                _billettDb.Remove(enKunde);
+                await _billettDb.SaveChangesAsync();
+                return true;
             }
             catch
             {
-                 return false;
+                return false;
             }
         }
+
+        //public async Task<bool> EndreKunde(Kunde innKunde)
+        //{
+        //    return
+        //}
     }
 }
