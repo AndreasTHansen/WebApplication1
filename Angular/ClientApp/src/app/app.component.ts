@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { kunde } from "kunde";
+import { kunde } from "./kunde";
 
 @Component({
   selector: 'app-root',
@@ -14,5 +14,5 @@ export class AppComponent {
     this.telefon = "92192122";
   }
 
-  kunder: Array<kontakt>
+  kunder: Array<kunde>
 }
