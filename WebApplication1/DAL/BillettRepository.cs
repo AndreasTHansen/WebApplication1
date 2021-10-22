@@ -178,6 +178,71 @@ namespace WebApplication1.DAL
             }
 
         }
+
+        public async Task<bool> EndreBillett(Billett endreBillett)
+        {
+            try
+            {
+                var endreObjekt = await _billettDb.Billetter.FindAsync(endreBillett.id);
+                //Sjekke om kunden har blitt endret
+                if (endreObjekt.kunde.id != endreBillett.kundeId)
+                {
+                    var sjekkKunde = _billettDb.Kunder.Find(endreBillett.kundeId);
+                    if (sjekkKunde == null)
+                    {
+                        var kundeRad = new Kunder();
+                        kundeRad.fornavn = endreBillett.fornavn;
+                        kundeRad.etternavn = endreBillett.etternavn;
+                        kundeRad.epost = endreBillett.epost;
+                        kundeRad.mobilnummer = endreBillett.mobilnummer;
+                        kundeRad.kort.kortnummer = endreBillett.kortnummer;
+                        kundeRad.kort.cvc = endreBillett.cvc;
+                        kundeRad.kort.utlopsdato = endreBillett.utlopsdato;
+
+                        //Kortet blir endret i endreKunde, tror ikke det skal være nødvendig å endre kortet her
+
+                        endreObjekt.kunde = kundeRad;
+           
+                    }
+                    else
+                    {
+                        endreObjekt.kunde.id = endreBillett.kundeId;
+                    }
+                }
+            if (endreObjekt.reise.id != endreBillett.reiseId)
+            {
+                var sjekkReise = _billettDb.Reiser.Find(endreBillett.reiseId);
+                //Sjekke om reisen har blitt endret
+                if (endreObjekt.reise.id != endreBillett.reiseId)
+                    {
+                        var reiseRad = new Reiser();
+                        reiseRad.reiseFra = endreBillett.reiseFra;
+                        reiseRad.reiseTil = endreBillett.reiseTil;
+                        reiseRad.reisePris = endreBillett.reisePris;
+                        reiseRad.datoAnkomst = endreBillett.datoAnkomst;
+                        reiseRad.datoAvreise = endreBillett.datoAvreise;
+                        reiseRad.tidspunktFra = endreBillett.tidspunktFra;
+                        reiseRad.tidspunktTil = endreBillett.tidspunktTil;
+                    }
+                    else
+                    {
+                        endreObjekt.reise.id = endreBillett.reiseId;
+                    }
+
+            }
+
+                endreObjekt.antallBarn = endreBillett.antallBarn;
+                endreObjekt.antallVoksne = endreBillett.antallVoksne;
+                endreObjekt.totalPris = endreBillett.totalPris;
+                await _billettDb.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                _log.LogInformation(e.Message);
+                return false;
+            }
+            return true;
+        }
         public async Task<List<Reise>> HentAlleReiser() 
         {
             try
@@ -226,6 +291,58 @@ namespace WebApplication1.DAL
                 return null;
             }
 
+        }
+
+        public async Task<bool> EndreReise(Reise endreReise)
+        {
+            try
+            {
+                var endreObjekt = await _billettDb.Reiser.FindAsync(endreReise.id);
+                endreObjekt.reiseFra = endreReise.reiseFra;
+                endreObjekt.reiseTil = endreReise.reiseFra;
+                endreObjekt.tidspunktFra = endreReise.tidspunktFra;
+                endreObjekt.tidspunktTil = endreReise.tidspunktTil;
+                endreObjekt.datoAnkomst = endreReise.datoAnkomst;
+                endreObjekt.datoAvreise = endreReise.datoAvreise;
+                endreObjekt.reisePris = endreReise.reisePris;
+            }
+            catch(Exception e)
+            {
+                _log.LogInformation(e.Message);
+                return false;
+            }
+            return true;
+        }
+
+        public async Task<bool> EndreKunde(Kunde endreKunde)
+        {
+            try
+            {
+                var endreObjekt = await _billettDb.Kunder.FindAsync(endreKunde.id);
+                //Sjekke om kortet finnes fra før
+                if (endreObjekt.kort.kortnummer != endreKunde.kortnummer)
+                {
+                    var kortRad = new Kort();
+                    kortRad.kortnummer = endreKunde.kortnummer;
+                    kortRad.cvc = endreKunde.cvc;
+                    kortRad.utlopsdato = endreKunde.utlopsdato;
+                    endreObjekt.kort = kortRad;
+                }
+                else
+                {
+                    endreObjekt.kort.kortnummer = endreKunde.kortnummer; 
+                }
+                endreObjekt.fornavn = endreKunde.fornavn;
+                endreObjekt.etternavn = endreKunde.etternavn;
+                endreObjekt.epost = endreKunde.epost;
+                endreObjekt.mobilnummer = endreKunde.mobilnummer;
+            }
+            catch (Exception e)
+            {
+                _log.LogInformation(e.Message);
+                return false;
+            }
+            return true;
         }
 
 
