@@ -195,9 +195,11 @@ namespace WebApplication1.DAL
                         kundeRad.etternavn = endreBillett.etternavn;
                         kundeRad.epost = endreBillett.epost;
                         kundeRad.mobilnummer = endreBillett.mobilnummer;
-                        kundeRad.kort.kortnummer = endreBillett.kortnummer; 
+                        kundeRad.kort.kortnummer = endreBillett.kortnummer;
+                        kundeRad.kort.cvc = endreBillett.cvc;
+                        kundeRad.kort.utlopsdato = endreBillett.utlopsdato;
 
-                        //Må sjekke om kortet finnes fra før av
+                        //Kortet blir endret i endreKunde, tror ikke det skal være nødvendig å endre kortet her
 
                         endreObjekt.kunde = kundeRad;
            
@@ -289,6 +291,58 @@ namespace WebApplication1.DAL
                 return null;
             }
 
+        }
+
+        public async Task<bool> EndreReise(Reise endreReise)
+        {
+            try
+            {
+                var endreObjekt = await _billettDb.Reiser.FindAsync(endreReise.id);
+                endreObjekt.reiseFra = endreReise.reiseFra;
+                endreObjekt.reiseTil = endreReise.reiseFra;
+                endreObjekt.tidspunktFra = endreReise.tidspunktFra;
+                endreObjekt.tidspunktTil = endreReise.tidspunktTil;
+                endreObjekt.datoAnkomst = endreReise.datoAnkomst;
+                endreObjekt.datoAvreise = endreReise.datoAvreise;
+                endreObjekt.reisePris = endreReise.reisePris;
+            }
+            catch(Exception e)
+            {
+                _log.LogInformation(e.Message);
+                return false;
+            }
+            return true;
+        }
+
+        public async Task<bool> EndreKunde(Kunde endreKunde)
+        {
+            try
+            {
+                var endreObjekt = await _billettDb.Kunder.FindAsync(endreKunde.id);
+                //Sjekke om kortet finnes fra før
+                if (endreObjekt.kort.kortnummer != endreKunde.kortnummer)
+                {
+                    var kortRad = new Kort();
+                    kortRad.kortnummer = endreKunde.kortnummer;
+                    kortRad.cvc = endreKunde.cvc;
+                    kortRad.utlopsdato = endreKunde.utlopsdato;
+                    endreObjekt.kort = kortRad;
+                }
+                else
+                {
+                    endreObjekt.kort.kortnummer = endreKunde.kortnummer; 
+                }
+                endreObjekt.fornavn = endreKunde.fornavn;
+                endreObjekt.etternavn = endreKunde.etternavn;
+                endreObjekt.epost = endreKunde.epost;
+                endreObjekt.mobilnummer = endreKunde.mobilnummer;
+            }
+            catch (Exception e)
+            {
+                _log.LogInformation(e.Message);
+                return false;
+            }
+            return true;
         }
 
 
