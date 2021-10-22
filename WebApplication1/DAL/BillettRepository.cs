@@ -314,6 +314,21 @@ namespace WebApplication1.DAL
             return true;
         }
 
+        public async Task<bool> SlettReise(int id)
+        {
+            try
+            {
+                Reiser enReise = await _billettDb.Reiser.FindAsync(id);
+                _billettDb.Remove(enReise);
+                await _billettDb.SaveChangesAsync();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public async Task<bool> EndreKunde(Kunde endreKunde)
         {
             try
