@@ -314,35 +314,19 @@ namespace WebApplication1.DAL
             return true;
         }
 
-        public async Task<bool> EndreKunde(Kunde endreKunde)
+        public async Task<bool> SlettReise(int id)
         {
             try
             {
-                var endreObjekt = await _billettDb.Kunder.FindAsync(endreKunde.id);
-                //Sjekke om kortet finnes fra før
-                if (endreObjekt.kort.kortnummer != endreKunde.kortnummer)
-                {
-                    var kortRad = new Kort();
-                    kortRad.kortnummer = endreKunde.kortnummer;
-                    kortRad.cvc = endreKunde.cvc;
-                    kortRad.utlopsdato = endreKunde.utlopsdato;
-                    endreObjekt.kort = kortRad;
-                }
-                else
-                {
-                    endreObjekt.kort.kortnummer = endreKunde.kortnummer; 
-                }
-                endreObjekt.fornavn = endreKunde.fornavn;
-                endreObjekt.etternavn = endreKunde.etternavn;
-                endreObjekt.epost = endreKunde.epost;
-                endreObjekt.mobilnummer = endreKunde.mobilnummer;
+                Reiser enReise = await _billettDb.Reiser.FindAsync(id);
+                _billettDb.Remove(enReise);
+                await _billettDb.SaveChangesAsync();
+                return true;
             }
-            catch (Exception e)
+            catch
             {
-                _log.LogInformation(e.Message);
                 return false;
             }
-            return true;
         }
 
 

@@ -14,6 +14,7 @@ namespace WebApplication1.DAL
         Task<bool> Slett(int id);
         Task<List<Reise>> HentAlleReiser();
         Task<Reise> HentEnReise(int id);
+        Task<bool> EndreBillett(Billett endreBillett);
         Task<bool> LoggInn(Bruker bruker);
     }
 }
