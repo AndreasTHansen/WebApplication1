@@ -79,7 +79,7 @@ namespace WebApplication1.Models
 
 
                 //Hentet fra fagstoff
-                // lag en påoggingsbruker
+                // lag en påloggingsbruker
                 var bruker = new Brukere();
                 bruker.Brukernavn = "Admin";
                 var passord = "Test11";

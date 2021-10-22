@@ -32,22 +32,17 @@ function hentAlleReiser() {
 }
 
 function adminLogin() {
+    const bruker = { Brukernavn: $("#usernameInput").val(), Passord: $("#passwordInput").val() };
 
-    //Brukernavn for admin er: admin
-    //Passord for admin er:    Admin123
-
-    const username = $("#usernameInput").val();
-    const password = $("#passwordInput").val();
-
-    console.log("Brukernavn: " + username + "\nPassord: " + password);
-
-    if (username == "admin" && password == "Admin123") {
-        location.href = "admin.html";
-    } else {
-        alert("Feil brukernavn eller passord");
-        $("#usernameInput").val("");
-        $("#passwordInput").val("");
-    }
+    $.get("billett/LoggInn", bruker, function (finnes) {
+        if (finnes) {
+            location.href = "admin.html";
+        } else {
+            alert("Feil brukernavn eller passord");
+            $("#usernameInput").val("");
+            $("#passwordInput").val("");
+        }
+    });
 }
 
 function init(reiser) {
