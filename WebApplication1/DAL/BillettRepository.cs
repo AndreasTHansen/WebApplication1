@@ -330,6 +330,30 @@ namespace WebApplication1.DAL
             }
         }
 
+        public async Task<bool> LagreReise(Reise innReise)
+        {
+            try
+            {
+                Reiser nyReise = new Reiser();
+
+                nyReise.reiseFra = innReise.reiseFra;
+                nyReise.reiseTil = innReise.reiseTil;
+                nyReise.datoAnkomst = innReise.datoAnkomst;
+                nyReise.datoAvreise = innReise.datoAvreise;
+                nyReise.tidspunktFra = innReise.tidspunktFra;
+                nyReise.tidspunktTil = innReise.tidspunktTil;
+                nyReise.reisePris = innReise.reisePris;
+
+                _billettDb.Reiser.Add(nyReise);
+                await _billettDb.SaveChangesAsync();
+                return true;
+            }
+            catch 
+            {
+                return false; 
+            }
+        }
+
 
 
         //LagHash, LagSalt og LoggInn er hentet fra fagstoff.

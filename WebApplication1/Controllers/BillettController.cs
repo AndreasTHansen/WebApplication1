@@ -120,6 +120,58 @@ namespace WebApplication1.Controllers
             return Ok(hentetReise);
         }
 
+        public async Task<ActionResult> LagreReise(Reise innReise)
+        {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
+            {
+                return Unauthorized("Ikke logget inn");
+            }
+            bool lagreOk = await _billettDb.LagreReise(innReise);
+            if (!lagreOk)
+            {
+                _log.LogInformation("Reisen kunne ikke lagres!");
+                return BadRequest("Reisen kunne ikke lagres");
+            }
+            return Ok("Reise lagret");
+        }
+
+        //EndreReise
+        public async Task<ActionResult> EndreReise(Reise endreReise)
+        {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
+            {
+                return Unauthorized("Ikke logget inn");
+            }
+            if (ModelState.IsValid)
+            {
+                bool endreOk = await _billettDb.EndreReise(endreReise);
+                if (!endreOk)
+                {
+                    _log.LogInformation("Reisen kunne ikke bli endret");
+                    return NotFound("Reisen ble ikke endret");
+                }
+                return Ok("Reisen ble endret");
+            }
+            _log.LogInformation("Feil i inputvalidering");
+            return BadRequest("Feil i inputvalidering på server");
+        }
+
+        //SlettReise
+        public async Task<ActionResult> SlettReise(int id)
+        {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
+            {
+                return Unauthorized("Ikke logget inn");
+            }
+            bool returOK = await _billettDb.SlettReise(id);
+            if (!returOK)
+            {
+                _log.LogInformation("Reisen ble ikke slettet");
+                return NotFound("Reisen ble ikke slettet");
+            }
+            return Ok("Reisen slettet");
+        }
+
         //Hentet fra fagstoff
         public async Task<ActionResult> LoggInn(Bruker bruker)
         {

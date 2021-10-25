@@ -18,7 +18,6 @@ namespace WebApplication1.Controllers
         private ILogger<KundeController> _log;
 
         private const string _loggetInn = "loggetInn";
-        private const string _ikkeLoggetInn = "";
 
         public KundeController(IKundeRepository billettDb, ILogger<KundeController> log)
         {

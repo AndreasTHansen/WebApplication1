@@ -10,11 +10,15 @@ namespace WebApplication1.DAL
     public interface IBillettRepository
     {
         Task<List<Billett>> HentAlle();
+        Task<Billett> HentEnBillett();
         Task<bool> Lagre(Billett innBillett);
-        Task<bool> Slett(int id);
+        Task<bool> Slett(int id); 
+        Task<bool> EndreBillett(Billett endreBillett);
         Task<List<Reise>> HentAlleReiser();
         Task<Reise> HentEnReise(int id);
-        Task<bool> EndreBillett(Billett endreBillett);
+        Task<bool> LagreReise(Reise innReise);
+        Task<bool> EndreReise(Reise endreReise);
+        Task<bool> SlettReise(int id);
         Task<bool> LoggInn(Bruker bruker);
     }
 }
