@@ -10,6 +10,8 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
+    [ApiController]
+    [Route("api/[controller]")]
     [Route("[controller]/[action]")]
     public class KundeController : ControllerBase
     {
