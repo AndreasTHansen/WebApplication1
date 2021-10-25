@@ -64,7 +64,7 @@ namespace WebApplication1.Controllers
                 _log.LogInformation("Kunden ble ikke slettet");
                 return NotFound("Kundenen ble ikke slettet");
             }
-            return Ok("Kunde slettet")
+            return Ok("Kunde slettet");
         }
     }
 }
