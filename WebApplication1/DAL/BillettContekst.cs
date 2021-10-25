@@ -1,11 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 
 namespace WebApplication1.Models
 
 {
-
+    [ExcludeFromCodeCoverage]
     public class Billetter
     {
         public int id { get; set; }
@@ -15,6 +16,7 @@ namespace WebApplication1.Models
         public virtual Kunder kunde { get; set; }
         public virtual Reiser reise { get; set; }
     }
+    [ExcludeFromCodeCoverage]
     public class Reiser
     {
         public int id { get; set; }
@@ -27,7 +29,7 @@ namespace WebApplication1.Models
         public string tidspunktTil { get; set; }
         public double reisePris { get; set; }
     }
-
+    [ExcludeFromCodeCoverage]
     public class Kunder
     {
         public int id { get; set; }
@@ -37,7 +39,7 @@ namespace WebApplication1.Models
         public string mobilnummer { get; set; }     
         public virtual Kort kort { get; set; }
     }
-
+    [ExcludeFromCodeCoverage]
     public class Brukere
     {
         public int Id { get; set; }
@@ -45,7 +47,7 @@ namespace WebApplication1.Models
         public byte[] Passord { get; set; }
         public byte[] Salt { get; set; }
     }
-
+    [ExcludeFromCodeCoverage]
     public class Kort
     {   
         [Key]
@@ -54,6 +56,7 @@ namespace WebApplication1.Models
         public string utlopsdato { get; set; }
         public int cvc { get; set; }
     }
+    [ExcludeFromCodeCoverage]
     public class BillettContekst : DbContext
     {
         public BillettContekst(DbContextOptions<BillettContekst> options)

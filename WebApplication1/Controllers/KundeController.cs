@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,9 @@ namespace WebApplication1.Controllers
 
         private ILogger<KundeController> _log;
 
+        private const string _loggetInn = "loggetInn";
+        private const string _ikkeLoggetInn = "";
+
         public KundeController(IKundeRepository billettDb, ILogger<KundeController> log)
         {
             _billettDb = billettDb;
@@ -24,13 +28,22 @@ namespace WebApplication1.Controllers
 
         public async Task<ActionResult> EndreKunde(Kunde endreKunde)
         {
-            bool endreOK = await _billettDb.EndreKunde(endreKunde);
-            if (!endreOK)
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
             {
-                _log.LogInformation("Det skjedde noe feil under endringen");
-                return NotFound("Kunden kunne ikke endres");
+                return Unauthorized("Ikke logget inn");
             }
-            return Ok("Kunden ble endret");
+            if (ModelState.IsValid)
+            {
+                bool endreOK = await _billettDb.EndreKunde(endreKunde);
+                if (!endreOK)
+                {
+                    _log.LogInformation("Det skjedde noe feil under endringen");
+                    return NotFound("Kunden kunne ikke endres");
+                }
+                return Ok("Kunden ble endret");
+            }
+            _log.LogInformation("Feil i inputvalidering");
+            return BadRequest("Feil i inputvalidering på server");
         }
 
         public async Task<ActionResult> LagreKunde(Kunde innKunde)

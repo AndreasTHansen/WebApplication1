@@ -1,12 +1,14 @@
 ﻿using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApplication1.Models;
 
 namespace WebApplication1.DAL
 {
+    [ExcludeFromCodeCoverage]
     public class KundeRepository : IKundeRepository
     {
         private readonly BillettContekst _billettDb;

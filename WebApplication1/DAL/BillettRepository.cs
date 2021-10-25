@@ -8,12 +8,13 @@ using System.Threading.Tasks;
 using WebApplication1.Models;
 using WebApplication1.Modules;
 using Microsoft.Extensions.Logging;
+using System.Diagnostics.CodeAnalysis;
 
 namespace WebApplication1.DAL
 {
 
 
-
+    [ExcludeFromCodeCoverage]
     public class BillettRepository : IBillettRepository
     {
 
