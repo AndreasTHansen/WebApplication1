@@ -32,5 +32,26 @@ namespace WebApplication1.Controllers
             }
             return Ok("Kunden ble endret");
         }
+
+        public async Task<ActionResult> LagreKunde(Kunde innKunde)
+        {
+            bool lagreOK = await _billettDb.LagreKunde(innKunde);
+            if (!lagreOK)
+            {
+                _log.LogInformation("Det skjedde noe feil under lagringen");
+                return BadRequest("Billetten kunne ikke lagres");
+            }
+            return Ok("Billetten ble lagret");
+        }
+        public async Task<ActionResult> SlettKunde(int id)
+        {
+            bool slettOk = await _billettDb.SlettKunde(id);
+            if (!slettOk)
+            {
+                _log.LogInformation("Kunden ble ikke slettet");
+                return NotFound("Kundenen ble ikke slettet");
+            }
+            return Ok("Kunde slettet")
+        }
     }
 }
