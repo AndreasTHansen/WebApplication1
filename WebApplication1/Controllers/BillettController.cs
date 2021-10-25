@@ -12,7 +12,11 @@ using WebApplication1.Modules;
 
 namespace WebApplication1.Controllers
 {
+    
+    [ApiController]
     [Route("[controller]/[action]")]
+    [Route("api/[controller]")]
+  
     public class BillettController : ControllerBase
     {
         private readonly IBillettRepository _billettDb;
@@ -30,40 +34,29 @@ namespace WebApplication1.Controllers
 
         public async Task<ActionResult> HentAlle()
         {
-            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
-            {
-                return Unauthorized("Ikke logget inn");
-            }
             List<Billett> alleBilletter = await _billettDb.HentAlle();
             return Ok(alleBilletter);
         }
 
+        [HttpPost]
         public async Task<ActionResult> Lagre(Billett innBillett)
         {
-            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
-            {
-                return Unauthorized("Ikke logget inn");
-            }
             if (ModelState.IsValid)
             {
                 bool returOK = await _billettDb.Lagre(innBillett);
                 if (!returOK)
                 {
                     _log.LogInformation("Billetten kunne ikke lagres!");
-                    return BadRequest("Billetten kunne ikke lagres");
+                    return BadRequest();
                 }
-                return Ok("Billett lagret");
+                return Ok();
             }
             _log.LogInformation("Feil i inputvalidering");
-            return BadRequest("Feil i inputvalidering på server");
+            return BadRequest();
         }
 
         public async Task<ActionResult> Slett(int id)
         {
-            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
-            {
-                return Unauthorized("Ikke logget inn");
-            }
             bool returOK = await _billettDb.Slett(id);
             if (!returOK)
             {
@@ -75,10 +68,6 @@ namespace WebApplication1.Controllers
 
         public async Task<ActionResult> EndreBillett(Billett endreBillett)
         {
-            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
-            {
-                return Unauthorized("Ikke logget inn");
-            }
             if (ModelState.IsValid)
             {
                 bool endreOk = await _billettDb.EndreBillett(endreBillett);
@@ -95,21 +84,16 @@ namespace WebApplication1.Controllers
 
         public async Task<ActionResult> HentAlleReiser()
         {
-            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
-            {
-                return Unauthorized("Ikke logget inn");
-            }
+            //if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
+            //{
+            //    return Unauthorized("Ikke logget inn");
+            //}
             List<Reise> reiseListe = await _billettDb.HentAlleReiser();
-            _log.LogInformation("Test");
             return Ok(reiseListe);
         }
 
         public async Task<ActionResult> HentEnReise(int id)
         {
-            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
-            {
-                return Unauthorized("Ikke logget inn");
-            }
             Reise hentetReise = await _billettDb.HentEnReise(id);
             
             if(hentetReise == null)
@@ -122,10 +106,6 @@ namespace WebApplication1.Controllers
 
         public async Task<ActionResult> LagreReise(Reise innReise)
         {
-            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
-            {
-                return Unauthorized("Ikke logget inn");
-            }
             bool lagreOk = await _billettDb.LagreReise(innReise);
             if (!lagreOk)
             {
@@ -138,10 +118,6 @@ namespace WebApplication1.Controllers
         //EndreReise
         public async Task<ActionResult> EndreReise(Reise endreReise)
         {
-            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
-            {
-                return Unauthorized("Ikke logget inn");
-            }
             if (ModelState.IsValid)
             {
                 bool endreOk = await _billettDb.EndreReise(endreReise);
@@ -156,13 +132,8 @@ namespace WebApplication1.Controllers
             return BadRequest("Feil i inputvalidering på server");
         }
 
-        //SlettReise
         public async Task<ActionResult> SlettReise(int id)
         {
-            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
-            {
-                return Unauthorized("Ikke logget inn");
-            }
             bool returOK = await _billettDb.SlettReise(id);
             if (!returOK)
             {
