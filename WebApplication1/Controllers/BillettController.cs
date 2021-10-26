@@ -12,11 +12,9 @@ using WebApplication1.Modules;
 
 namespace WebApplication1.Controllers
 {
-    
-    [ApiController]
+
     [Route("[controller]/[action]")]
-    [Route("api/[controller]")]
-  
+
     public class BillettController : ControllerBase
     {
         private readonly IBillettRepository _billettDb;
@@ -34,8 +32,13 @@ namespace WebApplication1.Controllers
 
         public async Task<ActionResult> HentAlle()
         {
+           
             List<Billett> alleBilletter = await _billettDb.HentAlle();
-            return Ok(alleBilletter);
+            if(alleBilletter == null)
+            {
+                return NotFound();
+            }
+                return Ok(alleBilletter);
         }
 
         [HttpPost]
