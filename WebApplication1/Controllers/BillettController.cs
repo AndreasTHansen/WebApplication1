@@ -65,9 +65,9 @@ namespace WebApplication1.Controllers
             if (!returOK)
             {
                 _log.LogInformation("Billetten ble ikke slettet");
-                return NotFound("Billetten ble ikke slettet");
+                return NotFound();
             }
-            return Ok("Billett slettet");
+            return Ok();
         }
 
         public async Task<ActionResult> EndreBillett(Billett endreBillett)
@@ -78,12 +78,12 @@ namespace WebApplication1.Controllers
                 if (!endreOk)
                 {
                     _log.LogInformation("Billetten kunne ikke bli endret");
-                    return NotFound("Billetten ble ikke endret");
+                    return NotFound();
                 }
                 return Ok("Billetten ble endret");
             }
             _log.LogInformation("Feil i inputvalidering");
-            return BadRequest("Feil i inputvalidering på server");
+            return BadRequest();
         }
 
         public async Task<ActionResult> HentAlleReiser()
@@ -103,7 +103,7 @@ namespace WebApplication1.Controllers
             if(hentetReise == null)
             {
                 _log.LogInformation("Fant ikke reisen i databasen");
-                return NotFound("Fant ikke reisen i databasen");
+                return NotFound();
             }
             return Ok(hentetReise);
         }
@@ -114,9 +114,9 @@ namespace WebApplication1.Controllers
             if (!lagreOk)
             {
                 _log.LogInformation("Reisen kunne ikke lagres!");
-                return BadRequest("Reisen kunne ikke lagres");
+                return BadRequest();
             }
-            return Ok("Reise lagret");
+            return Ok();
         }
 
         //EndreReise
@@ -128,12 +128,12 @@ namespace WebApplication1.Controllers
                 if (!endreOk)
                 {
                     _log.LogInformation("Reisen kunne ikke bli endret");
-                    return NotFound("Reisen ble ikke endret");
+                    return NotFound();
                 }
-                return Ok("Reisen ble endret");
+                return Ok();
             }
             _log.LogInformation("Feil i inputvalidering");
-            return BadRequest("Feil i inputvalidering på server");
+            return BadRequest();
         }
 
         public async Task<ActionResult> SlettReise(int id)
@@ -142,9 +142,9 @@ namespace WebApplication1.Controllers
             if (!returOK)
             {
                 _log.LogInformation("Reisen ble ikke slettet");
-                return NotFound("Reisen ble ikke slettet");
+                return NotFound();
             }
-            return Ok("Reisen slettet");
+            return Ok();
         }
 
         //Hentet fra fagstoff
