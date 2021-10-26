@@ -13,7 +13,6 @@ namespace WebApplication1.Controllers
     [ApiController]
     [Route("api/[controller]")]
 
-    [Route("[controller]/[action]")]
     public class KundeController : ControllerBase
     {
         private readonly IKundeRepository _billettDb;

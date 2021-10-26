@@ -13,7 +13,8 @@ using WebApplication1.Modules;
 namespace WebApplication1.Controllers
 {
 
-    [Route("[controller]/[action]")]
+    [ApiController]
+    [Route("api/[controller]")]
 
     public class BillettController : ControllerBase
     {
