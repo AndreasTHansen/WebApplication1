@@ -42,7 +42,7 @@ namespace WebApplication1.Controllers
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
             {
-                return Unauthorized("Ikke logget inn");
+                return Unauthorized();
             }
             if (ModelState.IsValid)
             {
@@ -50,12 +50,12 @@ namespace WebApplication1.Controllers
                 if (!endreOK)
                 {
                     _log.LogInformation("Det skjedde noe feil under endringen");
-                    return NotFound("Kunden kunne ikke endres");
+                    return NotFound();
                 }
-                return Ok("Kunden ble endret");
+                return Ok();
             }
             _log.LogInformation("Feil i inputvalidering");
-            return BadRequest("Feil i inputvalidering på server");
+            return BadRequest();
         }
         [HttpPost]
         public async Task<ActionResult> LagreKunde(Kunde innKunde)
@@ -64,9 +64,9 @@ namespace WebApplication1.Controllers
             if (!lagreOK)
             {
                 _log.LogInformation("Det skjedde noe feil under lagringen");
-                return BadRequest("Billetten kunne ikke lagres");
+                return BadRequest();
             }
-            return Ok("Billetten ble lagret");
+            return Ok();
         }
         [HttpDelete("{id}")]
         public async Task<ActionResult> SlettKunde(int id)
@@ -75,9 +75,9 @@ namespace WebApplication1.Controllers
             if (!slettOk)
             {
                 _log.LogInformation("Kunden ble ikke slettet");
-                return NotFound("Kundenen ble ikke slettet");
+                return NotFound();
             }
-            return Ok("Kunde slettet");
+            return Ok();
         }
     }
 }
