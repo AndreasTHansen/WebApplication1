@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Kunde } from "./kunde";
 import { HttpClient } from '@angular/common/http';
 
@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 export class AppComponent {
 
   public laster: string;
-  public alleKunder: Array<Kunde>
+  public alleKunder: Array<Kunde>;
 
   constructor(private _http: HttpClient) {}
 
@@ -17,12 +17,13 @@ export class AppComponent {
 
   hentAlleKunder() {
     this.laster = "Vennligst vent";
-    this._http.get<Kunde[]>("api/Kunde/")
-      .subscribe( data => {
+    this._http.get<Kunde[]>("api/kunde/")
+      .subscribe(data => {
         this.alleKunder = data;
         this.laster = "";
-      }
-      );
-      
-  }
+      }, 
+       error => console.log(error),
+       () => console.log("ferdig get-api/kunde")
+      );     
+  };
 }

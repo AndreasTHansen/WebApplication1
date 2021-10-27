@@ -41,9 +41,10 @@ namespace WebApplication1.DAL
 
                 return alleKunder;
             }
-            catch
+            catch(Exception e)
             {
-                return null;
+                _log.LogInformation(e.Message);
+                return null;               
             }
         }
 

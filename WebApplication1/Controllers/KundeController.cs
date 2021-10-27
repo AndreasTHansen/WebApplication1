@@ -15,7 +15,7 @@ namespace WebApplication1.Controllers
 
     public class KundeController : ControllerBase
     {
-        private readonly IKundeRepository _billettDb;
+        private IKundeRepository _billettDb;
 
         private ILogger<KundeController> _log;
 
