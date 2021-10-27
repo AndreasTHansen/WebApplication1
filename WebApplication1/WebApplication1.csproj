@@ -13,6 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ClientApp\src\app\endre\" />
+    <Folder Include="ClientApp\src\app\lagre\" />
+    <Folder Include="ClientApp\src\app\liste\" />
     <Folder Include="wwwroot\img\" />
   </ItemGroup>
 

@@ -1,22 +1,13 @@
 <div>
-  Navnet er: {{navn}}<br />
-  Skriv inn navnet her : <input type="text" [(ngModel)]="navn" />
+  <h1>Kunder</h1>
 
+  <button (click)="hentAlleKunder()">Hent kunder</button> {{laster}}
+  <ul>
+    <li *ngFor='let kunder of alleKunder'>
+      {{kunde.id}} : {{kunde.fornavn}} {{kunde.etternavn}}
+      {{kunde.adresse}} {{kunde.postnummer}} {{kunde.poststed}}
 
-  <table class="table">
-    <thead>
-      <tr>
-        <td>Navn og telefonnummer</td>
-      </tr>
-    </thead>
-
-    <tbody class="col-md-4">
-      <tr *ngFor="let kunde of kunder" style="margin-bottom:10px;">
-        <td> {{kunde.utData}} </td>
-        <td><button class="btn btn-danger btn-xs" (click)="slettKunde(kunde)">Slett</button></td>
-      </tr>
-    </tbody>
-
-  </table>
+    </li>
+  </ul>
 </div>
 
