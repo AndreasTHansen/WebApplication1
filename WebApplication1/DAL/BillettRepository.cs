@@ -34,11 +34,10 @@ namespace WebApplication1.DAL
             {
                 List<Billett> alleBilletter = await _billettDb.Billetter.Select(k => new Billett
                 {
-                    id = k.kunde.id,
+                    kundeId = k.kunde.id,
                     antallBarn = k.antallBarn,
                     antallVoksne = k.antallVoksne,
                     totalPris = k.totalPris,
-                    kundeId = k.kunde.id,
                     fornavn = k.kunde.fornavn,
                     etternavn = k.kunde.etternavn,
                     epost = k.kunde.epost,
