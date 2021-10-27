@@ -1,5 +1,5 @@
 import { Component} from '@angular/core';
-import { Kunde } from "./kunde";
+import { kunde } from "./kunde";
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 export class AppComponent {
 
   public laster: string;
-  public alleKunder: Array<Kunde>
+  public alleKunder: Array<kunde>
 
   constructor(private _http: HttpClient) {}
 
@@ -21,7 +21,9 @@ export class AppComponent {
       .subscribe( data => {
         this.alleKunder = data;
         this.laster = "";
-      }
+      },
+        error => alert(error),
+        () => console.log("ferdig get-/kunde")
       );
       
   }
