@@ -68,7 +68,7 @@ namespace WebApplication1.Controllers
             }
             return Ok("Billetten ble lagret");
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<ActionResult> SlettKunde(int id)
         {
             bool slettOk = await _billettDb.SlettKunde(id);
