@@ -1,24 +1,31 @@
 import { Component, OnInit } from '@angular/core';
-import { kunde } from "./kunde";
+import { Kunde } from "./kunde";
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html'
 })
 export class AppComponent {
-  public Kunde: kunde;
 
-  kunder: Array<kunde>
+  public laster: string;
+  public alleKunder: Array<Kunde>
 
-
-  ngOnInit() {
-    this.Kunde.utData = "Ole Hansen, 92192122";
-    this.kunder.push(this.Kunde)
-  }
+  constructor(private _http: HttpClient) {}
 
 
-  slettKunde(enKunde: kunde): void {
-    const indeks = this.kunder.indexOf(enKunde);
-    this.kunder.splice(indeks, 1);
+
+  hentAlleKunder() {
+    this.laster = "Vennligst vent";
+    this._http.get<Kunde[]>("api/Kunde/")
+      .subscribe( data => {
+        this.alleKunder = data;
+        this.laster = "";
+      },
+        error = alert(error),
+        () => console.log("Ferdig get-/kunde")
+
+      );
+      
   }
 }
