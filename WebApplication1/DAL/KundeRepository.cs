@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -20,6 +21,29 @@ namespace WebApplication1.DAL
             _billettDb = billettDb;
             _log = log;
 
+        }
+
+        public async Task<List<Kunde>> HentAlleKunder()
+        {
+            try
+            {
+                List<Kunde> alleKunder = await _billettDb.Kunder.Select(k => new Kunde
+                {
+                    fornavn = k.fornavn,
+                    etternavn = k.etternavn,
+                    epost = k.epost,
+                    mobilnummer = k.mobilnummer,
+                    kortnummer = k.kort.kortnummer,
+                    utlopsdato = k.kort.utlopsdato,
+                    cvc = k.kort.cvc
+                }).ToListAsync();
+
+                return alleKunder;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public async Task<bool> EndreKunde(Kunde endreKunde)

@@ -13,7 +13,6 @@ namespace WebApplication1.Controllers
     [ApiController]
     [Route("api/[controller]")]
 
-    [Route("[controller]/[action]")]
     public class KundeController : ControllerBase
     {
         private readonly IKundeRepository _billettDb;
@@ -27,7 +26,18 @@ namespace WebApplication1.Controllers
             _billettDb = billettDb;
             _log = log;
         }
+        [HttpGet]
+        public async Task<ActionResult> HentAlleKunder()
+        {
+            List<Kunde> alleKunder = await _billettDb.HentAlleKunder();
+            if (alleKunder == null)
+            {
+                return NotFound();
+            }
+            return Ok(alleKunder);
+        }
 
+        [HttpPut]
         public async Task<ActionResult> EndreKunde(Kunde endreKunde)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
@@ -47,7 +57,7 @@ namespace WebApplication1.Controllers
             _log.LogInformation("Feil i inputvalidering");
             return BadRequest("Feil i inputvalidering på server");
         }
-
+        [HttpPost]
         public async Task<ActionResult> LagreKunde(Kunde innKunde)
         {
             bool lagreOK = await _billettDb.LagreKunde(innKunde);
@@ -58,6 +68,7 @@ namespace WebApplication1.Controllers
             }
             return Ok("Billetten ble lagret");
         }
+        [HttpDelete("{id}")]
         public async Task<ActionResult> SlettKunde(int id)
         {
             bool slettOk = await _billettDb.SlettKunde(id);
