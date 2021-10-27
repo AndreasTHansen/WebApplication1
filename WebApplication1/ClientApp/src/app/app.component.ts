@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import { Kunde } from "./kunde";
 import { HttpClient } from '@angular/common/http';
 
@@ -21,10 +21,7 @@ export class AppComponent {
       .subscribe( data => {
         this.alleKunder = data;
         this.laster = "";
-      },
-        error = alert(error),
-        () => console.log("Ferdig get-/kunde")
-
+      }
       );
       
   }
