@@ -26,6 +26,7 @@ namespace WebApplication1.Controllers
             _billettDb = billettDb;
             _log = log;
         }
+
         [HttpGet]
         public async Task<ActionResult> HentAlleKunder()
         {

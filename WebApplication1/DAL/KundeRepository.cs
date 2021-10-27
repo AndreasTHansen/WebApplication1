@@ -29,6 +29,7 @@ namespace WebApplication1.DAL
             {
                 List<Kunde> alleKunder = await _billettDb.Kunder.Select(k => new Kunde
                 {
+                    id = k.id,
                     fornavn = k.fornavn,
                     etternavn = k.etternavn,
                     epost = k.epost,

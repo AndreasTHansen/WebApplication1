@@ -34,6 +34,7 @@ namespace WebApplication1.DAL
             {
                 List<Billett> alleBilletter = await _billettDb.Billetter.Select(k => new Billett
                 {
+                    id = k.id,
                     kundeId = k.kunde.id,
                     antallBarn = k.antallBarn,
                     antallVoksne = k.antallVoksne,
