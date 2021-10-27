@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,12 +12,18 @@ using WebApplication1.Modules;
 
 namespace WebApplication1.Controllers
 {
+
     [Route("[controller]/[action]")]
+
     public class BillettController : ControllerBase
     {
         private readonly IBillettRepository _billettDb;
 
         private ILogger<BillettController> _log;
+
+        private const string _loggetInn = "loggetInn";
+        private const string _ikkeLoggetInn = "";
+
         public BillettController(IBillettRepository billettDb, ILogger<BillettController> log)
         {
             _billettDb = billettDb;
@@ -25,9 +32,16 @@ namespace WebApplication1.Controllers
 
         public async Task<ActionResult> HentAlle()
         {
-            List<Billett> billettListe = await _billettDb.HentAlle();
-            return Ok(billettListe);
+           
+            List<Billett> alleBilletter = await _billettDb.HentAlle();
+            if(alleBilletter == null)
+            {
+                return NotFound();
+            }
+                return Ok(alleBilletter);
         }
+
+        [HttpPost]
         public async Task<ActionResult> Lagre(Billett innBillett)
         {
             if (ModelState.IsValid)
@@ -35,18 +49,19 @@ namespace WebApplication1.Controllers
                 bool returOK = await _billettDb.Lagre(innBillett);
                 if (!returOK)
                 {
-                    _log.LogInformation("Billetten ble ikke lagret");
-                    return BadRequest("Billetten ble ikke lagret");
+                    _log.LogInformation("Billetten kunne ikke lagres!");
+                    return BadRequest();
                 }
-                return Ok("Billett lagret");
+                return Ok();
             }
             _log.LogInformation("Feil i inputvalidering");
-            return BadRequest("Feil i inputvalidering");
+            return BadRequest();
         }
+
         public async Task<ActionResult> Slett(int id)
         {
-            bool slettOk = await _billettDb.Slett(id);
-            if (!slettOk)
+            bool returOK = await _billettDb.Slett(id);
+            if (!returOK)
             {
                 _log.LogInformation("Billetten ble ikke slettet");
                 return NotFound("Billetten ble ikke slettet");
@@ -56,18 +71,27 @@ namespace WebApplication1.Controllers
 
         public async Task<ActionResult> EndreBillett(Billett endreBillett)
         {
-            bool endreOk = await _billettDb.EndreBillett(endreBillett);
-            if (!endreOk)
+            if (ModelState.IsValid)
             {
-                _log.LogInformation("Billetten kunne ikke bli endret");
-                return NotFound("Billetten ble ikke endret");
+                bool endreOk = await _billettDb.EndreBillett(endreBillett);
+                if (!endreOk)
+                {
+                    _log.LogInformation("Billetten kunne ikke bli endret");
+                    return NotFound("Billetten ble ikke endret");
+                }
+                return Ok("Billetten ble endret");
             }
-            return Ok("Billetten ble endret");
+            _log.LogInformation("Feil i inputvalidering");
+            return BadRequest("Feil i inputvalidering på server");
         }
+
         public async Task<ActionResult> HentAlleReiser()
         {
+            //if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggetInn)))
+            //{
+            //    return Unauthorized("Ikke logget inn");
+            //}
             List<Reise> reiseListe = await _billettDb.HentAlleReiser();
-            _log.LogInformation("Test");
             return Ok(reiseListe);
         }
 
@@ -83,6 +107,45 @@ namespace WebApplication1.Controllers
             return Ok(hentetReise);
         }
 
+        public async Task<ActionResult> LagreReise(Reise innReise)
+        {
+            bool lagreOk = await _billettDb.LagreReise(innReise);
+            if (!lagreOk)
+            {
+                _log.LogInformation("Reisen kunne ikke lagres!");
+                return BadRequest("Reisen kunne ikke lagres");
+            }
+            return Ok("Reise lagret");
+        }
+
+        //EndreReise
+        public async Task<ActionResult> EndreReise(Reise endreReise)
+        {
+            if (ModelState.IsValid)
+            {
+                bool endreOk = await _billettDb.EndreReise(endreReise);
+                if (!endreOk)
+                {
+                    _log.LogInformation("Reisen kunne ikke bli endret");
+                    return NotFound("Reisen ble ikke endret");
+                }
+                return Ok("Reisen ble endret");
+            }
+            _log.LogInformation("Feil i inputvalidering");
+            return BadRequest("Feil i inputvalidering på server");
+        }
+
+        public async Task<ActionResult> SlettReise(int id)
+        {
+            bool returOK = await _billettDb.SlettReise(id);
+            if (!returOK)
+            {
+                _log.LogInformation("Reisen ble ikke slettet");
+                return NotFound("Reisen ble ikke slettet");
+            }
+            return Ok("Reisen slettet");
+        }
+
         //Hentet fra fagstoff
         public async Task<ActionResult> LoggInn(Bruker bruker)
         {
@@ -91,9 +154,11 @@ namespace WebApplication1.Controllers
                 bool returnOK = await _billettDb.LoggInn(bruker);
                 if (!returnOK)
                 {
-                    _log.LogInformation("Innloggingen feilet for bruker" + bruker.Brukernavn);
+                    _log.LogInformation("Innloggingen feilet for bruker");
+                    HttpContext.Session.SetString(_loggetInn, _ikkeLoggetInn);
                     return Ok(false);
                 }
+                HttpContext.Session.SetString(_loggetInn, _loggetInn);
                 return Ok(true);
             }
             _log.LogInformation("Feil i inputvalidering");

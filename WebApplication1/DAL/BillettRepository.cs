@@ -8,12 +8,13 @@ using System.Threading.Tasks;
 using WebApplication1.Models;
 using WebApplication1.Modules;
 using Microsoft.Extensions.Logging;
+using System.Diagnostics.CodeAnalysis;
 
 namespace WebApplication1.DAL
 {
 
 
-
+    [ExcludeFromCodeCoverage]
     public class BillettRepository : IBillettRepository
     {
 
@@ -326,6 +327,30 @@ namespace WebApplication1.DAL
             catch
             {
                 return false;
+            }
+        }
+
+        public async Task<bool> LagreReise(Reise innReise)
+        {
+            try
+            {
+                Reiser nyReise = new Reiser();
+
+                nyReise.reiseFra = innReise.reiseFra;
+                nyReise.reiseTil = innReise.reiseTil;
+                nyReise.datoAnkomst = innReise.datoAnkomst;
+                nyReise.datoAvreise = innReise.datoAvreise;
+                nyReise.tidspunktFra = innReise.tidspunktFra;
+                nyReise.tidspunktTil = innReise.tidspunktTil;
+                nyReise.reisePris = innReise.reisePris;
+
+                _billettDb.Reiser.Add(nyReise);
+                await _billettDb.SaveChangesAsync();
+                return true;
+            }
+            catch 
+            {
+                return false; 
             }
         }
 

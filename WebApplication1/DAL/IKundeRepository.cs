@@ -9,5 +9,7 @@ namespace WebApplication1.DAL
     public interface IKundeRepository
     {
         Task<bool> EndreKunde(Kunde endreKunde);
+        Task<bool> SlettKunde(int id);
+        Task<bool> LagreKunde(Kunde innKunde);
     }
 }
